@@ -225,5 +225,8 @@
     },
     "about_lbl_links": {
         "message": "Links"
+    },
+    "popup_tip_copied": {
+        "message": "Copied!"
     }
 }

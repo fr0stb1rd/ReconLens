@@ -114,51 +114,55 @@ function init_copy() {
             if (ele_id == "popup_btn_copy_url") {
                 elements[i].textContent = t("popup_btn_copy_url");
             }
-            elements[i].onclick = function () {
-                var inp = document.createElement('textarea');
-                document.body.appendChild(inp);
-                var copytext = document.getElementById(ele_name).textContent;
+            elements[i].onclick = async function (e) {
+                if (e) e.preventDefault();
+                const btn = this;
+                const originalText = btn.textContent;
+                
+                let copytext = document.getElementById(ele_name).textContent;
+                if (copytext === 'No data' || copytext === '-') return;
+
                 if (ele_id == "popup_btn_copy_url") {
-                    Promise.all([getCurrentTab().then(function x(tab) {
-                        if (tab == undefined) {
-                            alert(t("popup_tip_copy_first"));
-                            return;
-                        }
-                        var url = new URL(tab.url);
-                        var path_list = copytext.split('\n').filter(line => line.trim() !== 'No data' && line.trim() !== '');
-                        copytext = "";
-                        for (var i = 0; i < path_list.length; i++) {
-                            let item = path_list[i].trim();
-                            if (!item) continue;
-                            try {
-                                const resolvedUrl = new URL(item, tab.url);
-                                copytext += resolvedUrl.href + '\n';
-                            } catch (e) {
-                                console.warn(`Path resolve failed: ${item}`, e);
-                                if (item.startsWith('/')) {
-                                    copytext += url.origin + item + '\n';
-                                } else {
-                                    const currentPath = url.pathname;
-                                    const lastSlashIndex = currentPath.lastIndexOf('/');
-                                    const basePath = (lastSlashIndex !== -1) ? currentPath.substring(0, lastSlashIndex + 1) : '/';
-                                    copytext += url.origin + basePath + item + '\n';
-                                }
+                    const tab = await getCurrentTab();
+                    if (!tab) {
+                        alert(t("popup_tip_copy_first"));
+                        return;
+                    }
+                    const url = new URL(tab.url);
+                    const path_list = copytext.split('\n').filter(line => line.trim() !== 'No data' && line.trim() !== '' && line.trim() !== '-');
+                    copytext = "";
+                    for (let item of path_list) {
+                        item = item.trim();
+                        if (!item) continue;
+                        try {
+                            const resolvedUrl = new URL(item, tab.url);
+                            copytext += resolvedUrl.href + '\n';
+                        } catch (e) {
+                            if (item.startsWith('/')) {
+                                copytext += url.origin + item + '\n';
+                            } else {
+                                const basePath = url.pathname.substring(0, url.pathname.lastIndexOf('/') + 1) || '/';
+                                copytext += url.origin + basePath + item + '\n';
                             }
                         }
-                        inp.value = copytext.slice(0, -1);
-                        inp.select();
-                        document.execCommand('copy', false);
-                    })]).then(res => inp.remove());
-                    return;
+                    }
+                    copytext = copytext.trim();
                 }
-                if (copytext === 'No data') {
-                    inp.remove();
-                    return;
+
+                if (copytext) {
+                    try {
+                        await navigator.clipboard.writeText(copytext);
+                        // Visual Feedback
+                        btn.textContent = t("popup_tip_copied") || "Copied!";
+                        btn.classList.add('copy-success');
+                        setTimeout(() => {
+                            btn.textContent = originalText;
+                            btn.classList.remove('copy-success');
+                        }, 1000);
+                    } catch (err) {
+                        console.error('Copy failed:', err);
+                    }
                 }
-                inp.value = copytext;
-                inp.select();
-                document.execCommand('copy', false);
-                inp.remove();
             }
         }
     }

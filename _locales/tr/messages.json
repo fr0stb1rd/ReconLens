@@ -225,5 +225,8 @@
     },
     "about_lbl_links": {
         "message": "Bağlantılar"
+    },
+    "popup_tip_copied": {
+        "message": "Kopyalandı!"
     }
 }
