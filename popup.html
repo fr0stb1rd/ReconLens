@@ -181,14 +181,6 @@
             /* Prevent parent from scrolling */
         }
 
-        #taskstatus {
-            font-size: 11px;
-            font-weight: 500;
-            color: var(--text-muted);
-            margin-bottom: 2px;
-            text-align: right;
-            padding-right: 5px;
-        }
 
         /* Card Layout for each section (right panel) */
         .info-card {
@@ -196,7 +188,7 @@
             border-radius: 6px;
             box-shadow: var(--shadow-sm);
             margin-bottom: 0;
-            overflow: hidden;
+            overflow: visible; /* Changed from hidden to allow dropdowns */
             border: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
@@ -957,7 +949,7 @@
                     <div class="settings-group">
                         <label id="lbl_webhook">Webhook</label>
                         <label id="lbl_webhook_url" style="font-size: 11px; color: #888;">回调地址</label>
-                        <input type="text" id="url">
+                        <input type="text" id="webhook_url">
 
                         <label id="lbl_webhook_method" style="font-size: 11px; color: #888;">请求方法</label>
                         <select id="method">

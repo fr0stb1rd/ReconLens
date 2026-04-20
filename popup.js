@@ -535,7 +535,7 @@ function init_webhook_logic() {
     saveBtn.onclick = function () {
         try {
             const webhook_setting = {
-                url: document.getElementById('url').value,
+                url: document.getElementById('webhook_url').value,
                 method: document.getElementById('method').value,
                 arg: document.getElementById('arg').value,
                 headers: JSON.parse(document.getElementById('headers').value || '{}'),
@@ -551,7 +551,7 @@ function init_webhook_logic() {
 
     resetBtn.onclick = function () {
         const webhook_setting = { url: '', arg: '', headers: {} };
-        document.getElementById('url').value = '';
+        document.getElementById('webhook_url').value = '';
         document.getElementById('arg').value = '';
         document.getElementById('headers').value = '{}';
         chrome.storage.local.set({ webhook_setting }, () => {
@@ -562,7 +562,7 @@ function init_webhook_logic() {
     chrome.storage.local.get(['webhook_setting'], function (settings) {
         if (!settings || !settings.webhook_setting) return;
         const ws = settings.webhook_setting;
-        document.getElementById('url').value = ws.url || '';
+        document.getElementById('webhook_url').value = ws.url || '';
         document.getElementById('method').value = ws.method || 'POST';
         document.getElementById('arg').value = ws.arg || '';
         document.getElementById('headers').value = JSON.stringify(ws.headers || {});
