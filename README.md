@@ -3,9 +3,6 @@
 </p>
 
 <h1 align="center">ReconLens</h1>
-<p align="center">
-  <b>A <a href="https://sekademi.github.io/">Sekademi Cybersecurity</a> Product</b>
-</p>
 
 <p align="center">
   <strong>Passive Reconnaissance Lens for the Modern Web</strong><br>
@@ -270,3 +267,9 @@ This project is licensed under the **GNU General Public License v3.0** — see t
 - Secret detection patterns derived from the [Nuclei](https://github.com/projectdiscovery/nuclei) project by ProjectDiscovery
 - UI contributions by [M1r0ku](https://github.com/M1r0ku/FindSomething)
 - ReconLens Modernization by [fr0stb1rd](https://github.com/fr0stb1rd)
+
+---
+
+<p align="center">
+  A <b><a href="https://sekademi.github.io/">Sekademi Cybersecurity</a></b> Product
+</p>
