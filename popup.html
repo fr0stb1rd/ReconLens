@@ -376,7 +376,7 @@
             display: none;
             position: absolute;
             top: 100%;
-            right: 0;
+            left: 0;
             background: var(--panel-bg);
             border: 1px solid var(--border-color);
             border-radius: 4px;
@@ -636,8 +636,7 @@
 
     <div class="main-content">
         <div class="status-bar" id="status-bar-wrapper">
-            <div id="taskstatus"></div>
-            <div class="ai-copy-wrapper" id="ai-copy-wrapper">
+            <div class="ai-copy-wrapper" id="ai-copy-wrapper" style="margin-left: 15px;">
                 <button id="btn_copy_ai" class="btn-ai-main">Copy for AI</button>
                 <button id="ai_dropdown_toggle" class="btn-ai-toggle">▼</button>
 
@@ -648,6 +647,7 @@
                     <button data-format="text">Plain Text</button>
                 </div>
             </div>
+            <div id="taskstatus" style="padding-left: 10px;"></div>
         </div>
 
         <div class="search-container" id="search-wrapper">
