@@ -3,6 +3,9 @@
 </p>
 
 <h1 align="center">ReconLens</h1>
+<p align="center">
+  <b>A <a href="https://sekademi.github.io/">Sekademi Cybersecurity</a> Product</b>
+</p>
 
 <p align="center">
   <strong>Passive Reconnaissance Lens for the Modern Web</strong><br>
