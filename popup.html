@@ -274,38 +274,28 @@
             word-break: break-all;
             background-color: var(--data-display-bg);
             padding: 4px;
-            /* Tight padding for the container */
             flex: 1;
             min-height: 0;
             overflow-y: auto;
             margin: 0;
             white-space: pre-wrap;
-            color: var(--text-main);
-            line-height: 1.4;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 11px;
-            font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
+            line-height: 1.5;
         }
 
-        .data-display span,
         .data-display a {
             display: block;
-            /* Full width for better hover area */
+            color: var(--text-main);
+            text-decoration: none;
             padding: 2px 8px;
             border-radius: 3px;
-            text-decoration: none;
-            color: inherit;
-            cursor: default;
+            line-height: 1.6;
         }
 
-        .data-display a {
+        .data-display a:hover {
             color: var(--accent-color);
-        }
-
-        .data-display a:hover,
-        .data-display span:hover {
-            background-color: rgba(3, 102, 214, 0.1);
-            /* Subtle highlight */
-            color: var(--accent-hover);
+            background-color: rgba(var(--accent-color-rgb), 0.1);
         }
 
         /* Zebra striping */
@@ -482,14 +472,15 @@
             padding-bottom: 0;
         }
 
-        .settings-group > label {
+        .settings-group>label {
             display: block;
             font-size: 10px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             color: var(--accent-color);
-            margin-bottom: 8px; /* Consistent gap after header */
+            margin-bottom: 8px;
+            /* Consistent gap after header */
             opacity: 0.8;
         }
 
@@ -497,12 +488,15 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px; /* Uniform gap between items */
-            min-height: 26px; /* Match the height of select elements for uniformity */
+            margin-bottom: 8px;
+            /* Uniform gap between items */
+            min-height: 26px;
+            /* Match the height of select elements for uniformity */
         }
 
         .settings-item:last-child {
-            margin-bottom: 0; /* Remove extra gap at group end */
+            margin-bottom: 0;
+            /* Remove extra gap at group end */
         }
 
         .settings-item label {
@@ -528,7 +522,9 @@
             transition: border-color 0.2s, box-shadow 0.2s;
         }
 
-        input:focus, textarea:focus, select:focus {
+        input:focus,
+        textarea:focus,
+        select:focus {
             outline: none;
             border-color: var(--accent-color);
             box-shadow: 0 0 0 2px rgba(var(--accent-color-rgb), 0.1);
@@ -604,7 +600,7 @@
             background-color: white;
             border-radius: 50%;
             transition: transform 0.3s;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         .toggle-btn.state-on {
@@ -980,7 +976,8 @@
                             <label id="lbl_safe_mode">Safe Mode</label>
                             <button id="settingSafeMode" class="toggle-btn"></button>
                         </div>
-                        <div class="settings-item" style="margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 8px;">
+                        <div class="settings-item"
+                            style="margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 8px;">
                             <label id="lbl_clear_cache">Cache Management</label>
                             <button id="btn_clear_cache">Clear Cache</button>
                         </div>
@@ -989,8 +986,9 @@
                     <!-- Webhook Settings -->
                     <div class="settings-group">
                         <label id="lbl_webhook">Webhook Configuration</label>
-                        
-                        <label id="lbl_webhook_url" style="font-size: 11px; color: var(--text-muted);">Target URL</label>
+
+                        <label id="lbl_webhook_url" style="font-size: 11px; color: var(--text-muted);">Target
+                            URL</label>
                         <input type="text" id="webhook_url" placeholder="https://api.example.com/webhook">
 
                         <label id="lbl_webhook_method" style="font-size: 11px; color: var(--text-muted);">Method</label>
@@ -999,11 +997,14 @@
                             <option value="POST">POST</option>
                         </select>
 
-                        <label id="lbl_webhook_params" style="font-size: 11px; color: var(--text-muted);">Extra Argument</label>
+                        <label id="lbl_webhook_params" style="font-size: 11px; color: var(--text-muted);">Extra
+                            Argument</label>
                         <input type="text" id="arg" placeholder="e.g. source=reconlens">
 
-                        <label id="lbl_webhook_headers" style="font-size: 11px; color: var(--text-muted);">Custom Headers (JSON)</label>
-                        <textarea id="headers" placeholder='{"Authorization": "Bearer key"}' style="min-height: 40px;"></textarea>
+                        <label id="lbl_webhook_headers" style="font-size: 11px; color: var(--text-muted);">Custom
+                            Headers (JSON)</label>
+                        <textarea id="headers" placeholder='{"Authorization": "Bearer key"}'
+                            style="min-height: 40px;"></textarea>
 
                         <div class="button-group">
                             <button id="reset" class="js-btn-reset-save">Reset</button>
@@ -1014,7 +1015,8 @@
                     <!-- Allowlist Settings -->
                     <div class="settings-group">
                         <label id="lbl_allowlist">Domain Allowlist</label>
-                        <textarea id="allowlist" placeholder=".google.com&#10;.amazon.com" style="min-height: 60px;"></textarea>
+                        <textarea id="allowlist" placeholder=".google.com&#10;.amazon.com"
+                            style="min-height: 60px;"></textarea>
                         <div class="button-group">
                             <button id="reset_allowlist" class="js-btn-reset-save">Reset</button>
                             <button id="save_allowlist" class="js-btn-save">Save List</button>

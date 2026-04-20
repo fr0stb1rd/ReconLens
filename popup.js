@@ -126,9 +126,12 @@ async function getCurrentTab() {
     return tab;
 }
 
-function show_info(result_data, filter = "") {
+async function show_info(result_data, filter = "") {
     lastResultData = result_data; // Cache for search
     const lowerFilter = filter.toLowerCase();
+    const tab = await getCurrentTab();
+    const baseUrl = tab ? new URL(tab.url).origin : '';
+    const currentFullUrl = tab ? tab.url : '';
 
     for (var k in key) {
         let currentKey = key[k];
@@ -151,19 +154,22 @@ function show_info(result_data, filter = "") {
                 
                 for (var i in filteredItems) {
                     let itemText = filteredItems[i];
-                    let source = result_data['source'] ? result_data['source'][itemText] : null;
+                    let a = document.createElement('a');
+                    a.target = '_blank';
+                    a.textContent = itemText;
                     
-                    if (source) {
-                        let a = document.createElement('a');
-                        a.href = source;
-                        a.target = '_blank';
-                        a.textContent = itemText;
-                        fragment.appendChild(a);
-                    } else {
-                        let span = document.createElement('span');
-                        span.textContent = itemText;
-                        fragment.appendChild(span);
+                    let targetUrl = itemText;
+                    if (itemText.startsWith('/') || (!itemText.startsWith('http') && (itemText.includes('/') || itemText.includes('.')))) {
+                        try {
+                            targetUrl = new URL(itemText, currentFullUrl).href;
+                        } catch (e) {
+                            if (itemText.startsWith('/')) {
+                                targetUrl = baseUrl + itemText;
+                            }
+                        }
                     }
+                    a.href = targetUrl;
+                    fragment.appendChild(a);
                 }
                 container.appendChild(fragment);
             } else {
