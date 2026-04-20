@@ -159,12 +159,30 @@ async function show_info(result_data, filter = "") {
                     a.textContent = itemText;
                     
                     let targetUrl = itemText;
-                    if (itemText.startsWith('/') || (!itemText.startsWith('http') && (itemText.includes('/') || itemText.includes('.')))) {
+                    
+                    // Logic to determine the target URL
+                    if (itemText.startsWith('http')) {
+                        targetUrl = itemText;
+                    } else if (itemText.startsWith('//')) {
+                        targetUrl = 'https:' + itemText;
+                    } else if (itemText.startsWith('/')) {
+                        // Relative path
                         try {
                             targetUrl = new URL(itemText, currentFullUrl).href;
                         } catch (e) {
-                            if (itemText.startsWith('/')) {
-                                targetUrl = baseUrl + itemText;
+                            targetUrl = baseUrl + itemText;
+                        }
+                    } else if (itemText.includes('.')) {
+                        // Likely a domain or IP, or a path without leading slash
+                        // Check if it's likely a domain (no slash before the first dot)
+                        if (!itemText.includes('/') || itemText.indexOf('.') < itemText.indexOf('/')) {
+                            targetUrl = 'https://' + itemText;
+                        } else {
+                            // Path without leading slash
+                            try {
+                                targetUrl = new URL(itemText, currentFullUrl).href;
+                            } catch (e) {
+                                targetUrl = baseUrl + '/' + itemText;
                             }
                         }
                     }
