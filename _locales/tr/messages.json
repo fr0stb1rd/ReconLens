@@ -1,0 +1,229 @@
+{
+    "ext_name": {
+        "message": "ReconLens",
+        "description": "Eklenti ismi"
+    },
+    "ext_description": {
+        "message": "Web sayfalarindan uc noktalari, gizli anahtarlari ve hassas verileri pasif olarak cikaran kesif eklentisi",
+        "description": "Eklenti aciklamasi"
+    },
+    "nav_home": {
+        "message": "Ana Sayfa"
+    },
+    "nav_settings": {
+        "message": "Ayarlar"
+    },
+    "popup_title_path": {
+        "message": "Yol"
+    },
+    "popup_title_domain": {
+        "message": "Alan Adi"
+    },
+    "popup_title_url": {
+        "message": "URL"
+    },
+    "popup_title_ip": {
+        "message": "IP"
+    },
+    "popup_title_ip_port": {
+        "message": "IP ve Port"
+    },
+    "popup_title_incomplete_path": {
+        "message": "Eksik Yol"
+    },
+    "popup_title_static": {
+        "message": "Statik Kaynaklar"
+    },
+    "popup_title_id_card": {
+        "message": "Kimlik Karti"
+    },
+    "popup_title_mobile": {
+        "message": "Cep Telefonu"
+    },
+    "popup_title_email": {
+        "message": "E-posta"
+    },
+    "popup_title_jwt": {
+        "message": "JWT"
+    },
+    "popup_title_algorithm": {
+        "message": "Algoritma"
+    },
+    "popup_title_sensitive": {
+        "message": "Hassas Bilgiler"
+    },
+    "popup_sidebar_path": {
+        "message": "Yol"
+    },
+    "popup_sidebar_domain": {
+        "message": "Alan Adi"
+    },
+    "popup_sidebar_url": {
+        "message": "URL"
+    },
+    "popup_sidebar_ip": {
+        "message": "IP"
+    },
+    "popup_sidebar_ip_port": {
+        "message": "IP & Port"
+    },
+    "popup_sidebar_incomplete_path": {
+        "message": "Eksik Yol"
+    },
+    "popup_sidebar_static": {
+        "message": "Statik"
+    },
+    "popup_sidebar_id_card": {
+        "message": "Kimlik"
+    },
+    "popup_sidebar_mobile": {
+        "message": "Cep Tel."
+    },
+    "popup_sidebar_email": {
+        "message": "E-posta"
+    },
+    "popup_sidebar_jwt": {
+        "message": "JWT"
+    },
+    "popup_sidebar_algorithm": {
+        "message": "Algoritma"
+    },
+    "popup_sidebar_sensitive": {
+        "message": "Hassas"
+    },
+    "popup_btn_copy": {
+        "message": "Kopyala"
+    },
+    "popup_btn_copy_url": {
+        "message": "URL Kopyala"
+    },
+    "popup_tip_copy_first": {
+        "message": "Kopyalamadan once lutfen orijinal sayfaya tiklayin :)"
+    },
+    "popup_status_scanning": {
+        "message": "Taraniyor: $DONE$/$TOTAL$",
+        "description": "Ilerleme",
+        "placeholders": {
+            "done": {
+                "content": "$1"
+            },
+            "total": {
+                "content": "$2"
+            }
+        }
+    },
+    "popup_status_complete": {
+        "message": "Tamamlandi: $DONE$/$TOTAL$",
+        "description": "Tamamlandi",
+        "placeholders": {
+            "done": {
+                "content": "$1"
+            },
+            "total": {
+                "content": "$2"
+            }
+        }
+    },
+    "popup_status_no_data": {
+        "message": "Henuz veri yok. Taramayi baslatmak icin bir sayfayi ziyaret edin."
+    },
+    "popup_category_empty": {
+        "message": "Veri bulunamadi"
+    },
+    "setting_page_title": {
+        "message": "Ayarlar Yonetimi"
+    },
+    "setting_page_header": {
+        "message": "Eklenti Yapilandirmasi"
+    },
+    "setting_lbl_clear_cache": {
+        "message": "Onbellegi Temizle"
+    },
+    "setting_btn_clear": {
+        "message": "Temizle"
+    },
+    "setting_msg_clear_done": {
+        "message": "Onbellek basariyla temizlendi"
+    },
+    "setting_btn_state_on": {
+        "message": "Acik"
+    },
+    "setting_btn_state_off": {
+        "message": "Kapali"
+    },
+    "setting_lbl_float_window": {
+        "message": "Gezgin Panel"
+    },
+    "setting_lbl_auto_timeout": {
+        "message": "Otomatik Zaman Asimi"
+    },
+    "setting_lbl_safe_mode": {
+        "message": "Guvenli Mod"
+    },
+    "setting_lbl_webhook": {
+        "message": "Webhook"
+    },
+    "setting_lbl_webhook_url": {
+        "message": "Webhook Adresi"
+    },
+    "setting_lbl_webhook_method": {
+        "message": "HTTP Yontemi"
+    },
+    "setting_lbl_webhook_params": {
+        "message": "Parametre Adi"
+    },
+    "setting_lbl_webhook_headers": {
+        "message": "Ozel Basliklar"
+    },
+    "setting_lbl_allowlist": {
+        "message": "Alan Adi Izin Listesi"
+    },
+    "setting_tip_allowlist": {
+        "message": "Her satira bir alan adi uzantisi girin. Varsayilan: .google.com, .amazon.com, portswigger.net"
+    },
+    "setting_btn_reset_save": {
+        "message": "Sifirla ve Kaydet"
+    },
+    "setting_btn_save": {
+        "message": "Kaydet"
+    },
+    "float_btn_hide": {
+        "message": "Gizle"
+    },
+    "float_btn_copy": {
+        "message": "Kopyala"
+    },
+    "setting_lbl_language": {
+        "message": "Dil"
+    },
+    "setting_opt_auto": {
+        "message": "Tarayıcı Varsayılanı"
+    },
+    "setting_lbl_theme": {
+        "message": "Tema"
+    },
+    "setting_opt_theme_auto": {
+        "message": "Otomatik"
+    },
+    "setting_opt_theme_light": {
+        "message": "Açık"
+    },
+    "setting_opt_theme_dark": {
+        "message": "Koyu"
+    },
+    "nav_about": {
+        "message": "Hakkında"
+    },
+    "about_header": {
+        "message": "ReconLens Hakkında"
+    },
+    "about_lbl_description": {
+        "message": "Açıklama"
+    },
+    "about_lbl_credits": {
+        "message": "Katkıda Bulunanlar"
+    },
+    "about_lbl_links": {
+        "message": "Bağlantılar"
+    }
+}

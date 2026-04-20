@@ -1,0 +1,229 @@
+{
+    "ext_name": {
+        "message": "ReconLens",
+        "description": "扩展名"
+    },
+    "ext_description": {
+        "message": "被动侦察扩展，从网页中提取端点、密钥和敏感信息",
+        "description": "扩展描述"
+    },
+    "nav_home": {
+        "message": "主页"
+    },
+    "nav_settings": {
+        "message": "配置"
+    },
+    "popup_title_path": {
+        "message": "路径"
+    },
+    "popup_title_domain": {
+        "message": "域名"
+    },
+    "popup_title_url": {
+        "message": "URL"
+    },
+    "popup_title_ip": {
+        "message": "IP"
+    },
+    "popup_title_ip_port": {
+        "message": "IP & 端口"
+    },
+    "popup_title_incomplete_path": {
+        "message": "残缺路径"
+    },
+    "popup_title_static": {
+        "message": "静态资源"
+    },
+    "popup_title_id_card": {
+        "message": "身份证"
+    },
+    "popup_title_mobile": {
+        "message": "手机号"
+    },
+    "popup_title_email": {
+        "message": "邮箱"
+    },
+    "popup_title_jwt": {
+        "message": "JWT"
+    },
+    "popup_title_algorithm": {
+        "message": "算法"
+    },
+    "popup_title_sensitive": {
+        "message": "敏感信息"
+    },
+    "popup_sidebar_path": {
+        "message": "路径"
+    },
+    "popup_sidebar_domain": {
+        "message": "域名"
+    },
+    "popup_sidebar_url": {
+        "message": "URL"
+    },
+    "popup_sidebar_ip": {
+        "message": "IP"
+    },
+    "popup_sidebar_ip_port": {
+        "message": "IP & 端口"
+    },
+    "popup_sidebar_incomplete_path": {
+        "message": "残缺路径"
+    },
+    "popup_sidebar_static": {
+        "message": "静态"
+    },
+    "popup_sidebar_id_card": {
+        "message": "身份证"
+    },
+    "popup_sidebar_mobile": {
+        "message": "手机号"
+    },
+    "popup_sidebar_email": {
+        "message": "邮箱"
+    },
+    "popup_sidebar_jwt": {
+        "message": "JWT"
+    },
+    "popup_sidebar_algorithm": {
+        "message": "算法"
+    },
+    "popup_sidebar_sensitive": {
+        "message": "敏感信息"
+    },
+    "popup_btn_copy": {
+        "message": "复制"
+    },
+    "popup_btn_copy_url": {
+        "message": "复制URL"
+    },
+    "popup_tip_copy_first": {
+        "message": "复制前请先点击原始页面 :)"
+    },
+    "popup_status_scanning": {
+        "message": "扫描中：$DONE$/$TOTAL$",
+        "description": "进度",
+        "placeholders": {
+            "done": {
+                "content": "$1"
+            },
+            "total": {
+                "content": "$2"
+            }
+        }
+    },
+    "popup_status_complete": {
+        "message": "完成：$DONE$/$TOTAL$",
+        "description": "完成",
+        "placeholders": {
+            "done": {
+                "content": "$1"
+            },
+            "total": {
+                "content": "$2"
+            }
+        }
+    },
+    "popup_status_no_data": {
+        "message": "暂無数据，请访问页面开始扫描。"
+    },
+    "popup_category_empty": {
+        "message": "未发现数据"
+    },
+    "setting_page_title": {
+        "message": "配置管理"
+    },
+    "setting_page_header": {
+        "message": "插件配置"
+    },
+    "setting_lbl_clear_cache": {
+        "message": "清理缓存"
+    },
+    "setting_btn_clear": {
+        "message": "清理"
+    },
+    "setting_msg_clear_done": {
+        "message": "缓存已清理"
+    },
+    "setting_btn_state_on": {
+        "message": "已开启"
+    },
+    "setting_btn_state_off": {
+        "message": "已关闭"
+    },
+    "setting_lbl_float_window": {
+        "message": "全局悬浮窗"
+    },
+    "setting_lbl_auto_timeout": {
+        "message": "自动超时"
+    },
+    "setting_lbl_safe_mode": {
+        "message": "安全模式"
+    },
+    "setting_lbl_webhook": {
+        "message": "Webhook"
+    },
+    "setting_lbl_webhook_url": {
+        "message": "回调URL"
+    },
+    "setting_lbl_webhook_method": {
+        "message": "请求方式"
+    },
+    "setting_lbl_webhook_params": {
+        "message": "参数名"
+    },
+    "setting_lbl_webhook_headers": {
+        "message": "自定义请求头"
+    },
+    "setting_lbl_allowlist": {
+        "message": "域名白名单"
+    },
+    "setting_tip_allowlist": {
+        "message": "每行输入一个域名后缀，默认：.google.com、.amazon.com、portswigger.net"
+    },
+    "setting_btn_reset_save": {
+        "message": "重置并保存"
+    },
+    "setting_btn_save": {
+        "message": "保存"
+    },
+    "float_btn_hide": {
+        "message": "隐藏"
+    },
+    "float_btn_copy": {
+        "message": "复制"
+    },
+    "setting_lbl_language": {
+        "message": "语言"
+    },
+    "setting_opt_auto": {
+        "message": "浏览器默认"
+    },
+    "setting_lbl_theme": {
+        "message": "主题"
+    },
+    "setting_opt_theme_auto": {
+        "message": "自动"
+    },
+    "setting_opt_theme_light": {
+        "message": "浅色"
+    },
+    "setting_opt_theme_dark": {
+        "message": "深色"
+    },
+    "nav_about": {
+        "message": "关于"
+    },
+    "about_header": {
+        "message": "关于 ReconLens"
+    },
+    "about_lbl_description": {
+        "message": "描述"
+    },
+    "about_lbl_credits": {
+        "message": "致谢与作者"
+    },
+    "about_lbl_links": {
+        "message": "链接"
+    }
+}

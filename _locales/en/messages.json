@@ -1,0 +1,229 @@
+{
+    "ext_name": {
+        "message": "ReconLens",
+        "description": "Extension name"
+    },
+    "ext_description": {
+        "message": "Passive reconnaissance extension that extracts endpoints, secrets and sensitive data from web pages",
+        "description": "Extension description"
+    },
+    "nav_home": {
+        "message": "Home"
+    },
+    "nav_settings": {
+        "message": "Settings"
+    },
+    "popup_title_path": {
+        "message": "Path"
+    },
+    "popup_title_domain": {
+        "message": "Domain"
+    },
+    "popup_title_url": {
+        "message": "URL"
+    },
+    "popup_title_ip": {
+        "message": "IP"
+    },
+    "popup_title_ip_port": {
+        "message": "IP & Port"
+    },
+    "popup_title_incomplete_path": {
+        "message": "Incomplete Path"
+    },
+    "popup_title_static": {
+        "message": "Static Resources"
+    },
+    "popup_title_id_card": {
+        "message": "ID Card"
+    },
+    "popup_title_mobile": {
+        "message": "Mobile"
+    },
+    "popup_title_email": {
+        "message": "Email"
+    },
+    "popup_title_jwt": {
+        "message": "JWT"
+    },
+    "popup_title_algorithm": {
+        "message": "Algorithm"
+    },
+    "popup_title_sensitive": {
+        "message": "Sensitive Info"
+    },
+    "popup_sidebar_path": {
+        "message": "Path"
+    },
+    "popup_sidebar_domain": {
+        "message": "Domain"
+    },
+    "popup_sidebar_url": {
+        "message": "URL"
+    },
+    "popup_sidebar_ip": {
+        "message": "IP"
+    },
+    "popup_sidebar_ip_port": {
+        "message": "IP & Port"
+    },
+    "popup_sidebar_incomplete_path": {
+        "message": "Incomplete Path"
+    },
+    "popup_sidebar_static": {
+        "message": "Static"
+    },
+    "popup_sidebar_id_card": {
+        "message": "ID Card"
+    },
+    "popup_sidebar_mobile": {
+        "message": "Mobile"
+    },
+    "popup_sidebar_email": {
+        "message": "Email"
+    },
+    "popup_sidebar_jwt": {
+        "message": "JWT"
+    },
+    "popup_sidebar_algorithm": {
+        "message": "Algorithm"
+    },
+    "popup_sidebar_sensitive": {
+        "message": "Sensitive"
+    },
+    "popup_btn_copy": {
+        "message": "Copy"
+    },
+    "popup_btn_copy_url": {
+        "message": "Copy URL"
+    },
+    "popup_tip_copy_first": {
+        "message": "Please click on the original page before copying :)"
+    },
+    "popup_status_scanning": {
+        "message": "Scanning: $DONE$/$TOTAL$",
+        "description": "Progress scanning",
+        "placeholders": {
+            "done": {
+                "content": "$1"
+            },
+            "total": {
+                "content": "$2"
+            }
+        }
+    },
+    "popup_status_complete": {
+        "message": "Complete: $DONE$/$TOTAL$",
+        "description": "Progress complete",
+        "placeholders": {
+            "done": {
+                "content": "$1"
+            },
+            "total": {
+                "content": "$2"
+            }
+        }
+    },
+    "popup_status_no_data": {
+        "message": "No data yet. Visit a page to start scanning."
+    },
+    "popup_category_empty": {
+        "message": "No data found"
+    },
+    "setting_page_title": {
+        "message": "Settings"
+    },
+    "setting_page_header": {
+        "message": "Configuration"
+    },
+    "setting_lbl_clear_cache": {
+        "message": "Clear Cache"
+    },
+    "setting_btn_clear": {
+        "message": "Clear"
+    },
+    "setting_msg_clear_done": {
+        "message": "Cache cleared successfully"
+    },
+    "setting_btn_state_on": {
+        "message": "On"
+    },
+    "setting_btn_state_off": {
+        "message": "Off"
+    },
+    "setting_lbl_float_window": {
+        "message": "Floating Panel"
+    },
+    "setting_lbl_auto_timeout": {
+        "message": "Auto Timeout"
+    },
+    "setting_lbl_safe_mode": {
+        "message": "Safe Mode"
+    },
+    "setting_lbl_webhook": {
+        "message": "Webhook"
+    },
+    "setting_lbl_webhook_url": {
+        "message": "Webhook URL"
+    },
+    "setting_lbl_webhook_method": {
+        "message": "HTTP Method"
+    },
+    "setting_lbl_webhook_params": {
+        "message": "Parameter Name"
+    },
+    "setting_lbl_webhook_headers": {
+        "message": "Custom Headers"
+    },
+    "setting_lbl_allowlist": {
+        "message": "Domain Allowlist"
+    },
+    "setting_tip_allowlist": {
+        "message": "One domain suffix per line. Defaults: .google.com, .amazon.com, portswigger.net"
+    },
+    "setting_btn_reset_save": {
+        "message": "Reset & Save"
+    },
+    "setting_btn_save": {
+        "message": "Save"
+    },
+    "float_btn_hide": {
+        "message": "Hide"
+    },
+    "float_btn_copy": {
+        "message": "Copy"
+    },
+    "setting_lbl_language": {
+        "message": "Language"
+    },
+    "setting_opt_auto": {
+        "message": "Browser Default"
+    },
+    "setting_lbl_theme": {
+        "message": "Theme"
+    },
+    "setting_opt_theme_auto": {
+        "message": "Auto"
+    },
+    "setting_opt_theme_light": {
+        "message": "Light"
+    },
+    "setting_opt_theme_dark": {
+        "message": "Dark"
+    },
+    "nav_about": {
+        "message": "About"
+    },
+    "about_header": {
+        "message": "About ReconLens"
+    },
+    "about_lbl_description": {
+        "message": "Description"
+    },
+    "about_lbl_credits": {
+        "message": "Credits & Authors"
+    },
+    "about_lbl_links": {
+        "message": "Links"
+    }
+}

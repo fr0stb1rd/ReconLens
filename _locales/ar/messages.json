@@ -1,0 +1,228 @@
+{
+    "ext_name": {
+        "message": "ReconLens",
+        "description": "اسم الإضافة"
+    },
+    "ext_description": {
+        "message": "إضافة استطلاع سلبية تستخرج نقاط النهاية والمفاتيح والبيانات الحساسة من صفحات الويب"
+    },
+    "nav_home": {
+        "message": "الرئيسية"
+    },
+    "nav_settings": {
+        "message": "الإعدادات"
+    },
+    "popup_title_path": {
+        "message": "المسار"
+    },
+    "popup_title_domain": {
+        "message": "النطاق"
+    },
+    "popup_title_url": {
+        "message": "URL"
+    },
+    "popup_title_ip": {
+        "message": "IP"
+    },
+    "popup_title_ip_port": {
+        "message": "IP والمنفذ"
+    },
+    "popup_title_incomplete_path": {
+        "message": "مسار ناقص"
+    },
+    "popup_title_static": {
+        "message": "موارد ثابتة"
+    },
+    "popup_title_id_card": {
+        "message": "بطاقة الهوية"
+    },
+    "popup_title_mobile": {
+        "message": "رقم الهاتف"
+    },
+    "popup_title_email": {
+        "message": "البريد الإلكتروني"
+    },
+    "popup_title_jwt": {
+        "message": "JWT"
+    },
+    "popup_title_algorithm": {
+        "message": "الخوارزمية"
+    },
+    "popup_title_sensitive": {
+        "message": "معلومات حساسة"
+    },
+    "popup_sidebar_path": {
+        "message": "المسار"
+    },
+    "popup_sidebar_domain": {
+        "message": "النطاق"
+    },
+    "popup_sidebar_url": {
+        "message": "URL"
+    },
+    "popup_sidebar_ip": {
+        "message": "IP"
+    },
+    "popup_sidebar_ip_port": {
+        "message": "IP والمنفذ"
+    },
+    "popup_sidebar_incomplete_path": {
+        "message": "مسار ناقص"
+    },
+    "popup_sidebar_static": {
+        "message": "ثابت"
+    },
+    "popup_sidebar_id_card": {
+        "message": "الهوية"
+    },
+    "popup_sidebar_mobile": {
+        "message": "الهاتف"
+    },
+    "popup_sidebar_email": {
+        "message": "البريد"
+    },
+    "popup_sidebar_jwt": {
+        "message": "JWT"
+    },
+    "popup_sidebar_algorithm": {
+        "message": "الخوارزمية"
+    },
+    "popup_sidebar_sensitive": {
+        "message": "حساسة"
+    },
+    "popup_btn_copy": {
+        "message": "نسخ"
+    },
+    "popup_btn_copy_url": {
+        "message": "نسخ URL"
+    },
+    "popup_tip_copy_first": {
+        "message": "انقر على الصفحة الأصلية قبل النسخ :)"
+    },
+    "popup_status_scanning": {
+        "message": "جارٍ الفحص: $DONE$/$TOTAL$",
+        "description": "التقدم",
+        "placeholders": {
+            "done": {
+                "content": "$1"
+            },
+            "total": {
+                "content": "$2"
+            }
+        }
+    },
+    "popup_status_complete": {
+        "message": "اكتمل: $DONE$/$TOTAL$",
+        "description": "اكتمل",
+        "placeholders": {
+            "done": {
+                "content": "$1"
+            },
+            "total": {
+                "content": "$2"
+            }
+        }
+    },
+    "popup_status_no_data": {
+        "message": "لا توجد بيانات بعد. قم بزيارة صفحة لبدء الفحص."
+    },
+    "popup_category_empty": {
+        "message": "لم يتم العثور على بيانات"
+    },
+    "setting_page_title": {
+        "message": "إدارة الإعدادات"
+    },
+    "setting_page_header": {
+        "message": "تكوين الإضافة"
+    },
+    "setting_lbl_clear_cache": {
+        "message": "مسح ذاكرة التخزين المؤقت"
+    },
+    "setting_btn_clear": {
+        "message": "مسح"
+    },
+    "setting_msg_clear_done": {
+        "message": "تم مسح ذاكرة التخزين المؤقت"
+    },
+    "setting_btn_state_on": {
+        "message": "مفعّل"
+    },
+    "setting_btn_state_off": {
+        "message": "معطّل"
+    },
+    "setting_lbl_float_window": {
+        "message": "لوحة عائمة"
+    },
+    "setting_lbl_auto_timeout": {
+        "message": "انتهاء مهلة تلقائي"
+    },
+    "setting_lbl_safe_mode": {
+        "message": "الوضع الآمن"
+    },
+    "setting_lbl_webhook": {
+        "message": "Webhook"
+    },
+    "setting_lbl_webhook_url": {
+        "message": "رابط Webhook"
+    },
+    "setting_lbl_webhook_method": {
+        "message": "طريقة HTTP"
+    },
+    "setting_lbl_webhook_params": {
+        "message": "اسم المعامل"
+    },
+    "setting_lbl_webhook_headers": {
+        "message": "رؤوس مخصصة"
+    },
+    "setting_lbl_allowlist": {
+        "message": "قائمة السماح"
+    },
+    "setting_tip_allowlist": {
+        "message": "أدخل لاحقة نطاق واحدة في كل سطر. الافتراضي: .google.com، .amazon.com، portswigger.net"
+    },
+    "setting_btn_reset_save": {
+        "message": "إعادة تعيين وحفظ"
+    },
+    "setting_btn_save": {
+        "message": "حفظ"
+    },
+    "float_btn_hide": {
+        "message": "إخفاء"
+    },
+    "float_btn_copy": {
+        "message": "نسخ"
+    },
+    "setting_lbl_language": {
+        "message": "اللغة"
+    },
+    "setting_opt_auto": {
+        "message": "الافتراضي للمتصفح"
+    },
+    "setting_lbl_theme": {
+        "message": "المظهر"
+    },
+    "setting_opt_theme_auto": {
+        "message": "تلقائي"
+    },
+    "setting_opt_theme_light": {
+        "message": "فاتح"
+    },
+    "setting_opt_theme_dark": {
+        "message": "داكن"
+    },
+    "nav_about": {
+        "message": "حول"
+    },
+    "about_header": {
+        "message": "حول ReconLens"
+    },
+    "about_lbl_description": {
+        "message": "الوصف"
+    },
+    "about_lbl_credits": {
+        "message": "المساهمون والمؤلفون"
+    },
+    "about_lbl_links": {
+        "message": "الروابط"
+    }
+}

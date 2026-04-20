@@ -1,0 +1,701 @@
+<!--  
+@Date    : 2026-03-30 16:00:00
+@Author  : residuallaugh / M1r0ku
+-->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>FindSomething</title>
+    <style type="text/css">
+        :root {
+            --bg-color: #f0f2f5;
+            --panel-bg: #ffffff;
+            --text-main: #343a40;
+            --text-secondary: #555555;
+            --text-muted: #6c757d;
+            --border-color: #e0e0e0;
+            --accent-color: #007bff;
+            --accent-hover: #0056b3;
+            --accent-active: #e0f2ff;
+            --card-bg: #ffffff;
+            --card-header-bg: #f8f9fa;
+            --data-display-bg: #f8f9fa;
+            --data-display-border: #e9ecef;
+            --copy-btn-bg: #007bff;
+            --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        body.dark-mode {
+            --bg-color: #0d1117;
+            --panel-bg: #161b22;
+            --text-main: #c9d1d9;
+            --text-secondary: #8b949e;
+            --text-muted: #7d8590;
+            --border-color: #30363d;
+            --accent-color: #58a6ff;
+            --accent-hover: #1f6feb;
+            --accent-active: #161b22;
+            --card-bg: #0d1117;
+            --card-header-bg: #161b22;
+            --data-display-bg: #010409;
+            --data-display-border: #30363d;
+            --copy-btn-bg: #238636;
+            --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            width: 800px; /* Increased from 680px */
+            height: 600px; /* Increased from 480px */
+            font-family: 'Inter', 'Roboto', sans-serif;
+            font-size: 13px;
+            margin: 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            overflow: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Left Sidebar - Navigation Card List */
+        .left-panel {
+            width: 140px; /* Fixed width for the left panel */
+            background-color: var(--panel-bg);
+            box-shadow: 2px 0 6px rgba(0, 0, 0, 0.05);
+            padding-top: 5px; /* Reduced from 15px */
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto;
+            height: 100%;
+            box-sizing: border-box;
+            border-bottom: none;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .panel-title {
+            margin-bottom: 8px;
+            padding: 8px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .panel-brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .panel-subtitle {
+            font-size: 9px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-top: 2px;
+            opacity: 0.7;
+        }
+
+        .panel-title img {
+            border-radius: 4px;
+        }
+
+        .category-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .category-item {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .category-item a {
+            display: flex;
+            align-items: center;
+            padding: 5px 12px; /* Reduced from 8px 15px */
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 400;
+            transition: background-color 0.2s ease, color 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .category-item a:hover {
+            background-color: var(--bg-color);
+            color: var(--accent-color);
+        }
+
+        .category-item a.active {
+            background-color: var(--accent-active);
+            color: var(--accent-color);
+            border-left-color: var(--accent-color);
+            margin-bottom: 5px;
+        }
+
+        .sidebar-footer {
+            margin-top: auto; /* Push to bottom */
+            padding: 10px;
+            text-align: center;
+            font-size: 10px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            opacity: 0.6;
+            letter-spacing: 0.5px;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            width: 660px; /* Adjusted to 800 - 140 */
+            flex-grow: 1;
+            padding: 5px;
+            height: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; /* Prevent parent from scrolling */
+        }
+
+        #taskstatus {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+            text-align: right;
+            padding-right: 5px;
+        }
+
+        /* Card Layout for each section (right panel) */
+        .info-card {
+            background-color: var(--card-bg);
+            border-radius: 6px;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 0;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-height: 0; /* Important for flex scrolling */
+        }
+
+        .info-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 3px 10px; /* Even tighter padding */
+            background-color: var(--card-header-bg);
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.2s ease;
+        }
+
+        .info-card-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .info-card-content {
+            padding: 8px 12px; /* Reduced from 15px 20px */
+            flex: 1;
+            overflow-y: auto;
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        .data-display {
+            word-break: break-all;
+            background-color: var(--data-display-bg);
+            padding: 5px 8px; /* Tighter data padding */
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+            margin: 0; /* Remove default p margins */
+            white-space: pre-wrap;
+            color: var(--text-main);
+            line-height: 1.3;
+            border: 1px solid var(--data-display-border);
+            font-size: 11px;
+            font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
+        }
+
+        .data-display.no-data {
+            color: #999;
+            font-style: normal;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .copy-button {
+            border: none;
+            background-color: var(--copy-btn-bg);
+            color: #ffffff;
+            padding: 3px 6px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 10px;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        .copy-button:hover {
+            background-color: #0056b3;
+        }
+
+        .copy-button:active {
+            background-color: #004085;
+            transform: translateY(1px);
+        }
+
+        .copy-button#popupCopyurl {
+            background-color: #28a745;
+            margin-left: 6px;
+        }
+
+        .copy-button#popupCopyurl:hover {
+            background-color: #218838;
+        }
+
+        .copy-button#popupCopyurl:active {
+            background-color: #1e7e34;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        a:hover .tips {
+            border-color: #d64d00;
+        }
+
+        #info-cards-container {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Settings Specific Styles */
+        .settings-container {
+            background-color: var(--panel-bg);
+            border-radius: 6px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            flex-grow: 1;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+        }
+
+        .settings-group {
+            margin-bottom: 8px; /* Reduced from 15px */
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px; /* Reduced from 15px */
+        }
+        .settings-group:last-of-type {
+            margin-bottom: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .settings-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px; /* Reduced from 10px */
+        }
+        .settings-item label {
+            font-weight: 500;
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+        
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 4px 8px; /* Tighter inputs */
+            margin-top: 2px;
+            margin-bottom: 6px; /* Reduced from 12px */
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 13px;
+            box-sizing: border-box;
+            font-family: inherit;
+            background-color: var(--data-display-bg);
+            color: var(--text-main);
+        }
+
+        .settings-group > label {
+            display: block;
+            margin-bottom: 2px; /* Reduced from 5px */
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            margin-top: 5px; /* Reduced from 10px */
+            padding-top: 5px; /* Reduced from 10px */
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .button-group button, .settings-item button, .toggle-btn {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 4px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s ease;
+        }
+
+        /* Modern Toggle Styles */
+        .toggle-btn {
+            min-width: 50px;
+            border-radius: 20px; /* Switch-like shape */
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 10px;
+            letter-spacing: 0.5px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .toggle-btn.state-on {
+            background-color: #238636 !important; /* Green */
+            border: 1px solid #2ea043;
+        }
+
+        .toggle-btn.state-off {
+            background-color: #6c757d !important; /* Gray */
+            border: 1px solid #5c636a;
+        }
+
+        .toggle-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .button-group button:hover, .settings-item button:hover {
+            background-color: var(--accent-hover);
+        }
+        .button-group button#reset, .button-group button#reset_allowlist {
+            background-color: var(--text-muted);
+        }
+        .settings-item button#btn_clear_cache {
+            background-color: #dc3545;
+        }
+
+        /* Search Bar Styling */
+        .search-container {
+            margin-bottom: 2px; /* Minimal gap */
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background-color: var(--bg-color);
+            padding-bottom: 5px;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 13px;
+            background-color: var(--panel-bg);
+            color: var(--text-main);
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        #searchInput:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px var(--accent-active);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="left-panel">
+        <div class="panel-title">
+            <div class="panel-brand">
+                <img src="icons/icon128.png" alt="Logo" width="18" height="18">
+                <span>ReconLens</span>
+            </div>
+            <div class="panel-subtitle">RECON ENGINE</div>
+        </div>
+        <ul class="category-list">
+            <li class="category-item"><a href="#" data-category="path" class="active" id="popup_sidebar_path">Path</a></li>
+            <li class="category-item"><a href="#" data-category="domain" id="popup_sidebar_domain">域名</a></li>
+            <li class="category-item"><a href="#" data-category="url" id="popup_sidebar_url">URL</a></li>
+            <li class="category-item"><a href="#" data-category="ip" id="popup_sidebar_ip">IP</a></li>
+            <li class="category-item"><a href="#" data-category="ip_port" id="popup_sidebar_ip_port">IP & Port</a></li>
+            <li class="category-item"><a href="#" data-category="incomplete_path" id="popup_sidebar_incomplete_path">残缺路径</a></li>
+            <li class="category-item"><a href="#" data-category="static" id="popup_sidebar_static">静态资源</a></li>
+            <li class="category-item"><a href="#" data-category="id_card" id="popup_sidebar_id_card">身份证</a></li>
+            <li class="category-item"><a href="#" data-category="mobile" id="popup_sidebar_mobile">手机号</a></li>
+            <li class="category-item"><a href="#" data-category="email" id="popup_sidebar_email">邮箱</a></li>
+            <li class="category-item"><a href="#" data-category="sensitive" id="popup_sidebar_sensitive">敏感信息</a></li>
+            <li class="category-item"><a href="#" data-category="settings" id="nav_settings">配置</a></li>
+            <li class="category-item"><a href="#" data-category="about" id="nav_about">关于</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            v<span class="ext-version-display">1.0.0</span>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div id="taskstatus"></div>
+
+        <div class="search-container" id="search-wrapper">
+            <input type="text" id="searchInput" placeholder="Filter results...">
+        </div>
+
+        <div id="info-cards-container">
+            <div class="info-card" id="card-path">
+                <div class="info-card-header">
+                    <span class="info-card-title" id="popup_title_path">Path</span>
+                    <div>
+                        <button id="path_button" class="copy-button" name="path">复制</button>
+                        <button id="popup_btn_copy_url" class="copy-button" name="path">复制URL</button>
+                    </div>
+                </div>
+                <p id="path" class="data-display no-data">>-</p>
+            </div>
+
+            <div class="info-card" id="card-domain">
+                <div class="info-card-header">
+                    <span class="info-card-title" id="popup_title_domain">域名</span>
+                    <button class="copy-button" name="domain">复制</button>
+                </div>
+                <p id="domain" class="data-display no-data">>-</p>
+            </div>
+
+            <div class="info-card" id="card-url">
+                <div class="info-card-header">
+                    <span class="info-card-title" id="popup_title_url">Url</span>
+                    <button class="copy-button" name="url">复制</button>
+                </div>
+                <p id="url" class="data-display no-data">>-</p>
+            </div>
+
+            <div class="info-card" id="card-ip">
+                <div class="info-card-header">
+                    <span class="info-card-title" id="popup_title_ip">IP</span>
+                    <button type="button" class="copy-button" name="ip">复制</button>
+                </div>
+                <p id="ip" class="data-display no-data">>-</p>
+            </div>
+
+            <div class="info-card" id="card-ip_port">
+                <div class="info-card-header">
+                    <span class="info-card-title" id="popup_title_ip_port">IP_PORT</span>
+                    <button class="copy-button" name="ip_port">复制</button>
+                </div>
+                <p id="ip_port" class="data-display no-data">>-</p>
+            </div>
+
+            <div class="info-card" id="card-incomplete_path">
+                <div class="info-card-header">
+                    <span class="info-card-title" id="popup_title_incomplete_path">IncompletePath</span>
+                    <button class="copy-button" name="incomplete_path">复制</button>
+                </div>
+                <p id="incomplete_path" class="data-display no-data">>-</p>
+            </div>
+
+            <div class="info-card" id="card-static">
+                <div class="info-card-header">
+                    <span class="info-card-title" id="popup_title_static">StaticUrl</span>
+                    <button class="copy-button" name="static">复制</button>
+                </div>
+                <p id="static" class="data-display no-data">>-</p>
+            </div>
+
+            <div class="info-card" id="card-id_card">
+                <div class="info-card-header">
+                    <span class="info-card-title" id="popup_title_id_card">身份证</span>
+                    <button class="copy-button" name="id_card">复制</button>
+                </div>
+                <p id="id_card" class="data-display no-data">>-</p>
+            </div>
+
+            <div class="info-card" id="card-mobile">
+                <div class="info-card-header">
+                    <span class="info-card-title" id="popup_title_mobile">手机号</span>
+                    <button class="copy-button" name="mobile">复制</button>
+                </div>
+                <p id="mobile" class="data-display no-data">>-</p>
+            </div>
+
+            <div class="info-card" id="card-email">
+                <div class="info-card-header">
+                    <span class="info-card-title" id="popup_title_email">邮箱</span>
+                    <button class="copy-button" name="email">复制</button>
+                </div>
+                <p id="email" class="data-display no-data">>-</p>
+            </div>
+
+            <div class="info-card" id="card-jwt">
+                <div class="info-card-header">
+                    <span class="info-card-title" id="popup_title_jwt">JWT</span>
+                    <button class="copy-button" name="jwt">复制</button>
+                </div>
+                <p id="jwt" class="data-display no-data">>-</p>
+            </div>
+
+            <div class="info-card" id="card-algorithm">
+                <div class="info-card-header">
+                    <span class="info-card-title" id="popup_title_algorithm">算法</span>
+                    <button class="copy-button" name="algorithm">复制</button>
+                </div>
+                <p id="algorithm" class="data-display no-data">>-</p>
+            </div>
+
+            <div class="info-card" id="card-sensitive">
+                <div class="info-card-header">
+                    <span class="info-card-title" id="popup_title_sensitive">Secret</span>
+                    <button class="copy-button" name="sensitive">复制</button>
+                </div>
+                <p id="sensitive" class="data-display no-data">>-</p>
+            </div>
+
+            <div class="info-card" id="card-settings" style="display: none;">
+                <div class="info-card-header">
+                    <span class="info-card-title" id="settings_header">插件配置</span>
+                </div>
+                <div class="info-card-content">
+                    <div class="settings-group">
+                        <div class="settings-item">
+                            <label id="lbl_language">Language</label>
+                            <select id="user_language" style="width: 130px; margin-bottom: 0;">
+                                <option value="auto" id="opt_auto">Browser Default</option>
+                                <option value="en">English</option>
+                                <option value="tr">Türkçe</option>
+                                <option value="zh_CN">简体中文</option>
+                                <option value="ar">العربية</option>
+                            </select>
+                        </div>
+                        <div class="settings-item">
+                            <label id="lbl_theme">Theme</label>
+                            <select id="user_theme" style="width: 130px; margin-bottom: 0;">
+                                <option value="auto" id="opt_theme_auto">Auto</option>
+                                <option value="light" id="opt_theme_light">Light</option>
+                                <option value="dark" id="opt_theme_dark">Dark</option>
+                            </select>
+                        </div>
+                        <div class="settings-item">
+                            <label id="lbl_clear_cache">清理缓存</label>
+                            <button id="btn_clear_cache">清理</button>
+                        </div>
+                        <div class="settings-item">
+                            <label id="lbl_float_window">全局悬浮窗</label>
+                            <button id="global_float" class="toggle-btn">打开</button>
+                        </div>
+                        <div class="settings-item">
+                            <label id="lbl_auto_timeout">自动超时</label>
+                            <button id="fetch_timeout" class="toggle-btn">打开</button>
+                        </div>
+                        <div class="settings-item">
+                            <label id="lbl_safe_mode">安全模式</label>
+                            <button id="settingSafeMode" class="toggle-btn">打开</button>
+                        </div>
+                    </div>
+
+                    <div class="settings-group">
+                        <label id="lbl_webhook">Webhook</label>
+                        <label id="lbl_webhook_url" style="font-size: 11px; color: #888;">回调地址</label>
+                        <input type="text" id="url">
+
+                        <label id="lbl_webhook_method" style="font-size: 11px; color: #888;">请求方法</label>
+                        <select id="method">
+                            <option value ="GET">GET</option>
+                            <option value ="POST">POST</option>
+                        </select>
+
+                        <label id="lbl_webhook_params" style="font-size: 11px; color: #888;">请求参数</label>
+                        <input type="text" id="arg">
+
+                        <label id="lbl_webhook_headers" style="font-size: 11px; color: #888;">自定义headers</label>
+                        <textarea id="headers" placeholder='{"auth":"key"}'></textarea>
+                        
+                        <div class="button-group">
+                            <button id="reset" class="js-btn-reset-save">置空并保存</button>
+                            <button id="save" class="js-btn-save">保存</button>
+                        </div>
+                    </div>
+
+                    <div class="settings-group">
+                        <label id="lbl_allowlist">域名白名单</label>
+                        <textarea id="allowlist" placeholder=".google.com"></textarea>
+                        <div class="button-group">
+                            <button id="reset_allowlist" class="js-btn-reset-save">置空并保存</button>
+                            <button id="save_allowlist" class="js-btn-save">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Section -->
+            <div class="info-card" id="card-about" style="display: none;">
+                <div class="info-card-header">
+                    <span class="info-card-title" id="about_header">About ReconLens</span>
+                </div>
+                <div class="info-card-content">
+                    <div class="settings-group" style="text-align: center; padding: 10px 0;">
+                        <img src="icons/icon128.png" alt="Logo" width="48" height="48" style="margin-bottom: 8px;">
+                        <h3 style="margin: 0; color: var(--accent-color); font-size: 16px;">ReconLens</h3>
+                        <p style="font-size: 11px; color: var(--text-muted); margin: 4px 0 0 0;">v<span class="ext-version-display">1.0.0</span></p>
+                    </div>
+                    
+                    <div class="settings-group">
+                        <label id="about_lbl_description">Description</label>
+                        <p id="about_val_description" style="font-size: 12px; line-height: 1.5; color: var(--text-secondary);">Passive reconnaissance extension that extracts endpoints, secrets and sensitive data from web pages.</p>
+                    </div>
+
+                    <div class="settings-group">
+                        <label id="about_lbl_credits">Credits</label>
+                        <ul style="font-size: 11px; color: var(--text-secondary); padding-left: 18px; line-height: 1.7; margin: 5px 0;">
+                            <li><strong>fr0stb1rd</strong> - SPA Architecture & UI/UX</li>
+                            <li><strong>residuallaugh</strong> - Original Author</li>
+                            <li><strong>Project Discovery</strong> - Secret Patterns</li>
+                        </ul>
+                    </div>
+
+                    <div class="settings-group">
+                        <label id="about_lbl_links">Links</label>
+                        <div style="display: flex; gap: 15px; font-size: 11px;">
+                            <a href="https://github.com/fr0stb1rd/ReconLens" target="_blank" style="color: var(--accent-color); text-decoration: none;">GitHub Repo</a>
+                            <a href="https://github.com/fr0stb1rd/ReconLens/blob/main/LICENSE" target="_blank" style="color: var(--accent-color); text-decoration: none;">License (GPL-3.0)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script src="polyfill.js"></script>
+<script src="popup.js"></script>
+</html>
