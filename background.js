@@ -948,20 +948,28 @@ function webhook(data) {
 }
 
 function refresh_count() {
-  const cur = tab_url[selected_id];
-  if (!cur) return;
+  if (selected_id === -1) return;
+  const tid = selected_id;
+  const cur = tab_url[tid];
+  
+  if (!cur) {
+    chrome.action.setBadgeText({ text: "", tabId: tid });
+    return;
+  }
 
   const process_data = (data) => {
-    if (!data) return;
     let cnt = 0;
-    for (const k in data) {
-      if (k == "done" || k == "tasklist" || k == "donetasklist" || k == "current" || k == "pretasknum")
-        continue;
-      const v = data[k];
-      if (!v || v === "" || (Array.isArray(v) && v.length === 0)) continue;
-      cnt++;
+    if (data) {
+      for (const k in data) {
+        if (k == "done" || k == "tasklist" || k == "donetasklist" || k == "current" || k == "pretasknum")
+          continue;
+        const v = data[k];
+        if (!v || v === "" || (Array.isArray(v) && v.length === 0)) continue;
+        cnt++;
+      }
     }
-    chrome.action.setBadgeText({ text: "" + cnt });
+    const badgeText = cnt > 0 ? "" + cnt : "";
+    chrome.action.setBadgeText({ text: badgeText, tabId: tid });
     if (data && data['donetasklist'] && data['pretasknum'] && data['donetasklist'].length == data['pretasknum']) {
       data['done'] = 'done'
       chrome.storage.local.set({ ["findsomething_result_" + cur]: data }, function () { });
@@ -975,6 +983,8 @@ function refresh_count() {
       if (result["findsomething_result_" + cur]) {
         search_data[cur] = result["findsomething_result_" + cur];
         process_data(search_data[cur]);
+      } else {
+        process_data(null);
       }
     });
   } else {
