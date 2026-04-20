@@ -54,6 +54,7 @@ function init_locales() {
         'popup_title_incomplete_path': 'popup_title_incomplete_path',
         'popup_title_url': 'popup_title_url',
         'popup_title_static': 'popup_title_static',
+        'btn_copy_current': 'popup_btn_copy_current',
         'btn_copy_ai': 'popup_btn_copy_all',
         // Left sidebar category labels
         'popup_sidebar_path': 'popup_sidebar_path',
@@ -354,83 +355,91 @@ function init_ai_copy_logic() {
 
     let selectedFormat = 'md';
 
-    // Toggle menu
-    toggleBtn.onclick = (e) => {
-        e.stopPropagation();
-        menu.classList.toggle('show');
-    };
-
-    // Close menu on outside click
-    window.addEventListener('click', () => {
-        menu.classList.remove('show');
-    });
-
-    // Copy action
-    const doAiCopy = async (format) => {
-        if (!lastResultData) return;
-
+    // Shared formatting engine
+    const formatResults = (data, categories, format) => {
         let val = "";
-        const data = lastResultData;
-        const categories = key;
-
         if (format === 'md') {
-            val = "# ReconLens Scan Results\n\n";
-            for (const cat of categories) {
-                if (data[cat] && data[cat].length) {
+            val = "# ReconLens Results\n\n";
+            categories.forEach(cat => {
+                if (data[cat]?.length) {
                     val += `## ${t('popup_title_' + cat) || cat}\n`;
                     data[cat].forEach(item => val += `- ${item}\n`);
                     val += "\n";
                 }
-            }
+            });
         } else if (format === 'xml') {
             val = '<?xml version="1.0" encoding="UTF-8"?>\n<recon_results>\n';
-            for (const cat of categories) {
-                if (data[cat] && data[cat].length) {
+            categories.forEach(cat => {
+                if (data[cat]?.length) {
                     val += `  <category name="${t('popup_title_' + cat) || cat}">\n`;
                     data[cat].forEach(item => val += `    <item>${item}</item>\n`);
                     val += `  </category>\n`;
                 }
-            }
+            });
             val += '</recon_results>';
         } else if (format === 'html') {
             val = '<div class="recon-results">\n';
-            for (const cat of categories) {
-                if (data[cat] && data[cat].length) {
+            categories.forEach(cat => {
+                if (data[cat]?.length) {
                     val += `  <h2>${t('popup_title_' + cat) || cat}</h2>\n  <ul>\n`;
                     data[cat].forEach(item => val += `    <li>${item}</li>\n`);
                     val += `  </ul>\n`;
                 }
-            }
+            });
             val += '</div>';
         } else {
-            // Plain Text
-            for (const cat of categories) {
-                if (data[cat] && data[cat].length) {
+            categories.forEach(cat => {
+                if (data[cat]?.length) {
                     val += `${t('popup_title_' + cat) || cat}:\n`;
                     data[cat].forEach(item => val += `${item}\n`);
                     val += "\n";
                 }
-            }
+            });
         }
-
-        if (!val.trim()) return;
-
-        try {
-            await navigator.clipboard.writeText(val.trim());
-            provideFeedback(mainBtn, "popup_tip_copied");
-        } catch (err) {
-            console.error('AI Copy failed:', err);
-        }
-        menu.classList.remove('show');
+        return val.trim();
     };
 
-    mainBtn.onclick = () => doAiCopy(selectedFormat);
+    const setupSplitButton = (mainId, toggleId, menuId, copyFn) => {
+        const mainBtn = document.getElementById(mainId);
+        const toggleBtn = document.getElementById(toggleId);
+        const menu = document.getElementById(menuId);
+        if (!mainBtn || !toggleBtn || !menu) return;
 
-    menu.querySelectorAll('button').forEach(btn => {
-        btn.onclick = () => {
-            selectedFormat = btn.dataset.format;
-            doAiCopy(selectedFormat);
-        };
+        toggleBtn.onclick = (e) => { e.stopPropagation(); menu.classList.toggle('show'); };
+        mainBtn.onclick = () => copyFn('text'); // Default to text for main button
+        menu.querySelectorAll('button').forEach(btn => {
+            btn.onclick = () => copyFn(btn.dataset.format);
+        });
+    };
+
+    // Copy handlers
+    const copyAll = (format) => {
+        const val = formatResults(lastResultData, key, format);
+        if (val) {
+            navigator.clipboard.writeText(val);
+            provideFeedback(document.getElementById('btn_copy_ai'), "popup_tip_copied");
+        }
+        document.getElementById('ai_menu').classList.remove('show');
+    };
+
+    const copyCurrent = (format) => {
+        const activeLink = document.querySelector('.category-item a.active');
+        if (!activeLink || !lastResultData) return;
+        const cat = activeLink.dataset.category;
+        const val = formatResults(lastResultData, [cat], format);
+        if (val) {
+            navigator.clipboard.writeText(val);
+            provideFeedback(document.getElementById('btn_copy_current'), "popup_tip_copied");
+        }
+        document.getElementById('current_menu').classList.remove('show');
+    };
+
+    setupSplitButton('btn_copy_ai', 'ai_dropdown_toggle', 'ai_menu', copyAll);
+    setupSplitButton('btn_copy_current', 'current_dropdown_toggle', 'current_menu', copyCurrent);
+
+    window.addEventListener('click', () => {
+        document.getElementById('ai_menu')?.classList.remove('show');
+        document.getElementById('current_menu')?.classList.remove('show');
     });
 }
 

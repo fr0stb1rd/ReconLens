@@ -234,5 +234,8 @@
     },
     "popup_btn_copy_all": {
         "message": "Tüm Sonuçları Kopyala"
+    },
+    "popup_btn_copy_current": {
+        "message": "Bu Sayfayı Kopyala"
     }
 }

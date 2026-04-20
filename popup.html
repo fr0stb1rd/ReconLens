@@ -658,6 +658,18 @@
 
     <div class="main-content">
         <div class="status-bar" id="status-bar-wrapper">
+            <div class="ai-copy-wrapper" id="current-copy-wrapper">
+                <button id="btn_copy_current" class="btn-ai-main">Copy Current</button>
+                <button id="current_dropdown_toggle" class="btn-ai-toggle">▼</button>
+
+                <div id="current_menu" class="ai-menu">
+                    <button data-format="md">Markdown</button>
+                    <button data-format="xml">XML</button>
+                    <button data-format="html">HTML</button>
+                    <button data-format="text">Plain Text</button>
+                </div>
+            </div>
+
             <div class="ai-copy-wrapper" id="ai-copy-wrapper">
                 <button id="btn_copy_ai" class="btn-ai-main">Copy All Results</button>
                 <button id="ai_dropdown_toggle" class="btn-ai-toggle">▼</button>

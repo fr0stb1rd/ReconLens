@@ -234,5 +234,8 @@
     },
     "popup_btn_copy_all": {
         "message": "Copy All Results"
+    },
+    "popup_btn_copy_current": {
+        "message": "Copy Current"
     }
 }
