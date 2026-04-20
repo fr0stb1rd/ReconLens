@@ -54,8 +54,6 @@ function init_locales() {
         'popup_title_incomplete_path': 'popup_title_incomplete_path',
         'popup_title_url': 'popup_title_url',
         'popup_title_static': 'popup_title_static',
-        'btn_copy_current': 'popup_btn_copy_current',
-        'btn_copy_url_resolved': 'popup_btn_copy_url_resolved',
         'btn_copy_ai': 'popup_btn_copy_all',
         // Left sidebar category labels
         'popup_sidebar_path': 'popup_sidebar_path',
@@ -108,76 +106,8 @@ function init_locales() {
     }
 }
 
-// Removed premature init_locales() call
-
-
 var key = ["ip", "ip_port", "domain", "path", "incomplete_path", "url", "static", "id_card", "mobile", "email", "jwt", "algorithm", "sensitive"];
 let lastResultData = null; // Store latest results for search filtering
-
-function init_copy() {
-    var elements = document.getElementsByClassName("copy-button");
-    if (elements) {
-        for (var i = 0, len = elements.length | 0; i < len; i = i + 1 | 0) {
-            elements[i].textContent = t("popup_btn_copy");
-            let ele_name = elements[i].name;
-            let ele_id = elements[i].id;
-            if (ele_id == "popup_btn_copy_url") {
-                elements[i].textContent = t("popup_btn_copy_url");
-            }
-            elements[i].onclick = async function (e) {
-                if (e) e.preventDefault();
-                const btn = this;
-                const originalText = btn.textContent;
-                
-                let copytext = document.getElementById(ele_name).textContent;
-                if (copytext === 'No data' || copytext === '-') return;
-
-                if (ele_id == "popup_btn_copy_url") {
-                    const tab = await getCurrentTab();
-                    if (!tab) {
-                        alert(t("popup_tip_copy_first"));
-                        return;
-                    }
-                    const url = new URL(tab.url);
-                    const path_list = copytext.split('\n').filter(line => line.trim() !== 'No data' && line.trim() !== '' && line.trim() !== '-');
-                    copytext = "";
-                    for (let item of path_list) {
-                        item = item.trim();
-                        if (!item) continue;
-                        try {
-                            const resolvedUrl = new URL(item, tab.url);
-                            copytext += resolvedUrl.href + '\n';
-                        } catch (e) {
-                            if (item.startsWith('/')) {
-                                copytext += url.origin + item + '\n';
-                            } else {
-                                const basePath = url.pathname.substring(0, url.pathname.lastIndexOf('/') + 1) || '/';
-                                copytext += url.origin + basePath + item + '\n';
-                            }
-                        }
-                    }
-                    copytext = copytext.trim();
-                }
-
-                if (copytext) {
-                    try {
-                        await navigator.clipboard.writeText(copytext);
-                        // Visual Feedback
-                        btn.textContent = t("popup_tip_copied") || "Copied!";
-                        btn.classList.add('copy-success');
-                        setTimeout(() => {
-                            btn.textContent = originalText;
-                            btn.classList.remove('copy-success');
-                        }, 1000);
-                    } catch (err) {
-                        console.error('Copy failed:', err);
-                    }
-                }
-            }
-        }
-    }
-}
-
 
 /** Provide visual feedback on a button after an action. */
 function provideFeedback(btn, feedbackTextKey = "popup_tip_saved") {
@@ -329,7 +259,6 @@ function init_search_logic() {
 
 reconI18n.init().then(() => {
     init_locales();
-    init_copy();
     init_category_navigation();
     init_search_logic(); // Initialize Search
     init_ai_copy_logic(); // Initialize AI Copy
