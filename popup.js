@@ -162,12 +162,27 @@ async function show_info(result_data, filter = "") {
                     a.textContent = itemText;
 
                     let targetUrl = itemText;
-                    if (itemText.startsWith('/') || (!itemText.startsWith('http') && (itemText.includes('/') || itemText.includes('.')))) {
+                    let cleanText = itemText.trim();
+                    
+                    if (cleanText.startsWith('http')) {
+                        targetUrl = cleanText;
+                    } else if (cleanText.startsWith('//')) {
+                        targetUrl = 'https:' + cleanText;
+                    } else if (cleanText.startsWith('/')) {
                         try {
-                            targetUrl = new URL(itemText, currentFullUrl).href;
+                            targetUrl = new URL(cleanText, currentFullUrl).href;
                         } catch (e) {
-                            if (itemText.startsWith('/')) {
-                                targetUrl = baseUrl + itemText;
+                            targetUrl = baseUrl + cleanText;
+                        }
+                    } else if (cleanText.includes('.')) {
+                        // If it's a domain (dot exists and no slash before it)
+                        if (!cleanText.includes('/') || cleanText.indexOf('.') < cleanText.indexOf('/')) {
+                            targetUrl = 'https://' + (cleanText.startsWith('.') ? cleanText.substring(1) : cleanText);
+                        } else {
+                            try {
+                                targetUrl = new URL(cleanText, currentFullUrl).href;
+                            } catch (e) {
+                                targetUrl = baseUrl + '/' + cleanText;
                             }
                         }
                     }
