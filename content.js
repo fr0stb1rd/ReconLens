@@ -32,17 +32,20 @@
         var source_href = source.match(/href=['"].*?['"]/g);
         var source_src = source.match(/src=['"].*?['"]/g);
         var script_src = source.match(/<script [^><]*?src=['"].*?['"]/g);
-        chrome.storage.local.get(["settingSafeMode"], function (settings) {
+        chrome.storage.local.get(["settingSafeMode", "allowlist", "extension_enabled"], function (settings) {
+            // Master Switch Check
+            if (settings && settings["extension_enabled"] === false) {
+                console.log('ReconLens: Global scanning is disabled via Master Switch.');
+                return;
+            }
+
             settingSafeMode = settings["settingSafeMode"] == false ? false : true;
-        });
-        chrome.storage.local.get(["allowlist"], function (settings) {
-            // console.log(settings , settings['allowlist'])
             if (settings && settings['allowlist']) {
                 urlWhiteList = settings['allowlist'];
             }
             for (var i = 0; i < urlWhiteList.length; i++) {
                 if (host.endsWith(urlWhiteList[i]) || domain_host.endsWith(urlWhiteList[i])) {
-                    console.log('域名在白名单中，跳过当前页')
+                    console.log('ReconLens: Domain in allowlist, skipping scan.');
                     return;
                 }
             }

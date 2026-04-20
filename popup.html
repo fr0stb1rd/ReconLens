@@ -172,6 +172,77 @@
             letter-spacing: 0.5px;
         }
 
+        .master-switch-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+            padding: 4px 8px;
+            background-color: rgba(196, 7, 255, 0.05);
+            border-radius: 4px;
+            border: 1px solid rgba(196, 7, 255, 0.1);
+        }
+
+        #lbl_master_switch {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Small Toggle Switch */
+        .switch-sm {
+            position: relative;
+            display: inline-block;
+            width: 28px;
+            height: 16px;
+        }
+
+        .switch-sm input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider-sm {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #444;
+            transition: .3s;
+        }
+
+        .slider-sm:before {
+            position: absolute;
+            content: "";
+            height: 12px;
+            width: 12px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: .3s;
+        }
+
+        input:checked + .slider-sm {
+            background-color: var(--accent-color);
+        }
+
+        input:checked + .slider-sm:before {
+            transform: translateX(12px);
+        }
+
+        .slider-sm.round {
+            border-radius: 16px;
+        }
+
+        .slider-sm.round:before {
+            border-radius: 50%;
+        }
+
         /* Main Content Area */
         .main-content {
             width: 660px;
@@ -761,7 +832,13 @@
                 <img src="icons/icon128.png" alt="Logo" width="18" height="18">
                 <span>ReconLens</span>
             </div>
-            <div class="panel-subtitle">RECON ENGINE</div>
+            <div class="master-switch-wrapper">
+                <span id="lbl_master_switch">Active Scan</span>
+                <label class="switch-sm">
+                    <input type="checkbox" id="master_switch" checked>
+                    <span class="slider-sm round"></span>
+                </label>
+            </div>
         </div>
         <ul class="category-list">
             <li class="category-item"><a href="#" data-category="path" class="active" id="popup_sidebar_path">Path</a>

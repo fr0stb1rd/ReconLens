@@ -107,6 +107,21 @@ function init_locales() {
             });
         };
     }
+
+    // Initialize Master Switch
+    const masterSwitch = document.getElementById('master_switch');
+    if (masterSwitch) {
+        chrome.storage.local.get(['extension_enabled'], (result) => {
+            masterSwitch.checked = result.extension_enabled !== false;
+        });
+
+        masterSwitch.addEventListener('change', () => {
+            const enabled = masterSwitch.checked;
+            chrome.storage.local.set({ 'extension_enabled': enabled }, () => {
+                // Background script will handle the visual state change
+            });
+        });
+    }
 }
 
 var key = ["ip", "ip_port", "domain", "path", "incomplete_path", "url", "static", "id_card", "mobile", "email", "jwt", "algorithm", "sensitive"];
