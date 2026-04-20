@@ -238,7 +238,8 @@
 
         .status-search-wrapper {
             flex-shrink: 0;
-            width: 100px;
+            width: 180px;
+            /* Increased from 100px */
         }
 
         .status-search-input {
@@ -658,6 +659,9 @@
 
     <div class="main-content">
         <div class="status-bar" id="status-bar-wrapper">
+            <div class="status-search-wrapper" id="search-wrapper">
+                <input type="text" id="searchInput" class="status-search-input" placeholder="Filter...">
+            </div>
             <div class="ai-copy-wrapper" id="current-copy-wrapper">
                 <button id="btn_copy_current" class="btn-ai-main">Copy Current</button>
                 <button id="current_dropdown_toggle" class="btn-ai-toggle">▼</button>
@@ -680,10 +684,6 @@
                     <button data-format="html">HTML</button>
                     <button data-format="text">Plain Text</button>
                 </div>
-            </div>
-
-            <div class="status-search-wrapper" id="search-wrapper">
-                <input type="text" id="searchInput" class="status-search-input" placeholder="Filter...">
             </div>
 
             <div id="taskstatus"></div>
