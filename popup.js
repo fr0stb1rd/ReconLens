@@ -218,7 +218,6 @@ function show_info(result_data, filter = "") {
                         span.textContent = itemText;
                         fragment.appendChild(span);
                     }
-                    fragment.appendChild(document.createTextNode('')); // Removed \n as display:block handles it
                 }
                 container.appendChild(fragment);
             } else {

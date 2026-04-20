@@ -270,6 +270,15 @@
             color: var(--accent-hover);
         }
 
+        /* Zebra striping */
+        .data-display > *:nth-child(even) {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        body.dark-mode .data-display > *:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.06);
+        }
+
         body.dark-mode .data-display a:hover,
         body.dark-mode .data-display span:hover {
             background-color: rgba(56, 139, 253, 0.15);
