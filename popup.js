@@ -216,7 +216,56 @@ async function show_info(result_data, filter = "") {
                     };
 
                     itemDiv.appendChild(copyBtn);
+
+                    // Add Quick Lookups for IP and Domain (Before the link)
+                    if (currentKey === 'ip' || currentKey === 'ip_port' || currentKey === 'domain') {
+                        const lookupWrapper = document.createElement('div');
+                        lookupWrapper.className = 'lookup-wrapper';
+                        
+                        const rawValue = itemText.split(':')[0].replace(/^https?:\/\//, '').replace(/\/+$/, '');
+                        
+                        if (currentKey.startsWith('ip')) {
+                            // Shodan (Radar Icon)
+                            const shodan = document.createElement('a');
+                            shodan.className = 'lookup-btn';
+                            shodan.href = `https://www.shodan.io/host/${rawValue}`;
+                            shodan.target = '_blank';
+                            shodan.title = 'Lookup on Shodan';
+                            shodan.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>`;
+                            lookupWrapper.appendChild(shodan);
+                            
+                            // VirusTotal IP (Shield Icon)
+                            const vt = document.createElement('a');
+                            vt.className = 'lookup-btn';
+                            vt.href = `https://www.virustotal.com/gui/ip-address/${rawValue}`;
+                            vt.target = '_blank';
+                            vt.title = 'Lookup on VirusTotal';
+                            vt.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>`;
+                            lookupWrapper.appendChild(vt);
+                        } else {
+                            // VirusTotal Domain (Shield Icon)
+                            const vt = document.createElement('a');
+                            vt.className = 'lookup-btn';
+                            vt.href = `https://www.virustotal.com/gui/domain/${rawValue}`;
+                            vt.target = '_blank';
+                            vt.title = 'Lookup on VirusTotal';
+                            vt.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>`;
+                            lookupWrapper.appendChild(vt);
+                            
+                            // SecurityTrails (Activity Icon)
+                            const st = document.createElement('a');
+                            st.className = 'lookup-btn';
+                            st.href = `https://securitytrails.com/domain/${rawValue}`;
+                            st.target = '_blank';
+                            st.title = 'Lookup on SecurityTrails';
+                            st.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>`;
+                            lookupWrapper.appendChild(st);
+                        }
+                        itemDiv.appendChild(lookupWrapper);
+                    }
+
                     itemDiv.appendChild(a);
+
                     fragment.appendChild(itemDiv);
                 }
                 container.appendChild(fragment);

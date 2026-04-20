@@ -348,9 +348,37 @@
             height: 12px;
         }
 
-        /* Zebra striping */
-        .data-display>*:nth-child(even) {
-            background-color: rgba(0, 0, 0, 0.05);
+        .lookup-wrapper {
+            display: flex;
+            gap: 2px;
+            margin-right: 4px;
+            opacity: 0.4;
+            transition: opacity 0.2s;
+        }
+
+        .data-item:hover .lookup-wrapper {
+            opacity: 1;
+        }
+
+        .lookup-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 2px;
+            border-radius: 3px;
+            transition: all 0.2s;
+        }
+
+        .lookup-btn:hover {
+            color: var(--accent-color);
+            background-color: rgba(196, 7, 255, 0.1);
+        }
+
+        .lookup-btn svg {
+            width: 13px;
+            height: 13px;
         }
 
         body.dark-mode .data-display>*:nth-child(even) {
