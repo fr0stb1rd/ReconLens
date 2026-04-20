@@ -237,5 +237,8 @@
     },
     "popup_btn_copy_current": {
         "message": "Copy Current"
+    },
+    "popup_btn_copy_url_resolved": {
+        "message": "Copy with URL"
     }
 }

@@ -237,5 +237,8 @@
     },
     "popup_btn_copy_current": {
         "message": "Bu Sayfayı Kopyala"
+    },
+    "popup_btn_copy_url_resolved": {
+        "message": "URL ile Kopyala"
     }
 }

@@ -55,6 +55,7 @@ function init_locales() {
         'popup_title_url': 'popup_title_url',
         'popup_title_static': 'popup_title_static',
         'btn_copy_current': 'popup_btn_copy_current',
+        'btn_copy_url_resolved': 'popup_btn_copy_url_resolved',
         'btn_copy_ai': 'popup_btn_copy_all',
         // Left sidebar category labels
         'popup_sidebar_path': 'popup_sidebar_path',
@@ -406,40 +407,86 @@ function init_ai_copy_logic() {
         if (!mainBtn || !toggleBtn || !menu) return;
 
         toggleBtn.onclick = (e) => { e.stopPropagation(); menu.classList.toggle('show'); };
-        mainBtn.onclick = () => copyFn('text'); // Default to text for main button
+        mainBtn.onclick = () => copyFn('text');
         menu.querySelectorAll('button').forEach(btn => {
             btn.onclick = () => copyFn(btn.dataset.format);
         });
     };
 
+    const setupSplitButtonsByClass = (wrapperClass, mainClass, toggleClass, menuClass, copyFn) => {
+        document.querySelectorAll('.' + wrapperClass).forEach(wrapper => {
+            const mainBtn = wrapper.querySelector('.' + mainClass);
+            const toggleBtn = wrapper.querySelector('.' + toggleClass);
+            const menu = wrapper.querySelector('.' + menuClass);
+            if (!mainBtn || !toggleBtn || !menu) return;
+
+            toggleBtn.onclick = (e) => {
+                e.stopPropagation();
+                // Close other menus first
+                document.querySelectorAll('.ai-menu').forEach(m => { if(m !== menu) m.classList.remove('show'); });
+                menu.classList.toggle('show');
+            };
+            mainBtn.onclick = () => copyFn('text', mainBtn, menu);
+            menu.querySelectorAll('button').forEach(btn => {
+                btn.onclick = () => copyFn(btn.dataset.format, mainBtn, menu);
+            });
+        });
+    };
+
     // Copy handlers
-    const copyAll = (format) => {
+    const copyAll = (format, btn, menu) => {
         const val = formatResults(lastResultData, key, format);
         if (val) {
             navigator.clipboard.writeText(val);
-            provideFeedback(document.getElementById('btn_copy_ai'), "popup_tip_copied");
+            provideFeedback(btn || document.getElementById('btn_copy_ai'), "popup_tip_copied");
         }
-        document.getElementById('ai_menu').classList.remove('show');
+        (menu || document.getElementById('ai_menu')).classList.remove('show');
     };
 
-    const copyCurrent = (format) => {
+    const copyCurrent = (format, btn, menu) => {
         const activeLink = document.querySelector('.category-item a.active');
         if (!activeLink || !lastResultData) return;
         const cat = activeLink.dataset.category;
         const val = formatResults(lastResultData, [cat], format);
         if (val) {
             navigator.clipboard.writeText(val);
-            provideFeedback(document.getElementById('btn_copy_current'), "popup_tip_copied");
+            provideFeedback(btn, "popup_tip_copied");
         }
-        document.getElementById('current_menu').classList.remove('show');
+        menu.classList.remove('show');
+    };
+
+    const copyUrlResolved = async (format, btn, menu) => {
+        const activeLink = document.querySelector('.category-item a.active');
+        if (!activeLink || !lastResultData) return;
+        const cat = activeLink.dataset.category;
+        const items = lastResultData[cat] || [];
+        
+        const tab = await getCurrentTab();
+        if (!tab) return;
+
+        const resolvedItems = items.map(item => {
+            try {
+                return new URL(item.trim(), tab.url).href;
+            } catch (e) {
+                return item;
+            }
+        });
+
+        const resolvedData = { [cat]: resolvedItems };
+        const val = formatResults(resolvedData, [cat], format);
+        if (val) {
+            navigator.clipboard.writeText(val);
+            provideFeedback(btn, "popup_tip_copied");
+        }
+        menu.classList.remove('show');
     };
 
     setupSplitButton('btn_copy_ai', 'ai_dropdown_toggle', 'ai_menu', copyAll);
-    setupSplitButton('btn_copy_current', 'current_dropdown_toggle', 'current_menu', copyCurrent);
+    setupSplitButtonsByClass('current-copy-wrapper', 'btn-copy-current', 'current-dropdown-toggle', 'current-menu', copyCurrent);
+    setupSplitButtonsByClass('url-resolved-copy-wrapper', 'btn-copy-url-resolved', 'url-resolved-dropdown-toggle', 'url-resolved-menu', copyUrlResolved);
 
     window.addEventListener('click', () => {
-        document.getElementById('ai_menu')?.classList.remove('show');
-        document.getElementById('current_menu')?.classList.remove('show');
+        document.querySelectorAll('.ai-menu').forEach(m => m.classList.remove('show'));
     });
 }
 
