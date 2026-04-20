@@ -251,12 +251,12 @@ function handleCategoryClick(event) {
 
     const selectedCategory = event.currentTarget.dataset.category;
     const infoCardsContainer = document.getElementById('info-cards-container');
-    const taskStatus = document.getElementById('taskstatus');
+    const statusBar = document.getElementById('status-bar-wrapper');
     const searchWrapper = document.getElementById('search-wrapper');
 
-    // Hide task status and search if on settings/about tab
+    // Hide status bar and search if on settings/about tab
     const isSpecialTab = (selectedCategory === 'settings' || selectedCategory === 'about');
-    if (taskStatus) taskStatus.style.display = isSpecialTab ? 'none' : 'block';
+    if (statusBar) statusBar.style.display = isSpecialTab ? 'none' : 'flex';
     if (searchWrapper) searchWrapper.style.display = isSpecialTab ? 'none' : 'block';
 
     // Clear search when switching categories
@@ -290,10 +290,10 @@ function init_category_navigation() {
         const selectedCategory = initialCategoryLink.dataset.category;
 
         const isSpecialTab = (selectedCategory === 'settings' || selectedCategory === 'about');
-        const taskStatus = document.getElementById('taskstatus');
+        const statusBar = document.getElementById('status-bar-wrapper');
         const searchWrapper = document.getElementById('search-wrapper');
         
-        if (taskStatus) taskStatus.style.display = isSpecialTab ? 'none' : 'block';
+        if (statusBar) statusBar.style.display = isSpecialTab ? 'none' : 'flex';
         if (searchWrapper) searchWrapper.style.display = isSpecialTab ? 'none' : 'block';
 
         document.querySelectorAll('.info-card').forEach(card => {
@@ -322,6 +322,7 @@ reconI18n.init().then(() => {
     init_copy();
     init_category_navigation();
     init_search_logic(); // Initialize Search
+    init_ai_copy_logic(); // Initialize AI Copy
     init_settings_logic(); // Initialize merged settings logic
     init_theme_engine();    // Initialize Theme Engine
     
@@ -342,6 +343,53 @@ function init_settings_logic() {
     init_toggle_handlers();
     init_webhook_logic();
     init_allowlist_logic();
+}
+
+function init_ai_copy_logic() {
+    const mainBtn = document.getElementById('btn_copy_ai');
+    const toggleBtn = document.getElementById('ai_dropdown_toggle');
+    const menu = document.getElementById('ai_menu');
+    if (!mainBtn || !toggleBtn || !menu) return;
+
+    let selectedFormat = 'md';
+
+    // Toggle menu
+    toggleBtn.onclick = (e) => {
+        e.stopPropagation();
+        menu.classList.toggle('show');
+    };
+
+    // Close menu on outside click
+    window.addEventListener('click', () => {
+        menu.classList.remove('show');
+    });
+
+    // Copy action
+    const doAiCopy = async (format) => {
+        let val = "AXX"; // Placeholder
+        
+        // Format logic will go here
+        if (format === 'md') val = `**${val}**`;
+        if (format === 'xml') val = `<note>${val}</note>`;
+        if (format === 'html') val = `<p>${val}</p>`;
+
+        try {
+            await navigator.clipboard.writeText(val);
+            provideFeedback(mainBtn, "popup_tip_copied");
+        } catch (err) {
+            console.error('AI Copy failed:', err);
+        }
+        menu.classList.remove('show');
+    };
+
+    mainBtn.onclick = () => doAiCopy(selectedFormat);
+
+    menu.querySelectorAll('button').forEach(btn => {
+        btn.onclick = () => {
+            selectedFormat = btn.dataset.format;
+            doAiCopy(selectedFormat);
+        };
+    });
 }
 
 // ── Theme Engine ────────────────────────────────────────────────────────────
