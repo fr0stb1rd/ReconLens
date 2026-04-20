@@ -7,27 +7,14 @@
 /** Translate a key with optional placeholder args. */
 const t = (key, ...subs) => reconI18n.getMessage(key, subs.length ? subs : undefined);
 
-/** Set element text via i18n key without destroying child elements (like icons) */
+/** Set element HTML via i18n key (supports formatting like <strong>) */
 const setI18n = (elementId, key, ...subs) => {
     const el = document.getElementById(elementId);
     if (!el) return;
     
     const message = t(key, ...subs);
-    if (!message) return;
-
-    // If the element has no children, safe to use textContent
-    if (el.children.length === 0) {
-        el.textContent = message;
-    } else {
-        // If it has children (like icons), we only want to update the text part.
-        // Usually, the text is the last child or a direct text node.
-        let textNode = Array.from(el.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
-        if (textNode) {
-            textNode.textContent = message;
-        } else {
-            // Fallback: append a new text node if none found
-            el.appendChild(document.createTextNode(message));
-        }
+    if (message) {
+        el.innerHTML = message;
     }
 };
 
@@ -39,6 +26,7 @@ function init_locales() {
         // Sidebar nav
         'nav_settings': 'nav_settings',
         'nav_about': 'nav_about',
+        'lbl_master_switch': 'lbl_master_switch',
         // Settings labels
         'settings_header': 'setting_page_header',
         'lbl_clear_cache': 'setting_lbl_clear_cache',
@@ -90,7 +78,7 @@ function init_locales() {
         // About Section
         'about_header': 'about_header',
         'about_lbl_description': 'about_lbl_description',
-        'about_val_description': 'ext_description',
+        'about_val_description': 'about_description_full',
         'about_lbl_credits': 'about_lbl_credits',
         'about_lbl_links': 'about_lbl_links',
     };

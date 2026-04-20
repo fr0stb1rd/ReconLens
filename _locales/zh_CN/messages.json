@@ -7,6 +7,9 @@
         "message": "专业级被动侦察工具，旨在从 Web 资产中自动提取并规范化端点、机密和情报数据。",
         "description": "扩展描述"
     },
+    "about_description_full": {
+        "message": "<strong>ReconLens</strong> 是一款专为现代安全研究设计的专业级被动侦察引擎。它可以实时自动提取、规范化并对 Web 资产中的端点、机密和情报数据进行分类。"
+    },
     "nav_home": {
         "message": "主页"
     },

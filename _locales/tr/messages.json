@@ -7,6 +7,9 @@
         "message": "Web varlıklarından uç noktaları, gizli anahtarları ve istihbarat verilerini otomatik olarak ayıklayan ve normalize eden profesyonel pasif keşif aracı.",
         "description": "Eklenti aciklamasi"
     },
+    "about_description_full": {
+        "message": "<strong>ReconLens</strong>, modern güvenlik araştırmaları için tasarlanmış profesyonel bir pasif keşif motorudur. Web varlıklarındaki uç noktaları, gizli anahtarları ve istihbarat verilerini gerçek zamanlı olarak otomatik olarak ayıklar, normalize eder ve kategorize eder."
+    },
     "nav_home": {
         "message": "Ana Sayfa"
     },

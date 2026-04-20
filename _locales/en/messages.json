@@ -7,6 +7,9 @@
         "message": "Professional-grade passive reconnaissance tool designed for automated endpoint discovery, secret extraction, and structured intelligence gathering from web assets.",
         "description": "Extension description"
     },
+    "about_description_full": {
+        "message": "<strong>ReconLens</strong> is a professional-grade passive reconnaissance engine designed for modern security research. It automatically extracts, normalizes, and categorizes endpoints, secrets, and intelligence data from web assets in real-time."
+    },
     "nav_home": {
         "message": "Home"
     },
