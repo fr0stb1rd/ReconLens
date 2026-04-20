@@ -228,5 +228,8 @@
     },
     "popup_tip_copied": {
         "message": "Copied!"
+    },
+    "popup_tip_saved": {
+        "message": "Saved!"
     }
 }

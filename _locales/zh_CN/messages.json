@@ -225,5 +225,8 @@
     },
     "about_lbl_links": {
         "message": "链接"
+    },
+    "popup_tip_saved": {
+        "message": "已保存！"
     }
 }

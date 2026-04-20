@@ -168,6 +168,18 @@ function init_copy() {
     }
 }
 
+
+/** Provide visual feedback on a button after an action. */
+function provideFeedback(btn, feedbackTextKey = "popup_tip_saved") {
+    const originalText = btn.textContent;
+    btn.textContent = t(feedbackTextKey) || "Done!";
+    btn.classList.add('copy-success');
+    setTimeout(() => {
+        btn.textContent = originalText;
+        btn.classList.remove('copy-success');
+    }, 1000);
+}
+
 async function getCurrentTab() {
     let queryOptions = { active: true, lastFocusedWindow: true };
     let [tab] = await chrome.tabs.query(queryOptions);
@@ -446,9 +458,12 @@ function init_webhook_logic() {
                 arg: document.getElementById('arg').value,
                 headers: JSON.parse(document.getElementById('headers').value || '{}'),
             };
-            chrome.storage.local.set({ webhook_setting });
+            chrome.storage.local.set({ webhook_setting }, () => {
+                provideFeedback(saveBtn);
+            });
         } catch (e) {
             console.error('Webhook save failed:', e);
+            alert("Invalid JSON in headers");
         }
     };
 
@@ -457,7 +472,9 @@ function init_webhook_logic() {
         document.getElementById('url').value = '';
         document.getElementById('arg').value = '';
         document.getElementById('headers').value = '{}';
-        chrome.storage.local.set({ webhook_setting });
+        chrome.storage.local.set({ webhook_setting }, () => {
+            provideFeedback(resetBtn);
+        });
     };
 
     chrome.storage.local.get(['webhook_setting'], function (settings) {
@@ -478,12 +495,16 @@ function init_allowlist_logic() {
 
     saveBtn.onclick = function () {
         const snsArr = allowlistInput.value.split(/[\r\n]+/).map(s => s.trim()).filter(Boolean);
-        chrome.storage.local.set({ allowlist: snsArr });
+        chrome.storage.local.set({ allowlist: snsArr }, () => {
+            provideFeedback(saveBtn);
+        });
     };
 
     resetBtn.onclick = function () {
         allowlistInput.value = '';
-        chrome.storage.local.set({ allowlist: [] });
+        chrome.storage.local.set({ allowlist: [] }, () => {
+            provideFeedback(resetBtn);
+        });
     };
 
     chrome.storage.local.get(['allowlist'], function (data) {

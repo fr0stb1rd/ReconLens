@@ -224,5 +224,8 @@
     },
     "about_lbl_links": {
         "message": "الروابط"
+    },
+    "popup_tip_saved": {
+        "message": "تم الحفظ!"
     }
 }

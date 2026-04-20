@@ -228,5 +228,8 @@
     },
     "popup_tip_copied": {
         "message": "Kopyalandı!"
+    },
+    "popup_tip_saved": {
+        "message": "Kaydedildi!"
     }
 }
