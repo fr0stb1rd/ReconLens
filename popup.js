@@ -100,8 +100,11 @@ function init_locales() {
     const clearBtn = document.getElementById('btn_clear_cache');
     if (clearBtn) {
         clearBtn.onclick = function () {
-            chrome.storage.local.clear();
-            alert(t('setting_msg_clear_done'));
+            chrome.storage.local.remove(key, () => {
+                lastResultData = {};
+                show_info({}, "");
+                alert(t('setting_msg_clear_done'));
+            });
         };
     }
 }
