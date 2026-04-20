@@ -225,19 +225,17 @@
 
         #taskstatus {
             font-size: 12px;
-            /* Increased from 10px */
             font-weight: 500;
-            color: var(--text-dim);
+            color: var(--text-muted);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            flex-grow: 1;
+            margin-left: auto; /* Pushes it to the right */
         }
 
         .status-search-wrapper {
             flex-shrink: 0;
             width: 180px;
-            /* Increased from 100px */
         }
 
         .status-search-input {
