@@ -54,6 +54,7 @@ function init_locales() {
         'popup_title_incomplete_path': 'popup_title_incomplete_path',
         'popup_title_url': 'popup_title_url',
         'popup_title_static': 'popup_title_static',
+        'btn_copy_ai': 'popup_btn_copy_all',
         // Left sidebar category labels
         'popup_sidebar_path': 'popup_sidebar_path',
         'popup_sidebar_domain': 'popup_sidebar_domain',

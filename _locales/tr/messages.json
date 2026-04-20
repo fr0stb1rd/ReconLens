@@ -231,5 +231,8 @@
     },
     "popup_tip_saved": {
         "message": "Kaydedildi!"
+    },
+    "popup_btn_copy_all": {
+        "message": "Tüm Sonuçları Kopyala"
     }
 }

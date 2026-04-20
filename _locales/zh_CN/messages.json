@@ -228,5 +228,11 @@
     },
     "popup_tip_saved": {
         "message": "已保存！"
+    },
+    "popup_tip_copied": {
+        "message": "已复制！"
+    },
+    "popup_btn_copy_all": {
+        "message": "复制所有结果"
     }
 }
