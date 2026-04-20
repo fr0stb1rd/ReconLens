@@ -29,6 +29,12 @@
             --shadow-md: 0 2px 10px rgba(0, 0, 0, 0.08);
         }
 
+        /* Timeless UI: Disable all transitions and animations globally */
+        * {
+            transition: none !important;
+            animation: none !important;
+        }
+
         body.dark-mode {
             --bg-color: #0d1117;
             --panel-bg: #161b22;
@@ -78,7 +84,6 @@
             height: 100%;
             box-sizing: border-box;
             border-bottom: none;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         .panel-title {
@@ -135,7 +140,6 @@
             color: var(--text-secondary);
             font-size: 13px;
             font-weight: 400;
-            transition: background-color 0.2s ease, color 0.2s ease;
             border-left: 3px solid transparent;
         }
 
@@ -194,7 +198,6 @@
             margin-bottom: 0;
             overflow: hidden;
             border: 1px solid var(--border-color);
-            transition: background-color 0.3s ease, border-color 0.3s ease;
             display: flex;
             flex-direction: column;
             flex: 1;
@@ -210,7 +213,6 @@
             /* Even tighter padding */
             background-color: var(--card-header-bg);
             border-bottom: 1px solid var(--border-color);
-            transition: background-color 0.2s ease;
         }
 
         .info-card-title {
@@ -254,7 +256,6 @@
             border-radius: 3px;
             text-decoration: none;
             color: inherit;
-            transition: background-color 0.1s ease, color 0.1s ease;
             cursor: default;
         }
 
@@ -292,7 +293,6 @@
             border-radius: 3px;
             cursor: pointer;
             font-size: 10px;
-            transition: background-color 0.2s ease, transform 0.1s ease;
         }
 
         .copy-button:hover {
@@ -423,7 +423,6 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 12px;
-            transition: all 0.2s ease;
         }
 
         /* Modern Toggle Styles */
@@ -451,7 +450,6 @@
         }
 
         .toggle-btn:hover {
-            transform: translateY(-1px);
             box-shadow: var(--shadow-md);
         }
 
@@ -489,7 +487,6 @@
             background-color: var(--panel-bg);
             color: var(--text-main);
             outline: none;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
             box-shadow: var(--shadow-sm);
         }
 

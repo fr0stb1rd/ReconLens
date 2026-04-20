@@ -198,7 +198,6 @@ chrome.storage.local.get(["global_float"], function (settings) {
                 font-size: 15px;
             "></findsomething-div>
             <findsomething-div id="findsomething-hide-btn" style="
-                cursor: pointer;
                 margin-top: 0px; /* Adjust top margin for better alignment */
                 margin-right: 0px; /* Adjust right margin for better alignment */
                 font-size: 14px;
@@ -330,7 +329,6 @@ chrome.storage.local.get(["global_float"], function (settings) {
             color: #ffffff; /* White text */
             padding: 4px 10px; /* Padding for button */
             border-radius: 4px; /* Rounded corners for buttons */
-            cursor: pointer;
             font-size: 12px; /* Smaller font for button text */
             transition: background-color 0.2s ease, transform 0.1s ease; /* Smooth transition */
             flex-shrink: 0; /* Prevent button from shrinking */
@@ -347,7 +345,7 @@ chrome.storage.local.get(["global_float"], function (settings) {
         }
 
         button {
-            cursor: pointer;
+            
         }
 
         /* Scrollbar styling for WebKit browsers */
@@ -545,7 +543,7 @@ async function get_info() {
             if (result_data) {
                 show_info(result_data);
                 taskstatus.textContent = chrome.i18n.getMessage("popup_status_scanning", [
-                    String(result_data["donetasklist"]?.length || 0), 
+                    String(result_data["donetasklist"]?.length || 0),
                     String(result_data["tasklist"]?.length || 0)
                 ]);
             } else {
@@ -557,11 +555,11 @@ async function get_info() {
         }
 
         taskstatus.textContent = chrome.i18n.getMessage("popup_status_complete", [
-            String(result_data["donetasklist"]?.length || 0), 
+            String(result_data["donetasklist"]?.length || 0),
             String(result_data["tasklist"]?.length || 0)
         ]);
         show_info(result_data);
-        
+
         if (result_data['donetasklist']?.length != result_data['tasklist']?.length) {
             await sleep(100);
             get_info();
