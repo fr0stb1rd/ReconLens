@@ -188,7 +188,8 @@
             border-radius: 6px;
             box-shadow: var(--shadow-sm);
             margin-bottom: 0;
-            overflow: visible; /* Changed from hidden to allow dropdowns */
+            overflow: visible;
+            /* Changed from hidden to allow dropdowns */
             border: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
@@ -513,6 +514,10 @@
             font-family: inherit;
             background-color: var(--data-display-bg);
             color: var(--text-main);
+        }
+
+        textarea {
+            resize: vertical;
         }
 
         .settings-group>label {
