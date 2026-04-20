@@ -140,7 +140,7 @@ async function show_info(result_data, filter = "") {
 
         // Optimized clear: Much faster than while loop
         container.textContent = '';
-        
+
         if (result_data && result_data[currentKey] && result_data[currentKey].length > 0) {
             let filteredItems = result_data[currentKey];
             if (lowerFilter) {
@@ -151,38 +151,20 @@ async function show_info(result_data, filter = "") {
                 container.classList.remove('no-data');
                 // Use DocumentFragment to batch DOM updates (avoids multiple reflows)
                 const fragment = document.createDocumentFragment();
-                
+
                 for (var i in filteredItems) {
                     let itemText = filteredItems[i];
                     let a = document.createElement('a');
                     a.target = '_blank';
                     a.textContent = itemText;
-                    
+
                     let targetUrl = itemText;
-                    
-                    // Logic to determine the target URL
-                    if (itemText.startsWith('http')) {
-                        targetUrl = itemText;
-                    } else if (itemText.startsWith('//')) {
-                        targetUrl = 'https:' + itemText;
-                    } else if (itemText.startsWith('/')) {
-                        // Relative path
+                    if (itemText.startsWith('/') || (!itemText.startsWith('http') && (itemText.includes('/') || itemText.includes('.')))) {
                         try {
                             targetUrl = new URL(itemText, currentFullUrl).href;
                         } catch (e) {
-                            targetUrl = baseUrl + itemText;
-                        }
-                    } else if (itemText.includes('.')) {
-                        // Likely a domain or IP, or a path without leading slash
-                        // Check if it's likely a domain (no slash before the first dot)
-                        if (!itemText.includes('/') || itemText.indexOf('.') < itemText.indexOf('/')) {
-                            targetUrl = 'https://' + itemText;
-                        } else {
-                            // Path without leading slash
-                            try {
-                                targetUrl = new URL(itemText, currentFullUrl).href;
-                            } catch (e) {
-                                targetUrl = baseUrl + '/' + itemText;
+                            if (itemText.startsWith('/')) {
+                                targetUrl = baseUrl + itemText;
                             }
                         }
                     }
@@ -256,7 +238,7 @@ function init_category_navigation() {
         const isSpecialTab = (selectedCategory === 'settings' || selectedCategory === 'about');
         const statusBar = document.getElementById('status-bar-wrapper');
         const searchWrapper = document.getElementById('search-wrapper');
-        
+
         if (statusBar) statusBar.style.display = isSpecialTab ? 'none' : 'flex';
         if (searchWrapper) searchWrapper.style.display = isSpecialTab ? 'none' : 'block';
 
@@ -288,12 +270,12 @@ reconI18n.init().then(() => {
     init_ai_copy_logic(); // Initialize AI Copy
     init_settings_logic(); // Initialize merged settings logic
     init_theme_engine();    // Initialize Theme Engine
-    
+
     // Set version dynamically from manifest for all version labels
     document.querySelectorAll('.ext-version-display').forEach(el => {
         el.textContent = chrome.runtime.getManifest().version;
     });
-    
+
     start_monitoring();
 });
 
@@ -383,7 +365,7 @@ function init_ai_copy_logic() {
             toggleBtn.onclick = (e) => {
                 e.stopPropagation();
                 // Close other menus first
-                document.querySelectorAll('.ai-menu').forEach(m => { if(m !== menu) m.classList.remove('show'); });
+                document.querySelectorAll('.ai-menu').forEach(m => { if (m !== menu) m.classList.remove('show'); });
                 menu.classList.toggle('show');
             };
             mainBtn.onclick = () => copyFn('text', mainBtn, menu);
@@ -420,7 +402,7 @@ function init_ai_copy_logic() {
         if (!activeLink || !lastResultData) return;
         const cat = activeLink.dataset.category;
         const items = lastResultData[cat] || [];
-        
+
         const tab = await getCurrentTab();
         if (!tab) return;
 
