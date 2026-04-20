@@ -366,15 +366,56 @@ function init_ai_copy_logic() {
 
     // Copy action
     const doAiCopy = async (format) => {
-        let val = "AXX"; // Placeholder
-        
-        // Format logic will go here
-        if (format === 'md') val = `**${val}**`;
-        if (format === 'xml') val = `<note>${val}</note>`;
-        if (format === 'html') val = `<p>${val}</p>`;
+        if (!lastResultData) return;
+
+        let val = "";
+        const data = lastResultData;
+        const categories = key;
+
+        if (format === 'md') {
+            val = "# ReconLens Scan Results\n\n";
+            for (const cat of categories) {
+                if (data[cat] && data[cat].length) {
+                    val += `## ${t('popup_title_' + cat) || cat}\n`;
+                    data[cat].forEach(item => val += `- ${item}\n`);
+                    val += "\n";
+                }
+            }
+        } else if (format === 'xml') {
+            val = '<?xml version="1.0" encoding="UTF-8"?>\n<recon_results>\n';
+            for (const cat of categories) {
+                if (data[cat] && data[cat].length) {
+                    val += `  <category name="${t('popup_title_' + cat) || cat}">\n`;
+                    data[cat].forEach(item => val += `    <item>${item}</item>\n`);
+                    val += `  </category>\n`;
+                }
+            }
+            val += '</recon_results>';
+        } else if (format === 'html') {
+            val = '<div class="recon-results">\n';
+            for (const cat of categories) {
+                if (data[cat] && data[cat].length) {
+                    val += `  <h2>${t('popup_title_' + cat) || cat}</h2>\n  <ul>\n`;
+                    data[cat].forEach(item => val += `    <li>${item}</li>\n`);
+                    val += `  </ul>\n`;
+                }
+            }
+            val += '</div>';
+        } else {
+            // Plain Text
+            for (const cat of categories) {
+                if (data[cat] && data[cat].length) {
+                    val += `${t('popup_title_' + cat) || cat}:\n`;
+                    data[cat].forEach(item => val += `${item}\n`);
+                    val += "\n";
+                }
+            }
+        }
+
+        if (!val.trim()) return;
 
         try {
-            await navigator.clipboard.writeText(val);
+            await navigator.clipboard.writeText(val.trim());
             provideFeedback(mainBtn, "popup_tip_copied");
         } catch (err) {
             console.error('AI Copy failed:', err);
