@@ -157,12 +157,16 @@ async function show_info(result_data, filter = "") {
 
                 for (var i in filteredItems) {
                     let itemText = filteredItems[i];
+                    
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'data-item';
+
                     let a = document.createElement('a');
                     a.target = '_blank';
                     a.textContent = itemText;
 
-                    let targetUrl = itemText;
                     let cleanText = itemText.trim();
+                    let targetUrl = itemText;
                     
                     if (cleanText.startsWith('http')) {
                         targetUrl = cleanText;
@@ -175,7 +179,6 @@ async function show_info(result_data, filter = "") {
                             targetUrl = baseUrl + cleanText;
                         }
                     } else if (cleanText.includes('.')) {
-                        // If it's a domain (dot exists and no slash before it)
                         if (!cleanText.includes('/') || cleanText.indexOf('.') < cleanText.indexOf('/')) {
                             targetUrl = 'https://' + (cleanText.startsWith('.') ? cleanText.substring(1) : cleanText);
                         } else {
@@ -187,7 +190,30 @@ async function show_info(result_data, filter = "") {
                         }
                     }
                     a.href = targetUrl;
-                    fragment.appendChild(a);
+                    
+                    // Add Copy Button
+                    const copyBtn = document.createElement('button');
+                    copyBtn.className = 'item-copy-btn';
+                    copyBtn.title = 'Copy to clipboard';
+                    copyBtn.innerHTML = `
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>`;
+                    
+                    copyBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        navigator.clipboard.writeText(itemText).then(() => {
+                            // Temporary success state for the icon
+                            const originalSvg = copyBtn.innerHTML;
+                            copyBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="#4caf50" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+                            setTimeout(() => { copyBtn.innerHTML = originalSvg; }, 1000);
+                        });
+                    };
+
+                    itemDiv.appendChild(copyBtn);
+                    itemDiv.appendChild(a);
+                    fragment.appendChild(itemDiv);
                 }
                 container.appendChild(fragment);
             } else {

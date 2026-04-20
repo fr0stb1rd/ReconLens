@@ -17,16 +17,18 @@
             --text-secondary: #555555;
             --text-muted: #6c757d;
             --border-color: #e0e0e0;
-            --accent-color: #004a99;
-            --accent-hover: #003670;
-            --accent-active: #e0f2ff;
+            --accent-color: #c407ff;
+            --accent-hover: #a500e1;
+            --accent-active: #8600c4;
+            --accent-dim: #6700a7;
+            --accent-dark: #47008c;
             --card-bg: #ffffff;
             --card-header-bg: #f8f9fa;
             --data-display-bg: #f8f9fa;
             --data-display-border: #e9ecef;
-            --copy-btn-bg: #004a99;
-            --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 2px 10px rgba(0, 0, 0, 0.08);
+            --copy-btn-bg: #c407ff;
+            --shadow-sm: 0 1px 4px rgba(196, 7, 255, 0.1);
+            --shadow-md: 0 2px 10px rgba(196, 7, 255, 0.15);
         }
 
         /* Timeless UI: Disable all transitions and animations globally */
@@ -42,16 +44,18 @@
             --text-secondary: #8b949e;
             --text-muted: #7d8590;
             --border-color: #30363d;
-            --accent-color: #388bfd;
-            --accent-hover: #1f6feb;
-            --accent-active: #161b22;
+            --accent-color: #c407ff;
+            --accent-hover: #a500e1;
+            --accent-active: #8600c4;
+            --accent-dim: #6700a7;
+            --accent-dark: #47008c;
             --card-bg: #0d1117;
             --card-header-bg: #161b22;
             --data-display-bg: #010409;
             --data-display-border: #30363d;
-            --copy-btn-bg: #238636;
-            --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.2);
-            --shadow-md: 0 2px 10px rgba(0, 0, 0, 0.3);
+            --copy-btn-bg: #8600c4;
+            --shadow-sm: 0 1px 4px rgba(196, 7, 255, 0.2);
+            --shadow-md: 0 2px 10px rgba(196, 7, 255, 0.3);
         }
 
         body {
@@ -144,15 +148,16 @@
         }
 
         .category-item a:hover {
-            background-color: var(--bg-color);
+            background-color: rgba(196, 7, 255, 0.08);
             color: var(--accent-color);
         }
 
         .category-item a.active {
-            background-color: var(--accent-active);
-            color: var(--accent-color);
+            background-color: var(--accent-dim);
+            color: white;
             border-left-color: var(--accent-color);
             margin-bottom: 5px;
+            font-weight: 600;
         }
 
         .sidebar-footer {
@@ -284,18 +289,64 @@
             line-height: 1.5;
         }
 
-        .data-display a {
+        .data-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 4px;
+            transition: background-color 0.1s;
+            border-radius: 4px;
+        }
+
+        .data-item:hover {
+            /* No background color on hover as requested */
+            background-color: transparent;
+        }
+
+        .data-item a {
+            flex: 1;
             display: block;
             color: var(--text-main);
             text-decoration: none;
-            padding: 2px 8px;
-            border-radius: 3px;
+            padding: 3px 4px;
             line-height: 1.6;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        .data-display a:hover {
+        .data-item a:hover {
             color: var(--accent-color);
-            background-color: rgba(var(--accent-color-rgb), 0.1);
+        }
+
+        .item-copy-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: none;
+            padding: 4px;
+            margin-right: 2px;
+            color: var(--text-muted);
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.2s;
+            border-radius: 4px;
+        }
+
+        .data-item:hover .item-copy-btn {
+            opacity: 0.7;
+        }
+
+        .item-copy-btn:hover {
+            opacity: 1 !important;
+            color: var(--accent-color);
+            background-color: transparent;
+        }
+
+        .item-copy-btn svg {
+            width: 12px;
+            height: 12px;
         }
 
         /* Zebra striping */
@@ -560,20 +611,37 @@
             color: white;
         }
 
+        .js-btn-save {
+            background-color: var(--accent-active);
+            color: white;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
         .js-btn-save:hover {
             background-color: var(--accent-hover);
-            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(196, 7, 255, 0.3);
         }
 
         .js-btn-reset-save {
-            background-color: transparent;
-            color: var(--text-muted);
-            border: 1px solid var(--border-color) !important;
+            background-color: var(--accent-dark);
+            color: rgba(255, 255, 255, 0.8);
+            border: none !important;
+            padding: 6px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            transition: all 0.2s;
         }
 
         .js-btn-reset-save:hover {
-            background-color: rgba(255, 255, 255, 0.05);
-            color: var(--text-main);
+            background-color: var(--accent-dim);
+            color: white;
         }
 
         /* Modern Toggle Switch */
@@ -612,13 +680,17 @@
         }
 
         #btn_clear_cache {
-            background-color: rgba(220, 53, 69, 0.1);
-            color: #ff4d4d;
-            border: 1px solid rgba(220, 53, 69, 0.2);
+            background-color: var(--accent-dark);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 4px 10px;
+            font-size: 11px;
+            cursor: pointer;
         }
 
         #btn_clear_cache:hover {
-            background-color: #dc3545;
+            background-color: var(--accent-dim);
             color: white;
         }
 
