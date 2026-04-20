@@ -177,13 +177,11 @@ function show_info(result_data, filter = "") {
     for (var k in key) {
         let currentKey = key[k];
         let container = document.getElementById(currentKey);
-        if (!container) {
-            continue;
-        }
-        // Clear existing content
-        while (container.firstChild) {
-            container.firstChild.remove();
-        }
+        if (!container) continue;
+
+        // Optimized clear: Much faster than while loop
+        container.textContent = '';
+        
         if (result_data && result_data[currentKey] && result_data[currentKey].length > 0) {
             let filteredItems = result_data[currentKey];
             if (lowerFilter) {
@@ -192,30 +190,37 @@ function show_info(result_data, filter = "") {
 
             if (filteredItems.length > 0) {
                 container.classList.remove('no-data');
+                // Use DocumentFragment to batch DOM updates (avoids multiple reflows)
+                const fragment = document.createDocumentFragment();
+                
                 for (var i in filteredItems) {
                     let itemText = filteredItems[i];
-                    let link = document.createElement("a");
                     let source = result_data['source'] ? result_data['source'][itemText] : null;
+                    
                     if (source) {
+                        let link = document.createElement("a");
                         link.setAttribute("href", source);
                         link.setAttribute("title", source);
                         link.setAttribute("target", "_blank");
                         link.setAttribute("rel", "noopener noreferrer");
-                    }
-                    let span = document.createElement("span");
-                    span.textContent = itemText;
-                    if (source) {
+                        
                         let tips = document.createElement("div");
                         tips.setAttribute("class", "tips");
                         link.appendChild(tips);
+                        
+                        let span = document.createElement("span");
+                        span.textContent = itemText;
                         link.appendChild(span);
-                        container.appendChild(link);
-                        container.appendChild(document.createTextNode('\n'));
+                        
+                        fragment.appendChild(link);
                     } else {
-                        container.appendChild(span);
-                        container.appendChild(document.createTextNode('\n'));
+                        let span = document.createElement("span");
+                        span.textContent = itemText;
+                        fragment.appendChild(span);
                     }
+                    fragment.appendChild(document.createTextNode('\n'));
                 }
+                container.appendChild(fragment);
             } else {
                 container.textContent = t('popup_category_empty') || 'No matches found';
                 container.classList.add('no-data');
