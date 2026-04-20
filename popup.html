@@ -261,12 +261,12 @@
 
         .info-card-content {
             padding: 8px 12px;
-            /* Reduced from 15px 20px */
-            flex: 1;
+            flex-grow: 1;
             overflow-y: auto;
-            min-height: 0;
-            display: flex;
-            flex-direction: column;
+        }
+
+        #card-settings .info-card-content {
+            padding: 5px 10px;
         }
 
 
@@ -472,125 +472,152 @@
 
         .settings-group {
             margin-bottom: 8px;
-            /* Reduced from 15px */
+            padding: 4px 0 12px 0;
             border-bottom: 1px solid var(--border-color);
-            padding-bottom: 8px;
-            /* Reduced from 15px */
         }
 
         .settings-group:last-of-type {
             margin-bottom: 0;
             border-bottom: none;
-            padding-bottom: 0;
+        }
+
+        .settings-group > label {
+            display: block;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+            opacity: 0.8;
         }
 
         .settings-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 5px;
-            /* Reduced from 10px */
+            margin-bottom: 6px;
         }
 
         .settings-item label {
+            font-size: 12px;
             font-weight: 500;
             color: var(--text-secondary);
-            font-size: 13px;
         }
 
         input[type="text"],
         textarea,
         select {
             width: 100%;
-            padding: 4px 8px;
-            /* Tighter inputs */
+            padding: 5px 10px;
             margin-top: 2px;
             margin-bottom: 6px;
-            /* Reduced from 12px */
             border: 1px solid var(--border-color);
-            border-radius: 4px;
-            font-size: 13px;
+            border-radius: 6px;
+            font-size: 12px;
             box-sizing: border-box;
             font-family: inherit;
             background-color: var(--data-display-bg);
             color: var(--text-main);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(var(--accent-color-rgb), 0.1);
         }
 
         textarea {
             resize: vertical;
-        }
-
-        .settings-group>label {
-            display: block;
-            margin-bottom: 2px;
-            /* Reduced from 5px */
-            font-weight: 500;
-            color: var(--text-secondary);
+            min-height: 50px;
         }
 
         .button-group {
             display: flex;
             justify-content: flex-end;
             gap: 8px;
-            margin-top: 5px;
-            /* Reduced from 10px */
-            padding-top: 5px;
-            /* Reduced from 10px */
+            margin-top: 10px;
+            padding-top: 10px;
             border-top: 1px solid var(--border-color);
         }
 
         .button-group button,
-        .settings-item button,
-        .toggle-btn {
-            background-color: var(--accent-color);
-            color: white;
-            padding: 4px 10px;
-            border: none;
-            border-radius: 4px;
+        .settings-item button {
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
             cursor: pointer;
-            font-size: 12px;
+            transition: all 0.2s;
+            border: 1px solid transparent;
         }
 
-        /* Modern Toggle Styles */
+        .js-btn-save {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .js-btn-save:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        .js-btn-reset-save {
+            background-color: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border-color) !important;
+        }
+
+        .js-btn-reset-save:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+        }
+
+        /* Modern Toggle Switch */
         .toggle-btn {
-            min-width: 50px;
-            border-radius: 20px;
-            /* Switch-like shape */
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 10px;
-            letter-spacing: 0.5px;
-            box-shadow: var(--shadow-sm);
+            position: relative;
+            width: 32px;
+            height: 16px;
+            background-color: #484f58;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: none;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .toggle-btn::after {
+            content: '';
+            position: absolute;
+            left: 2px;
+            width: 12px;
+            height: 12px;
+            background-color: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.3);
         }
 
         .toggle-btn.state-on {
-            background-color: #238636 !important;
-            /* Green */
-            border: 1px solid #2ea043;
+            background-color: var(--accent-color);
         }
 
-        .toggle-btn.state-off {
-            background-color: #6c757d !important;
-            /* Gray */
-            border: 1px solid #5c636a;
+        .toggle-btn.state-on::after {
+            transform: translateX(16px);
         }
 
-        .toggle-btn:hover {
-            box-shadow: var(--shadow-md);
+        #btn_clear_cache {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: #ff4d4d;
+            border: 1px solid rgba(220, 53, 69, 0.2);
         }
 
-        .button-group button:hover,
-        .settings-item button:hover {
-            background-color: var(--accent-hover);
-        }
-
-        .button-group button#reset,
-        .button-group button#reset_allowlist {
-            background-color: var(--text-muted);
-        }
-
-        .settings-item button#btn_clear_cache {
+        #btn_clear_cache:hover {
             background-color: #dc3545;
+            color: white;
         }
 
         /* Search Bar Styling */
@@ -911,10 +938,12 @@
 
             <div class="info-card" id="card-settings" style="display: none;">
                 <div class="info-card-header">
-                    <span class="info-card-title" id="settings_header">插件配置</span>
+                    <span class="info-card-title" id="settings_header">Settings</span>
                 </div>
                 <div class="info-card-content">
+                    <!-- General Settings -->
                     <div class="settings-group">
+                        <label>General</label>
                         <div class="settings-item">
                             <label id="lbl_language">Language</label>
                             <select id="user_language" style="width: 130px; margin-bottom: 0;">
@@ -934,53 +963,55 @@
                             </select>
                         </div>
                         <div class="settings-item">
-                            <label id="lbl_clear_cache">清理缓存</label>
-                            <button id="btn_clear_cache">清理</button>
+                            <label id="lbl_float_window">Floating Window</label>
+                            <button id="global_float" class="toggle-btn"></button>
                         </div>
                         <div class="settings-item">
-                            <label id="lbl_float_window">全局悬浮窗</label>
-                            <button id="global_float" class="toggle-btn">打开</button>
+                            <label id="lbl_auto_timeout">Auto Timeout</label>
+                            <button id="fetch_timeout" class="toggle-btn"></button>
                         </div>
                         <div class="settings-item">
-                            <label id="lbl_auto_timeout">自动超时</label>
-                            <button id="fetch_timeout" class="toggle-btn">打开</button>
+                            <label id="lbl_safe_mode">Safe Mode</label>
+                            <button id="settingSafeMode" class="toggle-btn"></button>
                         </div>
-                        <div class="settings-item">
-                            <label id="lbl_safe_mode">安全模式</label>
-                            <button id="settingSafeMode" class="toggle-btn">打开</button>
+                        <div class="settings-item" style="margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 8px;">
+                            <label id="lbl_clear_cache">Cache Management</label>
+                            <button id="btn_clear_cache">Clear Cache</button>
                         </div>
                     </div>
 
+                    <!-- Webhook Settings -->
                     <div class="settings-group">
-                        <label id="lbl_webhook">Webhook</label>
-                        <label id="lbl_webhook_url" style="font-size: 11px; color: #888;">回调地址</label>
-                        <input type="text" id="webhook_url">
+                        <label id="lbl_webhook">Webhook Configuration</label>
+                        
+                        <label id="lbl_webhook_url" style="font-size: 11px; color: var(--text-muted);">Target URL</label>
+                        <input type="text" id="webhook_url" placeholder="https://api.example.com/webhook">
 
-                        <label id="lbl_webhook_method" style="font-size: 11px; color: #888;">请求方法</label>
-                        <select id="method">
+                        <label id="lbl_webhook_method" style="font-size: 11px; color: var(--text-muted);">Method</label>
+                        <select id="method" style="width: 100px;">
                             <option value="GET">GET</option>
                             <option value="POST">POST</option>
                         </select>
 
-                        <label id="lbl_webhook_params" style="font-size: 11px; color: #888;">请求参数</label>
-                        <input type="text" id="arg">
+                        <label id="lbl_webhook_params" style="font-size: 11px; color: var(--text-muted);">Extra Argument</label>
+                        <input type="text" id="arg" placeholder="e.g. source=reconlens">
 
-                        <label id="lbl_webhook_headers" style="font-size: 11px; color: #888;">自定义headers</label>
-                        <textarea id="headers" placeholder='{"auth":"key"}'></textarea>
+                        <label id="lbl_webhook_headers" style="font-size: 11px; color: var(--text-muted);">Custom Headers (JSON)</label>
+                        <textarea id="headers" placeholder='{"Authorization": "Bearer key"}' style="min-height: 40px;"></textarea>
 
                         <div class="button-group">
-                            <button id="reset" class="js-btn-reset-save">置空并保存</button>
-                            <button id="save" class="js-btn-save">保存</button>
+                            <button id="reset" class="js-btn-reset-save">Reset</button>
+                            <button id="save" class="js-btn-save">Save Config</button>
                         </div>
                     </div>
 
+                    <!-- Allowlist Settings -->
                     <div class="settings-group">
-                        <label id="lbl_allowlist">域名白名单</label>
-                        <textarea id="allowlist"
-                            placeholder=".google.com&#10;.amazon.com&#10;portswigger.net&#10;sekademi.github.io"></textarea>
+                        <label id="lbl_allowlist">Domain Allowlist</label>
+                        <textarea id="allowlist" placeholder=".google.com&#10;.amazon.com" style="min-height: 60px;"></textarea>
                         <div class="button-group">
-                            <button id="reset_allowlist" class="js-btn-reset-save">置空并保存</button>
-                            <button id="save_allowlist" class="js-btn-save">保存</button>
+                            <button id="reset_allowlist" class="js-btn-reset-save">Reset</button>
+                            <button id="save_allowlist" class="js-btn-save">Save List</button>
                         </div>
                     </div>
                 </div>

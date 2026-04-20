@@ -485,7 +485,6 @@ function init_language_selector() {
 function renderToggleLabel(elementId, isOn) {
     const el = document.getElementById(elementId);
     if (el) {
-        setI18n(elementId, isOn ? 'setting_btn_state_on' : 'setting_btn_state_off');
         if (isOn) {
             el.classList.add('state-on');
             el.classList.remove('state-off');
