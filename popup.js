@@ -91,6 +91,13 @@ function init_locales() {
         el.textContent = t('setting_btn_save');
     });
 
+    document.querySelectorAll('.btn-copy-current').forEach(el => {
+        el.textContent = t('popup_btn_copy_current');
+    });
+    document.querySelectorAll('.btn-copy-url-resolved').forEach(el => {
+        el.textContent = t('popup_btn_copy_url_resolved');
+    });
+
     // Clear Cache message
     const clearBtn = document.getElementById('btn_clear_cache');
     if (clearBtn) {
