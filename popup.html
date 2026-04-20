@@ -221,17 +221,42 @@
         .data-display {
             word-break: break-all;
             background-color: var(--data-display-bg);
-            padding: 5px 8px; /* Tighter data padding */
+            padding: 4px; /* Tight padding for the container */
             flex: 1;
             min-height: 0;
             overflow-y: auto;
-            margin: 0; /* Remove default p margins */
+            margin: 0;
             white-space: pre-wrap;
             color: var(--text-main);
-            line-height: 1.3;
-            border: 1px solid var(--data-display-border);
+            line-height: 1.4;
             font-size: 11px;
             font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
+        }
+
+        .data-display span, .data-display a {
+            display: block; /* Full width for better hover area */
+            padding: 2px 8px;
+            border-radius: 3px;
+            text-decoration: none;
+            color: inherit;
+            transition: background-color 0.1s ease, color 0.1s ease;
+            cursor: default;
+        }
+
+        .data-display a {
+            color: var(--accent-color);
+            cursor: pointer;
+        }
+
+        .data-display a:hover, .data-display span:hover {
+            background-color: rgba(3, 102, 214, 0.1); /* Subtle highlight */
+            color: var(--accent-hover);
+        }
+
+        body.dark-mode .data-display a:hover, 
+        body.dark-mode .data-display span:hover {
+            background-color: rgba(56, 139, 253, 0.15);
+            color: #58a6ff;
         }
 
         .data-display.no-data {
