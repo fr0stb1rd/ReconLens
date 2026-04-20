@@ -327,7 +327,7 @@
             border: none;
             padding: 4px;
             margin-right: 2px;
-            color: #8600c4; /* Passive Purple */
+            color: var(--accent-color); /* Initial Purple */
             cursor: pointer;
             opacity: 0.6;
             transition: all 0.2s;
@@ -335,13 +335,12 @@
         }
 
         .data-item:hover .item-copy-btn {
-            opacity: 0.8;
+            opacity: 1;
         }
 
         .item-copy-btn:hover {
-            opacity: 1 !important;
-            color: #c407ff; /* Active Purple */
-            background-color: transparent;
+            color: var(--accent-hover); /* Hover State */
+            background-color: rgba(196, 7, 255, 0.1);
         }
 
         .item-copy-btn svg {
@@ -388,8 +387,8 @@
         }
 
         .copy-success {
-            background-color: var(--accent-color) !important;
-            border-color: var(--accent-color) !important;
+            background-color: var(--accent-active) !important; /* Success State: #8600c4 */
+            border-color: var(--accent-active) !important;
             color: white !important;
         }
 

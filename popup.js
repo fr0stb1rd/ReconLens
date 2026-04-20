@@ -204,10 +204,14 @@ async function show_info(result_data, filter = "") {
                     copyBtn.onclick = (e) => {
                         e.stopPropagation();
                         navigator.clipboard.writeText(itemText).then(() => {
-                            // Temporary success state for the icon
                             const originalSvg = copyBtn.innerHTML;
-                            copyBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="#a500e1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
-                            setTimeout(() => { copyBtn.innerHTML = originalSvg; }, 1000);
+                            // Success state using --accent-active color: #8600c4
+                            copyBtn.style.color = '#8600c4';
+                            copyBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+                            setTimeout(() => { 
+                                copyBtn.innerHTML = originalSvg;
+                                copyBtn.style.color = ''; 
+                            }, 1000);
                         });
                     };
 
