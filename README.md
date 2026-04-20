@@ -32,14 +32,17 @@ Originally developed under the name *FindSomething* by [residuallaugh](https://g
 
 - **🚀 Performance-First Extraction:** High-speed regex matching optimized for modern web applications.
 - **🧠 Deep Normalization Engine:** Automatically cleans and deduplicates harvested data. No more redundant protocols (`http/s`), trailing slashes, or duplicate domains.
-- **🤖 AI-Ready Export:** Specialized "Copy for AI" engine that formats results into Markdown, XML, HTML, or Plain Text for seamless integration with LLMs like ChatGPT and Claude.
-- **🔗 Interactive Dashboard:** Every extracted string is a clickable link. Includes per-item copy buttons for rapid data collection.
+- **🤖 AI-Ready Export:** Specialized "Copy for AI" engine that formats results into Markdown, XML, HTML, or Plain Text. Now includes **Target URL** and **Scan Timestamps** in every report header.
+- **🔗 Interactive Dashboard:** Every extracted string is a clickable link. Includes per-item **Action Icons** (Copy + Lookups) for rapid data collection.
+- **⚡ Quick Lookups:** Built-in SVG shortcuts for IP and Domain intelligence:
+  - **Shodan & VirusTotal** for IP addresses.
+  - **SecurityTrails & VirusTotal** for domains.
 - **🎯 Smart URL Resolution:** Intelligent logic that distinguishes between domains (`google.com`) and relative paths (`/api/v1`), ensuring you always resolve to the correct target.
 - **🌍 Internationalization (i18n):** Full support for English, Turkish, Chinese, and Arabic.
-- **🎨 Modern Aesthetic:** A professional, dark-themed "Command Center" UI with a custom color palette for high-density information display.
+- **🎨 Custom Cyber Aesthetic:** A professional, high-contrast UI with a signature purple/magenta color palette (`#c407ff`).
 - **🔧 Granular Configuration:** Enable/disable specific detection categories, customize allowed domains, and toggle badge notifications.
 - **⚡ Webhook Integration:** Send your findings to a remote server for centralized reconnaissance.
-- **🛡️ Privacy Focused:** All analysis happens locally in your browser. No data leaves your machine unless you configure a webhook.
+- **🛡️ Privacy Focused:** All analysis happens locally in your browser. No data leaves your machine unless you explicitly configure a webhook.
 
 > **Use Case:** Bug bounty hunters, penetration testers, and security researchers who want to passively collect endpoints, API keys, tokens, and sensitive data leaks while doing normal web browsing.
  
