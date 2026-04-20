@@ -4,7 +4,7 @@
         "description": "Eklenti ismi"
     },
     "ext_description": {
-        "message": "Web sayfalarindan uc noktalari, gizli anahtarlari ve hassas verileri pasif olarak cikaran kesif eklentisi",
+        "message": "Web varlıklarından uç noktaları, gizli anahtarları ve istihbarat verilerini otomatik olarak ayıklayan ve normalize eden profesyonel pasif keşif aracı.",
         "description": "Eklenti aciklamasi"
     },
     "nav_home": {

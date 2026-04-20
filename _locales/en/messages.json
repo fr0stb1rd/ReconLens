@@ -4,7 +4,7 @@
         "description": "Extension name"
     },
     "ext_description": {
-        "message": "Passive reconnaissance extension that extracts endpoints, secrets and sensitive data from web pages",
+        "message": "Professional-grade passive reconnaissance tool designed for automated endpoint discovery, secret extraction, and structured intelligence gathering from web assets.",
         "description": "Extension description"
     },
     "nav_home": {

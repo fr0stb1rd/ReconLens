@@ -4,7 +4,7 @@
         "description": "扩展名"
     },
     "ext_description": {
-        "message": "被动侦察扩展，从网页中提取端点、密钥和敏感信息",
+        "message": "专业级被动侦察工具，旨在从 Web 资产中自动提取并规范化端点、机密和情报数据。",
         "description": "扩展描述"
     },
     "nav_home": {
