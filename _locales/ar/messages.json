@@ -13,6 +13,9 @@
     "nav_settings": {
         "message": "الإعدادات"
     },
+    "lbl_master_switch": {
+        "message": "المسح النشط"
+    },
     "popup_title_path": {
         "message": "المسار"
     },

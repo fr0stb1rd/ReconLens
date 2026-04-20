@@ -13,6 +13,9 @@
     "nav_settings": {
         "message": "配置"
     },
+    "lbl_master_switch": {
+        "message": "自动扫描"
+    },
     "popup_title_path": {
         "message": "路径"
     },

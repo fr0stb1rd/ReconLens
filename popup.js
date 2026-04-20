@@ -7,10 +7,28 @@
 /** Translate a key with optional placeholder args. */
 const t = (key, ...subs) => reconI18n.getMessage(key, subs.length ? subs : undefined);
 
-/** Set element textContent via i18n key (element ID decoupled from key). */
+/** Set element text via i18n key without destroying child elements (like icons) */
 const setI18n = (elementId, key, ...subs) => {
     const el = document.getElementById(elementId);
-    if (el) el.textContent = t(key, ...subs);
+    if (!el) return;
+    
+    const message = t(key, ...subs);
+    if (!message) return;
+
+    // If the element has no children, safe to use textContent
+    if (el.children.length === 0) {
+        el.textContent = message;
+    } else {
+        // If it has children (like icons), we only want to update the text part.
+        // Usually, the text is the last child or a direct text node.
+        let textNode = Array.from(el.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
+        if (textNode) {
+            textNode.textContent = message;
+        } else {
+            // Fallback: append a new text node if none found
+            el.appendChild(document.createTextNode(message));
+        }
+    }
 };
 
 // ── Localization Init ─────────────────────────────────────────────────────────

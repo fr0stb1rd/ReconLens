@@ -13,6 +13,9 @@
     "nav_settings": {
         "message": "Settings"
     },
+    "lbl_master_switch": {
+        "message": "Active Scan"
+    },
     "popup_title_path": {
         "message": "Path"
     },

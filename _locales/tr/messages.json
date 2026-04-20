@@ -13,6 +13,9 @@
     "nav_settings": {
         "message": "Ayarlar"
     },
+    "lbl_master_switch": {
+        "message": "Aktif Tarama"
+    },
     "popup_title_path": {
         "message": "Yol"
     },
