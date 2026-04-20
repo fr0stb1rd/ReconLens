@@ -198,23 +198,13 @@ function show_info(result_data, filter = "") {
                     let source = result_data['source'] ? result_data['source'][itemText] : null;
                     
                     if (source) {
-                        let link = document.createElement("a");
-                        link.setAttribute("href", source);
-                        link.setAttribute("title", source);
-                        link.setAttribute("target", "_blank");
-                        link.setAttribute("rel", "noopener noreferrer");
-                        
-                        let tips = document.createElement("div");
-                        tips.setAttribute("class", "tips");
-                        link.appendChild(tips);
-                        
-                        let span = document.createElement("span");
-                        span.textContent = itemText;
-                        link.appendChild(span);
-                        
-                        fragment.appendChild(link);
+                        let a = document.createElement('a');
+                        a.href = source;
+                        a.target = '_blank';
+                        a.textContent = itemText;
+                        fragment.appendChild(a);
                     } else {
-                        let span = document.createElement("span");
+                        let span = document.createElement('span');
                         span.textContent = itemText;
                         fragment.appendChild(span);
                     }
