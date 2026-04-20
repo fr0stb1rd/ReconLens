@@ -27,7 +27,20 @@
 **ReconLens** is a passive information extraction tool built as a Manifest V3 browser extension. As you browse, it automatically analyzes the page source, inline scripts, and referenced JavaScript files to extract valuable reconnaissance data — all without sending any additional probing requests beyond what the page already loads.
 
 Originally developed under the name *FindSomething* by [residuallaugh](https://github.com/momosecurity/FindSomething), ReconLens is a fork focused on modernization and expanded capabilities.
- 
+
+## ✨ Features
+
+- **🚀 Performance-First Extraction:** High-speed regex matching optimized for modern web applications.
+- **🧠 Deep Normalization Engine:** Automatically cleans and deduplicates harvested data. No more redundant protocols (`http/s`), trailing slashes, or duplicate domains.
+- **🤖 AI-Ready Export:** Specialized "Copy for AI" engine that formats results into Markdown, XML, HTML, or Plain Text for seamless integration with LLMs like ChatGPT and Claude.
+- **🔗 Interactive Dashboard:** Every extracted string is a clickable link. Includes per-item copy buttons for rapid data collection.
+- **🎯 Smart URL Resolution:** Intelligent logic that distinguishes between domains (`google.com`) and relative paths (`/api/v1`), ensuring you always resolve to the correct target.
+- **🌍 Internationalization (i18n):** Full support for English, Turkish, Chinese, and Arabic.
+- **🎨 Modern Aesthetic:** A professional, dark-themed "Command Center" UI with a custom color palette for high-density information display.
+- **🔧 Granular Configuration:** Enable/disable specific detection categories, customize allowed domains, and toggle badge notifications.
+- **⚡ Webhook Integration:** Send your findings to a remote server for centralized reconnaissance.
+- **🛡️ Privacy Focused:** All analysis happens locally in your browser. No data leaves your machine unless you configure a webhook.
+
 > **Use Case:** Bug bounty hunters, penetration testers, and security researchers who want to passively collect endpoints, API keys, tokens, and sensitive data leaks while doing normal web browsing.
  
 ---
