@@ -178,7 +178,7 @@
         "message": "قائمة السماح"
     },
     "setting_tip_allowlist": {
-        "message": "أدخل لاحقة نطاق واحدة في كل سطر. الافتراضي: .google.com، .amazon.com، portswigger.net"
+        "message": "أدخل لاحقة نطاق واحدة في كل سطر. الافتراضي: .google.com، .amazon.com، portswigger.net، sekademi.github.io"
     },
     "setting_btn_reset_save": {
         "message": "إعادة تعيين وحفظ"

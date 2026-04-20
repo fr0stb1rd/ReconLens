@@ -179,7 +179,7 @@
         "message": "Domain Allowlist"
     },
     "setting_tip_allowlist": {
-        "message": "One domain suffix per line. Defaults: .google.com, .amazon.com, portswigger.net"
+        "message": "One domain suffix per line. Defaults: .google.com, .amazon.com, portswigger.net, sekademi.github.io"
     },
     "setting_btn_reset_save": {
         "message": "Reset & Save"

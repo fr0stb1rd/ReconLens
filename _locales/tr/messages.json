@@ -179,7 +179,7 @@
         "message": "Alan Adi Izin Listesi"
     },
     "setting_tip_allowlist": {
-        "message": "Her satira bir alan adi uzantisi girin. Varsayilan: .google.com, .amazon.com, portswigger.net"
+        "message": "Her satira bir alan adi uzantisi girin. Varsayilan: .google.com, .amazon.com, portswigger.net, sekademi.github.io"
     },
     "setting_btn_reset_save": {
         "message": "Sifirla ve Kaydet"
