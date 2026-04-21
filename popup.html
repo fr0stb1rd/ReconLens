@@ -541,6 +541,15 @@
             /* Added height */
         }
 
+        mark {
+            background: var(--accent-color);
+            color: #fff;
+            padding: 0 2px;
+            border-radius: 2px;
+            box-shadow: 0 0 8px rgba(196, 7, 255, 0.4);
+            font-weight: bold;
+        }
+
         .ai-menu {
             display: none;
             position: absolute;
@@ -1221,6 +1230,7 @@
 
                             <div class="button-group">
                                 <button id="reset" class="js-btn-reset-save">Reset</button>
+                                <button id="webhook_test" class="js-btn-test" style="background: var(--bg-card); border: 1px solid var(--accent-color); color: var(--accent-color);">Test Connection</button>
                                 <button id="save" class="js-btn-save">Save Config</button>
                             </div>
                         </div>

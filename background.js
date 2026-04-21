@@ -950,14 +950,26 @@ function webhook(data) {
 function refresh_count() {
   if (selected_id === -1) return;
   const tid = selected_id;
-  const cur = tab_url[tid];
-  
-  if (!cur) {
-    chrome.action.setBadgeText({ text: "", tabId: tid });
-    return;
-  }
 
-  const process_data = (data) => {
+  chrome.storage.local.get(['master_switch'], (settings) => {
+    const isEnabled = settings.master_switch !== false;
+    
+    if (!isEnabled) {
+      chrome.action.setBadgeText({ text: "OFF", tabId: tid });
+      chrome.action.setBadgeBackgroundColor({ color: "#666666", tabId: tid });
+      return;
+    }
+
+    // Default accent color
+    chrome.action.setBadgeBackgroundColor({ color: "#c407ff", tabId: tid });
+
+    const cur = tab_url[tid];
+    if (!cur) {
+      chrome.action.setBadgeText({ text: "", tabId: tid });
+      return;
+    }
+
+    const process_data = (data) => {
     let cnt = 0;
     if (data) {
       for (const k in data) {
@@ -1188,6 +1200,13 @@ chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     if (tabs[0].url) {
       tab_url[selected_id] = tabs[0].url;
     }
+    refresh_count();
+  }
+});
+
+// ── Master Switch Persistence & UI Sync ──────────────────────────────────────
+chrome.storage.onChanged.addListener((changes, area) => {
+  if (area === 'local' && changes.master_switch) {
     refresh_count();
   }
 });

@@ -184,7 +184,15 @@ async function show_info(result_data, filter = "") {
 
                     let a = document.createElement('a');
                     a.target = '_blank';
-                    a.textContent = itemText;
+                    
+                    if (filter && itemText.toLowerCase().includes(lowerFilter)) {
+                        // Escape regex special characters and create a global, case-insensitive regex
+                        const escapedFilter = filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                        const regex = new RegExp(`(${escapedFilter})`, 'gi');
+                        a.innerHTML = itemText.replace(regex, '<mark>$1</mark>');
+                    } else {
+                        a.textContent = itemText;
+                    }
 
                     let cleanText = itemText.trim();
                     let targetUrl = itemText;
@@ -363,11 +371,15 @@ function init_category_navigation() {
 
 function init_search_logic() {
     const searchInput = document.getElementById('searchInput');
+    let searchTimeout;
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
-            if (lastResultData) {
-                show_info(lastResultData, e.target.value);
-            }
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                if (lastResultData) {
+                    show_info(lastResultData, e.target.value);
+                }
+            }, 150); // 150ms debounce
         });
     }
 }
@@ -684,7 +696,66 @@ function init_toggle_handlers() {
 function init_webhook_logic() {
     const saveBtn = document.getElementById('save');
     const resetBtn = document.getElementById('reset');
+    const testBtn = document.getElementById('webhook_test');
     if (!saveBtn || !resetBtn) return;
+
+    if (testBtn) {
+        testBtn.onclick = async function () {
+            const originalText = testBtn.textContent;
+            const url = document.getElementById('webhook_url').value;
+            if (!url) {
+                alert("Please enter a Webhook URL first");
+                return;
+            }
+
+            testBtn.textContent = "...";
+            testBtn.disabled = true;
+
+            try {
+                const method = document.getElementById('method').value;
+                const headers = JSON.parse(document.getElementById('headers').value || '{}');
+                const arg = document.getElementById('arg').value;
+                
+                const testData = {
+                    test: true,
+                    tool: "ReconLens",
+                    timestamp: new Date().toISOString(),
+                    message: "Webhook Connection Test Successful"
+                };
+
+                const fetchOptions = {
+                    method: method,
+                    headers: { 'Content-Type': 'application/json', ...headers },
+                };
+
+                if (method === 'POST') {
+                    fetchOptions.body = JSON.stringify(testData);
+                }
+
+                const response = await fetch(url + (arg ? (url.includes('?') ? '&' : '?') + arg : ''), fetchOptions);
+
+                if (response.ok) {
+                    testBtn.textContent = "OK!";
+                    testBtn.style.borderColor = "#4caf50";
+                    testBtn.style.color = "#4caf50";
+                } else {
+                    throw new Error(`Status: ${response.status}`);
+                }
+            } catch (e) {
+                console.error('Webhook test failed:', e);
+                testBtn.textContent = "Error";
+                testBtn.style.borderColor = "#f44336";
+                testBtn.style.color = "#f44336";
+            } finally {
+                setTimeout(() => {
+                    testBtn.textContent = originalText;
+                    testBtn.style.borderColor = "";
+                    testBtn.style.color = "";
+                    testBtn.disabled = false;
+                }, 2000);
+            }
+        };
+    }
 
     saveBtn.onclick = function () {
         try {
