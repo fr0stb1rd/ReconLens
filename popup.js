@@ -314,6 +314,7 @@ function handleCategoryClick(event) {
     event.currentTarget.classList.add('active');
 
     const selectedCategory = event.currentTarget.dataset.category;
+    chrome.storage.local.set({ 'last_active_category': selectedCategory });
     const infoCardsContainer = document.getElementById('info-cards-container');
     const statusBar = document.getElementById('status-bar-wrapper');
     const searchWrapper = document.getElementById('search-wrapper');
@@ -344,31 +345,18 @@ function init_category_navigation() {
         link.addEventListener('click', handleCategoryClick);
     });
 
-    // Check for category in URL (tab-like navigation from settings)
-    const urlParams = new URLSearchParams(window.location.search);
-    const targetCategory = urlParams.get('category') || 'path';
+    // Check for category in storage first (to preserve across reloads/language changes)
+    chrome.storage.local.get(['last_active_category'], (result) => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const targetCategory = urlParams.get('category') || result.last_active_category || 'path';
 
-    const initialCategoryLink = document.querySelector(`.category-item a[data-category="${targetCategory}"]`);
-    if (initialCategoryLink) {
-        initialCategoryLink.classList.add('active');
-        const selectedCategory = initialCategoryLink.dataset.category;
-
-        const isSpecialTab = (selectedCategory === 'settings' || selectedCategory === 'about');
-        const statusBar = document.getElementById('status-bar-wrapper');
-        const searchWrapper = document.getElementById('search-wrapper');
-
-        if (statusBar) statusBar.style.display = isSpecialTab ? 'none' : 'flex';
-        if (searchWrapper) searchWrapper.style.display = isSpecialTab ? 'none' : 'block';
-
-        document.querySelectorAll('.info-card').forEach(card => {
-            if (card.id === `card-${selectedCategory}`) {
-                card.style.display = 'flex'; // Changed from 'block' to 'flex'
-            } else {
-                card.style.display = 'none';
-            }
-        });
-    }
+        const initialCategoryLink = document.querySelector(`.category-item a[data-category="${targetCategory}"]`);
+        if (initialCategoryLink) {
+            initialCategoryLink.click(); // Use .click() to trigger all logic including UI updates
+        }
+    });
 }
+
 
 function init_search_logic() {
     const searchInput = document.getElementById('searchInput');
