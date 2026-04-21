@@ -59,18 +59,27 @@
         }
 
         body {
-            width: 800px;
-            /* Increased from 680px */
-            height: 600px;
-            /* Increased from 480px */
             font-family: 'Inter', 'Roboto', sans-serif;
             font-size: 13px;
             margin: 0;
+            padding: 0;
             background-color: var(--bg-color);
             color: var(--text-main);
             display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
             overflow: hidden;
-            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .app-container {
+            width: 800px;
+            height: 600px;
+            display: flex;
+            background-color: var(--panel-bg);
+            position: relative;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
         }
 
         /* Left Sidebar - Navigation Card List */
@@ -516,6 +525,8 @@
             /* Added height */
         }
 
+
+
         .btn-ai-toggle {
             background: var(--accent-color);
             color: white;
@@ -826,6 +837,7 @@
 </head>
 
 <body>
+    <div class="app-container">
     <div class="left-panel">
         <div class="panel-title">
             <div class="panel-brand">
@@ -1260,6 +1272,7 @@
             </div>
         </div>
 
+    </div>
     </div>
 </body>
 <script src="polyfill.js"></script>
