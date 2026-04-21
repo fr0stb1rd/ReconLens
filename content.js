@@ -408,7 +408,10 @@ chrome.storage.local.get(["global_float"], function (settings) {
         }
     </style>
     `;
-    div.innerHTML = floatHtml;
+    const parser = new DOMParser();
+    const parsedDoc = parser.parseFromString(floatHtml, 'text/html');
+    const nodes = Array.from(parsedDoc.body.childNodes);
+    nodes.forEach(node => div.appendChild(node));
     body.appendChild(div);
 
     // Safely set i18n text after injection (AMO compliance)
