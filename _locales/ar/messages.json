@@ -133,6 +133,9 @@
     "popup_status_no_data": {
         "message": "لا توجد بيانات بعد. قم بزيارة صفحة لبدء الفحص."
     },
+    "popup_status_disabled": {
+        "message": "المسح النشط معطل. قم بتشغيل المفتاح للبدء."
+    },
     "popup_category_empty": {
         "message": "لم يتم العثور على بيانات"
     },

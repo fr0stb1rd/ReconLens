@@ -133,6 +133,9 @@
     "popup_status_no_data": {
         "message": "暂無数据，请访问页面开始扫描。"
     },
+    "popup_status_disabled": {
+        "message": "主动扫描已禁用。请打开开关以开始扫描。"
+    },
     "popup_category_empty": {
         "message": "未发现数据"
     },

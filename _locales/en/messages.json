@@ -133,6 +133,9 @@
     "popup_status_no_data": {
         "message": "No data yet. Visit a page to start scanning."
     },
+    "popup_status_disabled": {
+        "message": "Active scanning is disabled. Toggle the switch to start."
+    },
     "popup_category_empty": {
         "message": "No data found"
     },

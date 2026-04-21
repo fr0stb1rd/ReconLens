@@ -133,6 +133,9 @@
     "popup_status_no_data": {
         "message": "Henüz veri yok. Taramayı başlatmak için bir sayfayı ziyaret edin."
     },
+    "popup_status_disabled": {
+        "message": "Aktif tarama kapalı. Taramayı başlatmak için şalteri açın."
+    },
     "popup_category_empty": {
         "message": "Veri bulunamadı"
     },

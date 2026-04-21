@@ -113,21 +113,6 @@ function init_locales() {
             });
         };
     }
-
-    // Initialize Master Switch
-    const masterSwitch = document.getElementById('master_switch');
-    if (masterSwitch) {
-        chrome.storage.local.get(['extension_enabled'], (result) => {
-            masterSwitch.checked = result.extension_enabled !== false;
-        });
-
-        masterSwitch.addEventListener('change', () => {
-            const enabled = masterSwitch.checked;
-            chrome.storage.local.set({ 'extension_enabled': enabled }, () => {
-                // Background script will handle the visual state change
-            });
-        });
-    }
 }
 
 var key = ["ip", "ip_port", "domain", "path", "incomplete_path", "url", "static", "id_card", "mobile", "email", "jwt", "algorithm", "sensitive"];
@@ -184,7 +169,7 @@ async function show_info(result_data, filter = "") {
 
                     let a = document.createElement('a');
                     a.target = '_blank';
-                    
+
                     if (filter && itemText.toLowerCase().includes(lowerFilter)) {
                         // Escape regex special characters and create a global, case-insensitive regex
                         const escapedFilter = filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -731,7 +716,7 @@ function init_webhook_logic() {
                 const method = document.getElementById('method').value;
                 const headers = JSON.parse(document.getElementById('headers').value || '{}');
                 const arg = document.getElementById('arg').value;
-                
+
                 const testData = {
                     test: true,
                     tool: "ReconLens",
@@ -838,29 +823,37 @@ function init_allowlist_logic() {
 }
 
 function start_monitoring() {
-    getCurrentTab().then(function get_info(tab) {
-        if (!tab || !tab.url) {
-            setI18n('taskstatus', 'popup_status_no_data');
-            return;
-        }
-        chrome.storage.local.get(["findsomething_result_" + tab.url], function (result) {
-            if (!result || !result["findsomething_result_" + tab.url]) {
+    chrome.storage.local.get(['extension_enabled'], (settings) => {
+        const isEnabled = settings.extension_enabled !== false;
+
+        getCurrentTab().then(function get_info(tab) {
+            if (!isEnabled) {
+                setI18n('taskstatus', 'popup_status_disabled'); // Show "Scanning disabled"
+                return;
+            }
+            if (!tab || !tab.url) {
                 setI18n('taskstatus', 'popup_status_no_data');
                 return;
             }
-            const result_data = result["findsomething_result_" + tab.url];
-            show_info(result_data);
-            if (result_data.donetasklist) {
-                const done = String(result_data.donetasklist.length);
-                const total = String(result_data.tasklist.length);
-                if (result_data['done'] !== 'done') {
-                    setI18n('taskstatus', 'popup_status_scanning', done, total);
-                } else {
-                    setI18n('taskstatus', 'popup_status_complete', done, total);
+            chrome.storage.local.get(["findsomething_result_" + tab.url], function (result) {
+                if (!result || !result["findsomething_result_" + tab.url]) {
+                    setI18n('taskstatus', 'popup_status_no_data');
+                    return;
                 }
-            } else {
-                setI18n('taskstatus', 'popup_status_scanning', '0', '?');
-            }
+                const result_data = result["findsomething_result_" + tab.url];
+                show_info(result_data);
+                if (result_data.donetasklist) {
+                    const done = String(result_data.donetasklist.length);
+                    const total = String(result_data.tasklist.length);
+                    if (result_data['done'] !== 'done') {
+                        setI18n('taskstatus', 'popup_status_scanning', done, total);
+                    } else {
+                        setI18n('taskstatus', 'popup_status_complete', done, total);
+                    }
+                } else {
+                    setI18n('taskstatus', 'popup_status_scanning', '0', '?');
+                }
+            });
         });
     });
 
