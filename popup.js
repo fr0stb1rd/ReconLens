@@ -11,7 +11,7 @@ const t = (key, ...subs) => reconI18n.getMessage(key, subs.length ? subs : undef
 const setI18n = (elementId, key, ...subs) => {
     const el = document.getElementById(elementId);
     if (!el) return;
-    
+
     const message = t(key, ...subs);
     if (message) {
         el.innerHTML = message;
@@ -178,7 +178,7 @@ async function show_info(result_data, filter = "") {
 
                 for (var i in filteredItems) {
                     let itemText = filteredItems[i];
-                    
+
                     const itemDiv = document.createElement('div');
                     itemDiv.className = 'data-item';
 
@@ -188,7 +188,7 @@ async function show_info(result_data, filter = "") {
 
                     let cleanText = itemText.trim();
                     let targetUrl = itemText;
-                    
+
                     if (cleanText.startsWith('http')) {
                         targetUrl = cleanText;
                     } else if (cleanText.startsWith('//')) {
@@ -211,7 +211,7 @@ async function show_info(result_data, filter = "") {
                         }
                     }
                     a.href = targetUrl;
-                    
+
                     // Add Copy Button
                     const copyBtn = document.createElement('button');
                     copyBtn.className = 'item-copy-btn';
@@ -221,7 +221,7 @@ async function show_info(result_data, filter = "") {
                             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                             <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                         </svg>`;
-                    
+
                     copyBtn.onclick = (e) => {
                         e.stopPropagation();
                         navigator.clipboard.writeText(itemText).then(() => {
@@ -229,9 +229,9 @@ async function show_info(result_data, filter = "") {
                             // Success state using --accent-active color: #8600c4
                             copyBtn.style.color = '#8600c4';
                             copyBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
-                            setTimeout(() => { 
+                            setTimeout(() => {
                                 copyBtn.innerHTML = originalSvg;
-                                copyBtn.style.color = ''; 
+                                copyBtn.style.color = '';
                             }, 1000);
                         });
                     };
@@ -242,9 +242,9 @@ async function show_info(result_data, filter = "") {
                     if (currentKey === 'ip' || currentKey === 'ip_port' || currentKey === 'domain') {
                         const lookupWrapper = document.createElement('div');
                         lookupWrapper.className = 'lookup-wrapper';
-                        
+
                         const rawValue = itemText.split(':')[0].replace(/^https?:\/\//, '').replace(/\/+$/, '');
-                        
+
                         if (currentKey.startsWith('ip')) {
                             // Shodan (Radar Icon)
                             const shodan = document.createElement('a');
@@ -254,7 +254,7 @@ async function show_info(result_data, filter = "") {
                             shodan.title = 'Lookup on Shodan';
                             shodan.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>`;
                             lookupWrapper.appendChild(shodan);
-                            
+
                             // VirusTotal IP (Shield Icon)
                             const vt = document.createElement('a');
                             vt.className = 'lookup-btn';
@@ -272,7 +272,7 @@ async function show_info(result_data, filter = "") {
                             vt.title = 'Lookup on VirusTotal';
                             vt.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>`;
                             lookupWrapper.appendChild(vt);
-                            
+
                             // SecurityTrails (Activity Icon)
                             const st = document.createElement('a');
                             st.className = 'lookup-btn';
@@ -438,6 +438,22 @@ function init_ai_copy_logic() {
                 }
             });
             val += '</recon_results>';
+        } else if (format === 'json') {
+            const jsonObj = {
+                metadata: {
+                    tool: "ReconLens",
+                    target: targetUrl || "Unknown",
+                    scanned_at: scanDate,
+                    signature: signatureText
+                },
+                results: {}
+            };
+            categories.forEach(cat => {
+                if (data[cat]?.length) {
+                    jsonObj.results[cat] = data[cat];
+                }
+            });
+            val = JSON.stringify(jsonObj, null, 2);
         } else if (format === 'html') {
             val = `<!-- ${signatureText} -->\n<!-- ${contextText} -->\n<div class="recon-results">\n  <h1>${contextText}</h1>\n`;
             categories.forEach(cat => {
@@ -612,7 +628,7 @@ function init_language_selector() {
             // Update UI dynamically
             document.documentElement.lang = newLang.split('_')[0];
             init_locales();
-            
+
             // Re-render version displays
             document.querySelectorAll('.ext-version-display').forEach(el => {
                 el.textContent = chrome.runtime.getManifest().version;
