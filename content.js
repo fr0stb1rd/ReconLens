@@ -282,85 +282,129 @@ chrome.storage.local.get(["global_float"], function (settings) {
         findsomething-div {
             display: block;
         }
-        findsomething-p {
-            display: block;
-            margin-top: 8px; /* Reduced top margin */
-            margin-bottom: 8px; /* Reduced bottom margin */
-            line-height: 1.5; /* Better readability for paragraphs */
-            word-break: break-word; /* Ensure long words break */
-            padding-left: 10px; /* Indent content slightly */
-            color: #495057; /* Softer text color for content */
+        
+        #findsomething_neko {
+            backdrop-filter: blur(12px);
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            border: 1px solid rgba(196, 7, 255, 0.4) !important;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15) !important;
+            transition: all 0.3s ease !important;
         }
 
-        /* Grouping for each item (Title + Paragraph) */
+        #findsomething_neko-title {
+            background: linear-gradient(135deg, #c407ff 0%, #8600c4 100%) !important;
+            padding: 14px 18px !important;
+            border-bottom: none !important;
+            box-shadow: 0 2px 10px rgba(134, 0, 196, 0.2) !important;
+        }
+
+        #findsomething_taskstatus {
+            color: white !important;
+            font-size: 12px !important;
+            font-weight: 600 !important;
+            letter-spacing: 0.8px !important;
+            text-transform: uppercase !important;
+            opacity: 0.95 !important;
+        }
+
+        #findsomething-hide-btn {
+            background: rgba(255, 255, 255, 0.15) !important;
+            color: white !important;
+            border: 1px solid rgba(255, 255, 255, 0.4) !important;
+            padding: 5px 12px !important;
+            font-size: 10px !important;
+            text-transform: uppercase !important;
+            letter-spacing: 1px !important;
+            font-weight: 700 !important;
+            border-radius: 6px !important;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            cursor: pointer !important;
+        }
+
+        #findsomething-hide-btn:hover {
+            background: rgba(255, 255, 255, 0.25) !important;
+            border-color: white !important;
+            transform: translateY(-1px);
+        }
+
         .findsomething-item-group {
-            margin-bottom: 15px; /* Space between different data items */
-        }
-        .findsomething-item-group:last-child {
-            margin-bottom: 0; /* No margin after the last item */
+            margin-bottom: 15px !important;
+            background: #ffffff !important;
+            border-radius: 10px !important;
+            border: 1px solid #f0f0f0 !important;
+            overflow: hidden !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02) !important;
+            transition: all 0.2s ease !important;
         }
 
+        .findsomething-item-group:hover {
+            border-color: rgba(196, 7, 255, 0.4) !important;
+            box-shadow: 0 4px 12px rgba(196, 7, 255, 0.08) !important;
+            transform: translateY(-1px);
+        }
 
         .findsomething-title {
-            font-size: 15px; /* Slightly adjusted font size */
-            font-weight: 700; /* Bolder titles */
-            border-left: 4px solid #007bff; /* Blue border for titles */
-            text-indent: 8px; /* More indent for text */
-            height: auto; /* Let height adjust to content */
-            line-height: 1.2; /* Tighter line height for titles */
-            width: 100%;
-            margin-left: 0px; /* Remove margin-left as padding handles it */
-            color: #343a40; /* Darker title color */
-            padding: 2px 0; /* Small vertical padding for titles */
-            display: flex; /* Use flex to align title and button */
-            align-items: center; /* Vertically center content */
-            justify-content: space-between; /* Push button to the right */
+            background: #fafafa !important;
+            padding: 10px 14px !important;
+            font-size: 11px !important;
+            font-weight: 800 !important;
+            color: #8600c4 !important;
+            border-bottom: 1px solid #f5f5f5 !important;
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.8px !important;
         }
-        
-        /* Copy button style */
+
         .findsomething_copy {
-            border-style: none;
-            background-color: #007bff; /* Blue background for copy buttons */
-            color: #ffffff; /* White text */
-            padding: 4px 10px; /* Padding for button */
-            border-radius: 4px; /* Rounded corners for buttons */
-            font-size: 12px; /* Smaller font for button text */
-            transition: background-color 0.2s ease, transform 0.1s ease; /* Smooth transition */
-            flex-shrink: 0; /* Prevent button from shrinking */
-            margin-right: 5px; /* Small margin from right edge */
+            background: #fdf4ff !important;
+            border: 1px solid #c407ff !important;
+            color: #c407ff !important;
+            padding: 3px 10px !important;
+            font-size: 10px !important;
+            border-radius: 6px !important;
+            font-weight: 700 !important;
+            cursor: pointer !important;
+            transition: all 0.2s ease !important;
         }
 
         .findsomething_copy:hover {
-            background-color: #0056b3; /* Darker blue on hover */
-            transform: translateY(-1px); /* Slight lift on hover */
+            background: #c407ff !important;
+            color: white !important;
+            box-shadow: 0 0 10px rgba(196, 7, 255, 0.3) !important;
         }
 
-        .findsomething_copy:active {
-            transform: translateY(0); /* Press effect */
+        findsomething-p {
+            display: block !important;
+            padding: 12px 14px !important;
+            margin: 0 !important;
+            font-size: 13px !important;
+            line-height: 1.6 !important;
+            color: #333 !important;
+            word-break: break-all !important;
+            max-height: 160px !important;
+            overflow-y: auto !important;
+            font-family: 'Fira Code', 'JetBrains Mono', 'Consolas', monospace !important;
+            background: white !important;
         }
 
-        button {
-            
-        }
-
-        /* Scrollbar styling for WebKit browsers */
+        /* Scrollbar styling */
+        findsomething-p::-webkit-scrollbar,
         #findsomething_neko::-webkit-scrollbar {
-            width: 8px;
+            width: 4px;
         }
 
-        #findsomething_neko::-webkit-scrollbar-track {
-            background: #f0f2f5; /* Light track background */
-            border-radius: 4px;
-        }
-
+        findsomething-p::-webkit-scrollbar-thumb,
         #findsomething_neko::-webkit-scrollbar-thumb {
-            background-color: #c0c0c0; /* Gray thumb */
-            border-radius: 4px;
-            border: 2px solid #f0f2f5; /* Border to create visual space */
+            background: #e0e0e0;
+            border-radius: 10px;
         }
 
+        findsomething-p::-webkit-scrollbar-thumb:hover,
         #findsomething_neko::-webkit-scrollbar-thumb:hover {
-            background-color: #a0a0a0; /* Darker gray on hover */
+            background: #c407ff;
         }
     </style>
     `;
