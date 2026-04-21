@@ -42,7 +42,9 @@ Originally developed under the name *FindSomething* by [residuallaugh](https://g
 - **🧠 Sticky UI State:** Automatically remembers and restores your last active category/tab across reloads or sessions.
 - **🎨 Custom Cyber Aesthetic:** A professional, high-contrast UI with a signature purple/magenta color palette (`#c407ff`). Includes a centralized application layout for both popup and full-tab views.
 - **🔧 Granular Configuration:** Enable/disable specific detection categories, customize allowed domains, and toggle badge notifications.
-- **⚡ Webhook Integration:** Send your findings to a remote server for centralized reconnaissance.
+- **🛡️ Master Switch (Active Scan):** Complete control over the extraction engine. Toggle scanning on/off globally with a single click — icon badge shows "OFF" when inactive.
+- **⚡ Webhook Integration & Testing:** Send your findings to a remote server for centralized reconnaissance. Includes a **Test Connection** feature to verify your endpoint instantly.
+- **🔎 Neon-Powered Search:** Lightning-fast filtering across all results with professional **Neon Purple Highlighting** for matched terms.
 - **🛡️ Privacy Focused:** All analysis happens locally in your browser. No data leaves your machine unless you explicitly configure a webhook.
 
 > **Use Case:** Bug bounty hunters, penetration testers, and security researchers who want to passively collect endpoints, API keys, tokens, and sensitive data leaks while doing normal web browsing.
@@ -221,6 +223,7 @@ Forward extracted data to your own server or SIEM for automated processing.
 | **Method** | `GET` or `POST` (POST recommended due to GET length limits) |
 | **Parameters** | Optional parameter name for the request body |
 | **Custom Headers** | JSON object for authentication headers |
+| **Connection Test** | Dedicated button to verify your endpoint settings instantly |
 
 ### Payload Format
 

@@ -412,7 +412,9 @@ function init_master_switch() {
 
     // Handle toggle
     ms.onchange = () => {
-        chrome.storage.local.set({ extension_enabled: ms.checked });
+        chrome.storage.local.set({ extension_enabled: ms.checked }, () => {
+            start_monitoring(); // Refresh UI status message immediately
+        });
     };
 }
 
