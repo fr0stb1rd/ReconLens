@@ -282,6 +282,7 @@ This project is licensed under the **GNU General Public License v3.0** — see t
 - Original project FindSomething by [residuallaugh](https://github.com/momosecurity/FindSomething) - [Blog](https://security.immomo.com/blog/145)
 - Secret detection patterns derived from the [Nuclei](https://github.com/projectdiscovery/nuclei) project by ProjectDiscovery
 - UI contributions by [M1r0ku](https://github.com/M1r0ku/FindSomething)
+- Additional contributions by [osxtest](https://github.com/osxtest)
 - ReconLens Modernization by [fr0stb1rd](https://github.com/fr0stb1rd)
 
 ---
