@@ -5,7 +5,7 @@
     },
     "ext_description": {
         "message": "Web varlıklarından uç noktaları, gizli anahtarları ve istihbarat verilerini otomatik olarak ayıklayan ve normalize eden profesyonel pasif keşif aracı.",
-        "description": "Eklenti aciklamasi"
+        "description": "Eklenti açıklaması"
     },
     "about_description_full": {
         "message": "<strong>ReconLens</strong>, modern güvenlik araştırmaları için tasarlanmış profesyonel bir pasif keşif motorudur. Web varlıklarındaki uç noktaları, gizli anahtarları ve istihbarat verilerini gerçek zamanlı olarak otomatik olarak ayıklar, normalize eder ve kategorize eder."
@@ -20,19 +20,19 @@
         "message": "Aktif Tarama"
     },
     "popup_title_path": {
-        "message": "Yol"
+        "message": "Dosya Yolu"
     },
     "popup_title_domain": {
-        "message": "Alan Adi"
+        "message": "Alan Adı"
     },
     "popup_title_url": {
         "message": "URL"
     },
     "popup_title_ip": {
-        "message": "IP"
+        "message": "IP Adresi"
     },
     "popup_title_ip_port": {
-        "message": "IP ve Port"
+        "message": "IP & Port"
     },
     "popup_title_incomplete_path": {
         "message": "Eksik Yol"
@@ -41,7 +41,7 @@
         "message": "Statik Kaynaklar"
     },
     "popup_title_id_card": {
-        "message": "Kimlik Karti"
+        "message": "Kimlik Kartı"
     },
     "popup_title_mobile": {
         "message": "Cep Telefonu"
@@ -59,16 +59,16 @@
         "message": "Hassas Bilgiler"
     },
     "popup_sidebar_path": {
-        "message": "Yol"
+        "message": "Yollar"
     },
     "popup_sidebar_domain": {
-        "message": "Alan Adi"
+        "message": "Alan Adları"
     },
     "popup_sidebar_url": {
-        "message": "URL"
+        "message": "URL'ler"
     },
     "popup_sidebar_ip": {
-        "message": "IP"
+        "message": "IP'ler"
     },
     "popup_sidebar_ip_port": {
         "message": "IP & Port"
@@ -104,11 +104,11 @@
         "message": "URL Kopyala"
     },
     "popup_tip_copy_first": {
-        "message": "Kopyalamadan once lutfen orijinal sayfaya tiklayin :)"
+        "message": "Kopyalamadan önce lütfen orijinal sayfaya tıklayın :)"
     },
     "popup_status_scanning": {
-        "message": "Taraniyor: $DONE$/$TOTAL$",
-        "description": "Ilerleme",
+        "message": "Taranıyor: $DONE$/$TOTAL$",
+        "description": "İlerleme",
         "placeholders": {
             "done": {
                 "content": "$1"
@@ -119,8 +119,8 @@
         }
     },
     "popup_status_complete": {
-        "message": "Tamamlandi: $DONE$/$TOTAL$",
-        "description": "Tamamlandi",
+        "message": "Tamamlandı: $DONE$/$TOTAL$",
+        "description": "Tamamlandı",
         "placeholders": {
             "done": {
                 "content": "$1"
@@ -131,40 +131,40 @@
         }
     },
     "popup_status_no_data": {
-        "message": "Henuz veri yok. Taramayi baslatmak icin bir sayfayi ziyaret edin."
+        "message": "Henüz veri yok. Taramayı başlatmak için bir sayfayı ziyaret edin."
     },
     "popup_category_empty": {
-        "message": "Veri bulunamadi"
+        "message": "Veri bulunamadı"
     },
     "setting_page_title": {
-        "message": "Ayarlar Yonetimi"
+        "message": "Ayarlar Yönetimi"
     },
     "setting_page_header": {
-        "message": "Eklenti Yapilandirmasi"
+        "message": "Eklenti Yapılandırması"
     },
     "setting_lbl_clear_cache": {
-        "message": "Onbellegi Temizle"
+        "message": "Önbelleği Temizle"
     },
     "setting_btn_clear": {
         "message": "Temizle"
     },
     "setting_msg_clear_done": {
-        "message": "Onbellek basariyla temizlendi"
+        "message": "Önbellek başarıyla temizlendi"
     },
     "setting_btn_state_on": {
-        "message": "Acik"
+        "message": "Açık"
     },
     "setting_btn_state_off": {
-        "message": "Kapali"
+        "message": "Kapalı"
     },
     "setting_lbl_float_window": {
-        "message": "Gezgin Panel"
+        "message": "Yüzen Panel"
     },
     "setting_lbl_auto_timeout": {
-        "message": "Otomatik Zaman Asimi"
+        "message": "Otomatik Zaman Aşımı"
     },
     "setting_lbl_safe_mode": {
-        "message": "Guvenli Mod"
+        "message": "Güvenli Mod"
     },
     "setting_lbl_webhook": {
         "message": "Webhook"
@@ -173,22 +173,22 @@
         "message": "Webhook Adresi"
     },
     "setting_lbl_webhook_method": {
-        "message": "HTTP Yontemi"
+        "message": "HTTP Yöntemi"
     },
     "setting_lbl_webhook_params": {
-        "message": "Parametre Adi"
+        "message": "Parametre Adı"
     },
     "setting_lbl_webhook_headers": {
-        "message": "Ozel Basliklar"
+        "message": "Özel Başlıklar"
     },
     "setting_lbl_allowlist": {
-        "message": "Alan Adi Izin Listesi"
+        "message": "Alan Adı İzin Listesi"
     },
     "setting_tip_allowlist": {
-        "message": "Her satira bir alan adi uzantisi girin. Varsayilan: .google.com, .amazon.com, portswigger.net, sekademi.github.io"
+        "message": "Her satıra bir alan adı uzantısı girin. Varsayılan: .google.com, .amazon.com, portswigger.net, sekademi.github.io"
     },
     "setting_btn_reset_save": {
-        "message": "Sifirla ve Kaydet"
+        "message": "Sıfırla ve Kaydet"
     },
     "setting_btn_save": {
         "message": "Kaydet"
@@ -224,10 +224,10 @@
         "message": "ReconLens Hakkında"
     },
     "about_lbl_description": {
-        "message": "Açıklama"
+        "message": "Operasyonel İstihbarat"
     },
     "about_lbl_credits": {
-        "message": "Katkıda Bulunanlar"
+        "message": "Emeği Geçenler"
     },
     "about_lbl_links": {
         "message": "Bağlantılar"
