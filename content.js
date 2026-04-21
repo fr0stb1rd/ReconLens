@@ -200,7 +200,7 @@ chrome.storage.local.get(["global_float"], function (settings) {
                 padding: 5px 10px; /* Padding for click area */
                 border-radius: 5px; /* Slightly rounded button */
                 transition: background-color 0.2s ease, color 0.2s ease;
-            ">${chrome.i18n.getMessage("float_btn_hide")}</findsomething-div>
+            "></findsomething-div>
         </findsomething-div>
 
         <findsomething-div style="
@@ -212,68 +212,68 @@ chrome.storage.local.get(["global_float"], function (settings) {
             box-sizing: border-box; /* Include padding in width */
         ">
             <findsomething-div class="findsomething-item-group">
-                <findsomething-div class="findsomething-title">${chrome.i18n.getMessage("popup_title_path")}<button class="findsomething_copy" name="path">${chrome.i18n.getMessage("float_btn_copy")}</button></findsomething-div>
-                <findsomething-p id="findsomething_path">${chrome.i18n.getMessage("popup_category_empty")}</findsomething-p>
+                <findsomething-div class="findsomething-title"><button class="findsomething_copy" name="path"></button></findsomething-div>
+                <findsomething-p id="findsomething_path"></findsomething-p>
             </findsomething-div>
 
             <findsomething-div class="findsomething-item-group">
-                <findsomething-div class="findsomething-title">${chrome.i18n.getMessage("popup_title_ip")}<button type="button" class="findsomething_copy" name="ip">${chrome.i18n.getMessage("float_btn_copy")}</button></findsomething-div>
-                <findsomething-p id="findsomething_ip">${chrome.i18n.getMessage("popup_category_empty")}</findsomething-p>
+                <findsomething-div class="findsomething-title"><button type="button" class="findsomething_copy" name="ip"></button></findsomething-div>
+                <findsomething-p id="findsomething_ip"></findsomething-p>
             </findsomething-div>
 
             <findsomething-div class="findsomething-item-group">
-                <findsomething-div class="findsomething-title">${chrome.i18n.getMessage("popup_title_ip_port")}<button class="findsomething_copy" name="ip_port">${chrome.i18n.getMessage("float_btn_copy")}</button></findsomething-div>
-                <findsomething-p id="findsomething_ip_port">${chrome.i18n.getMessage("popup_category_empty")}</findsomething-p>
+                <findsomething-div class="findsomething-title"><button class="findsomething_copy" name="ip_port"></button></findsomething-div>
+                <findsomething-p id="findsomething_ip_port"></findsomething-p>
             </findsomething-div>
 
             <findsomething-div class="findsomething-item-group">
-                <findsomething-div class="findsomething-title">${chrome.i18n.getMessage("popup_title_domain")}<button class="findsomething_copy" name="domain">${chrome.i18n.getMessage("float_btn_copy")}</button></findsomething-div>
-                <findsomething-p id="findsomething_domain">${chrome.i18n.getMessage("popup_category_empty")}</findsomething-p>
+                <findsomething-div class="findsomething-title"><button class="findsomething_copy" name="domain"></button></findsomething-div>
+                <findsomething-p id="findsomething_domain"></findsomething-p>
             </findsomething-div>
 
             <findsomething-div class="findsomething-item-group">
-                <findsomething-div class="findsomething-title">${chrome.i18n.getMessage("popup_title_id_card")}<button class="findsomething_copy" name="id_card">${chrome.i18n.getMessage("float_btn_copy")}</button></findsomething-div>
-                <findsomething-p id="findsomething_id_card">${chrome.i18n.getMessage("popup_category_empty")}</findsomething-p>
+                <findsomething-div class="findsomething-title"><button class="findsomething_copy" name="id_card"></button></findsomething-div>
+                <findsomething-p id="findsomething_id_card"></findsomething-p>
             </findsomething-div>
 
             <findsomething-div class="findsomething-item-group">
-                <findsomething-div class="findsomething-title">${chrome.i18n.getMessage("popup_title_mobile")}<button class="findsomething_copy" name="mobile">${chrome.i18n.getMessage("float_btn_copy")}</button></findsomething-div>
-                <findsomething-p id="findsomething_mobile">${chrome.i18n.getMessage("popup_category_empty")}</findsomething-p>
+                <findsomething-div class="findsomething-title"><button class="findsomething_copy" name="mobile"></button></findsomething-div>
+                <findsomething-p id="findsomething_mobile"></findsomething-p>
             </findsomething-div>
 
             <findsomething-div class="findsomething-item-group">
-                <findsomething-div class="findsomething-title">${chrome.i18n.getMessage("popup_title_email")}<button class="findsomething_copy" name="email">${chrome.i18n.getMessage("float_btn_copy")}</button></findsomething-div>
-                <findsomething-p id="findsomething_email">${chrome.i18n.getMessage("popup_category_empty")}</findsomething-p>
+                <findsomething-div class="findsomething-title"><button class="findsomething_copy" name="email"></button></findsomething-div>
+                <findsomething-p id="findsomething_email"></findsomething-p>
             </findsomething-div>
 
             <findsomething-div class="findsomething-item-group">
-                <findsomething-div class="findsomething-title">${chrome.i18n.getMessage("popup_title_jwt")}<button class="findsomething_copy" name="jwt">${chrome.i18n.getMessage("float_btn_copy")}</button></findsomething-div>
-                <findsomething-p id="findsomething_jwt">${chrome.i18n.getMessage("popup_category_empty")}</findsomething-p>
+                <findsomething-div class="findsomething-title"><button class="findsomething_copy" name="jwt"></button></findsomething-div>
+                <findsomething-p id="findsomething_jwt"></findsomething-p>
             </findsomething-div>
 
             <findsomething-div class="findsomething-item-group">
-                <findsomething-div class="findsomething-title">${chrome.i18n.getMessage("popup_title_algorithm")}<button class="findsomething_copy" name="algorithm">${chrome.i18n.getMessage("float_btn_copy")}</button></findsomething-div>
-                <findsomething-p id="findsomething_algorithm">${chrome.i18n.getMessage("popup_category_empty")}</findsomething-p>
+                <findsomething-div class="findsomething-title"><button class="findsomething_copy" name="algorithm"></button></findsomething-div>
+                <findsomething-p id="findsomething_algorithm"></findsomething-p>
             </findsomething-div>
 
             <findsomething-div class="findsomething-item-group">
-                <findsomething-div class="findsomething-title">${chrome.i18n.getMessage("popup_title_sensitive")}<button class="findsomething_copy" name="sensitive">${chrome.i18n.getMessage("float_btn_copy")}</button></findsomething-div>
-                <findsomething-p id="findsomething_sensitive">${chrome.i18n.getMessage("popup_category_empty")}</findsomething-p>
+                <findsomething-div class="findsomething-title"><button class="findsomething_copy" name="sensitive"></button></findsomething-div>
+                <findsomething-p id="findsomething_sensitive"></findsomething-p>
             </findsomething-div>
 
             <findsomething-div class="findsomething-item-group">
-                <findsomething-div class="findsomething-title">${chrome.i18n.getMessage("popup_title_incomplete_path")}<button class="findsomething_copy" name="incomplete_path">${chrome.i18n.getMessage("float_btn_copy")}</button></findsomething-div>
-                <findsomething-p id="findsomething_incomplete_path">${chrome.i18n.getMessage("popup_category_empty")}</findsomething-p>
+                <findsomething-div class="findsomething-title"><button class="findsomething_copy" name="incomplete_path"></button></findsomething-div>
+                <findsomething-p id="findsomething_incomplete_path"></findsomething-p>
             </findsomething-div>
 
             <findsomething-div class="findsomething-item-group">
-                <findsomething-div class="findsomething-title">${chrome.i18n.getMessage("popup_title_url")}<button class="findsomething_copy" name="url">${chrome.i18n.getMessage("float_btn_copy")}</button></findsomething-div>
-                <findsomething-p id="findsomething_url">${chrome.i18n.getMessage("popup_category_empty")}</findsomething-p>
+                <findsomething-div class="findsomething-title"><button class="findsomething_copy" name="url"></button></findsomething-div>
+                <findsomething-p id="findsomething_url"></findsomething-p>
             </findsomething-div>
 
             <findsomething-div class="findsomething-item-group">
-                <findsomething-div class="findsomething-title">${chrome.i18n.getMessage("popup_title_static")}<button class="findsomething_copy" name="static">${chrome.i18n.getMessage("float_btn_copy")}</button></findsomething-div>
-                <findsomething-p id="findsomething_static">${chrome.i18n.getMessage("popup_category_empty")}</findsomething-p>
+                <findsomething-div class="findsomething-title"><button class="findsomething_copy" name="static"></button></findsomething-div>
+                <findsomething-p id="findsomething_static"></findsomething-p>
             </findsomething-div>
         </findsomething-div>
     </findsomething-div>
@@ -366,6 +366,26 @@ chrome.storage.local.get(["global_float"], function (settings) {
     `;
     div.appendChild(document.createRange().createContextualFragment(floatHtml));
     body.appendChild(div);
+
+    // Safely set i18n text after injection (AMO compliance)
+    const hBtn = document.getElementById('findsomething-hide-btn');
+    if (hBtn) hBtn.textContent = chrome.i18n.getMessage("float_btn_hide");
+    
+    // Set titles and empty messages for all categories
+    const categories = ['path', 'ip', 'ip_port', 'domain', 'id_card', 'mobile', 'email', 'jwt', 'algorithm', 'sensitive', 'incomplete_path', 'url', 'static'];
+    categories.forEach(cat => {
+        const p = document.getElementById('findsomething_' + cat);
+        if (p) p.textContent = chrome.i18n.getMessage("popup_category_empty");
+        // Update button and title text
+        const titleDiv = p?.previousElementSibling;
+        if (titleDiv) {
+            const btn = titleDiv.querySelector('button');
+            if (btn) btn.textContent = chrome.i18n.getMessage("float_btn_copy");
+            const titleText = chrome.i18n.getMessage("popup_title_" + cat);
+            // Prepend the title text to the title div (before the button)
+            titleDiv.prepend(document.createTextNode(titleText));
+        }
+    });
 
     const hideBtn = document.getElementById('findsomething-hide-btn');
     if (hideBtn) {

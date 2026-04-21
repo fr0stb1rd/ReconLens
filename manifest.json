@@ -48,10 +48,7 @@
   "browser_specific_settings": {
     "gecko": {
       "id": "reconlens@fr0stb1rd",
-      "strict_min_version": "126.0",
-      "data_collection_permissions": {
-        "is_prohibited": true
-      }
+      "strict_min_version": "140.0"
     }
   }
 }
