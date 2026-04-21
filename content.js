@@ -157,10 +157,7 @@ chrome.storage.local.get(["global_float"], function (settings) {
 
     const body = document.getElementsByTagName('html')[0];
     const div = document.createElement('div');
-    div.setAttribute("id", "findsomething-float-div");
-
-    // All styling moved inline or to the embedded <style> tag
-    div.innerHTML = `
+    const floatHtml = `
     <findsomething-div id="findsomething_neko" style="
         width:410px;
         max-height:500px;
@@ -173,11 +170,6 @@ chrome.storage.local.get(["global_float"], function (settings) {
         left:20px;
         top:20px;
         position: fixed;
-        z-index: 1000000;
-        overflow-y:auto; /* Use overflow-y for vertical scrolling */
-        overflow-x:hidden; /* Hide horizontal scroll if not needed */
-        display: flex; /* Use flexbox for internal layout */
-        flex-direction: column; /* Stack items vertically */
         font-family: 'Roboto', sans-serif; /* Consistent font */
         padding-bottom: 10px; /* Add some padding at the bottom */
     ">
@@ -371,8 +363,9 @@ chrome.storage.local.get(["global_float"], function (settings) {
             background-color: #a0a0a0; /* Darker gray on hover */
         }
     </style>
-    `
-    body.appendChild(div)
+    `;
+    div.appendChild(document.createRange().createContextualFragment(floatHtml));
+    body.appendChild(div);
 
     const hideBtn = document.getElementById('findsomething-hide-btn');
     if (hideBtn) {

@@ -14,7 +14,8 @@ const setI18n = (elementId, key, ...subs) => {
 
     const message = t(key, ...subs);
     if (message) {
-        el.innerHTML = message;
+        // Strip simple HTML tags like <strong> for security compliance (AMO)
+        el.textContent = message.replace(/<\/?[^>]+(>|$)/g, "");
     }
 };
 
@@ -171,10 +172,19 @@ async function show_info(result_data, filter = "") {
                     a.target = '_blank';
 
                     if (filter && itemText.toLowerCase().includes(lowerFilter)) {
-                        // Escape regex special characters and create a global, case-insensitive regex
                         const escapedFilter = filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
                         const regex = new RegExp(`(${escapedFilter})`, 'gi');
-                        a.innerHTML = itemText.replace(regex, '<mark>$1</mark>');
+                        const parts = itemText.split(regex);
+                        a.textContent = '';
+                        parts.forEach(part => {
+                            if (part.toLowerCase() === filter.toLowerCase()) {
+                                const mark = document.createElement('mark');
+                                mark.textContent = part;
+                                a.appendChild(mark);
+                            } else {
+                                a.appendChild(document.createTextNode(part));
+                            }
+                        });
                     } else {
                         a.textContent = itemText;
                     }
@@ -209,21 +219,26 @@ async function show_info(result_data, filter = "") {
                     const copyBtn = document.createElement('button');
                     copyBtn.className = 'item-copy-btn';
                     copyBtn.title = 'Copy to clipboard';
-                    copyBtn.innerHTML = `
+                    const svgMarkup = `
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                             <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                         </svg>`;
+                    copyBtn.appendChild(document.createRange().createContextualFragment(svgMarkup));
 
                     copyBtn.onclick = (e) => {
                         e.stopPropagation();
                         navigator.clipboard.writeText(itemText).then(() => {
-                            const originalSvg = copyBtn.innerHTML;
-                            // Success state using --accent-active color: #8600c4
+                            const originalContent = Array.from(copyBtn.childNodes);
+                            // Clear and add success icon
+                            copyBtn.textContent = '';
+                            const successIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
                             copyBtn.style.color = '#8600c4';
-                            copyBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+                            copyBtn.appendChild(document.createRange().createContextualFragment(successIcon));
+
                             setTimeout(() => {
-                                copyBtn.innerHTML = originalSvg;
+                                copyBtn.textContent = '';
+                                originalContent.forEach(node => copyBtn.appendChild(node));
                                 copyBtn.style.color = '';
                             }, 1000);
                         });
