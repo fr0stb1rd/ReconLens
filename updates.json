@@ -1,0 +1,12 @@
+{
+  "addons": {
+    "reconlens@fr0stb1rd": {
+      "updates": [
+        {
+          "version": "1.0.0",
+          "update_link": "https://github.com/fr0stb1rd/ReconLens/releases/download/v1.0.0/reconlens.xpi"
+        }
+      ]
+    }
+  }
+}
