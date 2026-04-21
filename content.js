@@ -408,7 +408,7 @@ chrome.storage.local.get(["global_float"], function (settings) {
         }
     </style>
     `;
-    div.appendChild(document.createRange().createContextualFragment(floatHtml));
+    div.innerHTML = floatHtml;
     body.appendChild(div);
 
     // Safely set i18n text after injection (AMO compliance)
