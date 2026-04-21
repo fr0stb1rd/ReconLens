@@ -32,14 +32,15 @@ Originally developed under the name *FindSomething* by [residuallaugh](https://g
 
 - **🚀 Performance-First Extraction:** High-speed regex matching optimized for modern web applications.
 - **🧠 Deep Normalization Engine:** Automatically cleans and deduplicates harvested data. No more redundant protocols (`http/s`), trailing slashes, or duplicate domains.
-- **🤖 AI-Ready Export:** Specialized "Copy for AI" engine that formats results into Markdown, XML, HTML, or Plain Text. Now includes **Target URL** and **Scan Timestamps** in every report header.
+- **🤖 AI-Ready Export:** Specialized "Copy for AI" engine that formats results into **Markdown**, **JSON**, **XML**, **HTML**, or **Plain Text**. Now includes **Target URL** and **Scan Timestamps** in every report header.
 - **🔗 Interactive Dashboard:** Every extracted string is a clickable link. Includes per-item **Action Icons** (Copy + Lookups) for rapid data collection.
 - **⚡ Quick Lookups:** Built-in SVG shortcuts for IP and Domain intelligence:
   - **Shodan & VirusTotal** for IP addresses.
   - **SecurityTrails & VirusTotal** for domains.
 - **🎯 Smart URL Resolution:** Intelligent logic that distinguishes between domains (`google.com`) and relative paths (`/api/v1`), ensuring you always resolve to the correct target.
-- **🌍 Internationalization (i18n):** Full support for English, Turkish, Chinese, and Arabic.
-- **🎨 Custom Cyber Aesthetic:** A professional, high-contrast UI with a signature purple/magenta color palette (`#c407ff`).
+- **🌍 Internationalization (i18n):** Full support for English, Turkish, Chinese, and Arabic with **Instant Dynamic Switching** (no reload required).
+- **🧠 Sticky UI State:** Automatically remembers and restores your last active category/tab across reloads or sessions.
+- **🎨 Custom Cyber Aesthetic:** A professional, high-contrast UI with a signature purple/magenta color palette (`#c407ff`). Includes a centralized application layout for both popup and full-tab views.
 - **🔧 Granular Configuration:** Enable/disable specific detection categories, customize allowed domains, and toggle badge notifications.
 - **⚡ Webhook Integration:** Send your findings to a remote server for centralized reconnaissance.
 - **🛡️ Privacy Focused:** All analysis happens locally in your browser. No data leaves your machine unless you explicitly configure a webhook.
@@ -69,7 +70,8 @@ Modern web applications are increasingly complex, often exposing sensitive inter
 | 📋 **One-Click Copy** | Copy any category or construct full URLs from relative paths |
 | 🔢 **Badge Counter** | Extension icon shows the number of findings at a glance |
 | 🗑️ **Auto Expiration** | Cached data expires after 7 days of inactivity |
-| 🌍 **Multi-Language** | EN, TR, ZH, AR supported with **Manual Language Selection** |
+| 🌍 **Multi-Language** | EN, TR, ZH, AR supported with **Instant Dynamic Switching** |
+| 🧠 **Sticky Tabs** | Remembers your last viewed category across reloads |
 | 🌗 **Dark Mode** | Native support for Light, Dark, and System (Auto) themes |
 | 🦊 **Cross-Browser** | Native support for both **Chrome** and **Firefox** (MV3) |
 
