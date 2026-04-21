@@ -302,20 +302,21 @@ async function show_info(result_data, filter = "") {
     }
 }
 
-function handleCategoryClick(event) {
-    event.preventDefault(); // Prevent default link behavior
+function switchCategory(selectedCategory) {
+    if (!selectedCategory) return;
 
-    // Remove active class from all category items
+    // Save to storage
+    chrome.storage.local.set({ 'last_active_category': selectedCategory });
+
+    // Update Sidebar UI
     document.querySelectorAll('.category-item a').forEach(item => {
-        item.classList.remove('active');
+        if (item.dataset.category === selectedCategory) {
+            item.classList.add('active');
+        } else {
+            item.classList.remove('active');
+        }
     });
 
-    // Add active class to the clicked item
-    event.currentTarget.classList.add('active');
-
-    const selectedCategory = event.currentTarget.dataset.category;
-    chrome.storage.local.set({ 'last_active_category': selectedCategory });
-    const infoCardsContainer = document.getElementById('info-cards-container');
     const statusBar = document.getElementById('status-bar-wrapper');
     const searchWrapper = document.getElementById('search-wrapper');
 
@@ -332,11 +333,17 @@ function handleCategoryClick(event) {
     // Show selected category card, hide others
     document.querySelectorAll('.info-card').forEach(card => {
         if (card.id === `card-${selectedCategory}`) {
-            card.style.display = 'flex'; // Changed from 'block' to 'flex'
+            card.style.display = 'flex';
         } else {
             card.style.display = 'none';
         }
     });
+}
+
+function handleCategoryClick(event) {
+    event.preventDefault();
+    const selectedCategory = event.currentTarget.dataset.category;
+    switchCategory(selectedCategory);
 }
 
 function init_category_navigation() {
@@ -349,11 +356,7 @@ function init_category_navigation() {
     chrome.storage.local.get(['last_active_category'], (result) => {
         const urlParams = new URLSearchParams(window.location.search);
         const targetCategory = urlParams.get('category') || result.last_active_category || 'path';
-
-        const initialCategoryLink = document.querySelector(`.category-item a[data-category="${targetCategory}"]`);
-        if (initialCategoryLink) {
-            initialCategoryLink.click(); // Use .click() to trigger all logic including UI updates
-        }
+        switchCategory(targetCategory);
     });
 }
 
@@ -598,8 +601,22 @@ function init_language_selector() {
         if (settings.user_language) select.value = settings.user_language;
     });
     select.onchange = () => {
-        chrome.storage.local.set({ user_language: select.value }, () => {
-            window.location.reload();
+        let newLang = select.value;
+        chrome.storage.local.set({ user_language: newLang }, () => {
+            // Update i18n engine state
+            if (newLang.startsWith('zh')) newLang = 'zh_CN';
+            if (newLang.startsWith('tr')) newLang = 'tr';
+            if (newLang.startsWith('ar')) newLang = 'ar';
+            reconI18n.currentLang = newLang;
+
+            // Update UI dynamically
+            document.documentElement.lang = newLang.split('_')[0];
+            init_locales();
+            
+            // Re-render version displays
+            document.querySelectorAll('.ext-version-display').forEach(el => {
+                el.textContent = chrome.runtime.getManifest().version;
+            });
         });
     };
 }
