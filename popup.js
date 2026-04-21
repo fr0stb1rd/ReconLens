@@ -136,10 +136,10 @@ async function getCurrentTab() {
     return tab;
 }
 
-async function show_info(result_data, filter = "") {
+async function show_info(result_data, filter = "", tab = null) {
     lastResultData = result_data; // Cache for search
     const lowerFilter = filter.toLowerCase();
-    const tab = await getCurrentTab();
+    if (!tab) tab = await getCurrentTab();
     const baseUrl = tab ? new URL(tab.url).origin : '';
     const currentFullUrl = tab ? tab.url : '';
 
@@ -215,6 +215,11 @@ async function show_info(result_data, filter = "") {
                     }
                     a.href = targetUrl;
 
+                    // Initialize Copy Button
+                    const copyBtn = document.createElement('button');
+                    copyBtn.className = 'item-copy-btn';
+                    copyBtn.title = 'Copy to clipboard';
+
                     const svgNS = "http://www.w3.org/2000/svg";
                     const svgMarkup = document.createElementNS(svgNS, "svg");
                     svgMarkup.setAttribute("viewBox", "0 0 24 24");
@@ -266,9 +271,8 @@ async function show_info(result_data, filter = "") {
                         });
                     };
 
-                    itemDiv.appendChild(copyBtn);
 
-                    // Add Quick Lookups for IP and Domain (Before the link)
+                    // Add Quick Lookups for IP and Domain
                     if (currentKey === 'ip' || currentKey === 'ip_port' || currentKey === 'domain') {
                         const lookupWrapper = document.createElement('div');
                         lookupWrapper.className = 'lookup-wrapper';
@@ -282,7 +286,23 @@ async function show_info(result_data, filter = "") {
                             shodan.href = `https://www.shodan.io/host/${rawValue}`;
                             shodan.target = '_blank';
                             shodan.title = 'Lookup on Shodan';
-                            shodan.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>`;
+                            
+                            const shodanSvg = document.createElementNS(svgNS, "svg");
+                            shodanSvg.setAttribute("viewBox", "0 0 24 24");
+                            shodanSvg.setAttribute("fill", "none");
+                            shodanSvg.setAttribute("stroke", "currentColor");
+                            shodanSvg.setAttribute("stroke-width", "2");
+                            shodanSvg.setAttribute("stroke-linecap", "round");
+                            shodanSvg.setAttribute("stroke-linejoin", "round");
+                            
+                            for (let r of [10, 6, 2]) {
+                                const circle = document.createElementNS(svgNS, "circle");
+                                circle.setAttribute("cx", "12");
+                                circle.setAttribute("cy", "12");
+                                circle.setAttribute("r", r.toString());
+                                shodanSvg.appendChild(circle);
+                            }
+                            shodan.appendChild(shodanSvg);
                             lookupWrapper.appendChild(shodan);
 
                             // VirusTotal IP (Shield Icon)
@@ -291,7 +311,19 @@ async function show_info(result_data, filter = "") {
                             vt.href = `https://www.virustotal.com/gui/ip-address/${rawValue}`;
                             vt.target = '_blank';
                             vt.title = 'Lookup on VirusTotal';
-                            vt.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>`;
+                            
+                            const vtSvg = document.createElementNS(svgNS, "svg");
+                            vtSvg.setAttribute("viewBox", "0 0 24 24");
+                            vtSvg.setAttribute("fill", "none");
+                            vtSvg.setAttribute("stroke", "currentColor");
+                            vtSvg.setAttribute("stroke-width", "2");
+                            vtSvg.setAttribute("stroke-linecap", "round");
+                            vtSvg.setAttribute("stroke-linejoin", "round");
+                            
+                            const vtPath = document.createElementNS(svgNS, "path");
+                            vtPath.setAttribute("d", "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z");
+                            vtSvg.appendChild(vtPath);
+                            vt.appendChild(vtSvg);
                             lookupWrapper.appendChild(vt);
                         } else {
                             // VirusTotal Domain (Shield Icon)
@@ -300,7 +332,19 @@ async function show_info(result_data, filter = "") {
                             vt.href = `https://www.virustotal.com/gui/domain/${rawValue}`;
                             vt.target = '_blank';
                             vt.title = 'Lookup on VirusTotal';
-                            vt.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>`;
+                            
+                            const vtSvg = document.createElementNS(svgNS, "svg");
+                            vtSvg.setAttribute("viewBox", "0 0 24 24");
+                            vtSvg.setAttribute("fill", "none");
+                            vtSvg.setAttribute("stroke", "currentColor");
+                            vtSvg.setAttribute("stroke-width", "2");
+                            vtSvg.setAttribute("stroke-linecap", "round");
+                            vtSvg.setAttribute("stroke-linejoin", "round");
+                            
+                            const vtPath = document.createElementNS(svgNS, "path");
+                            vtPath.setAttribute("d", "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z");
+                            vtSvg.appendChild(vtPath);
+                            vt.appendChild(vtSvg);
                             lookupWrapper.appendChild(vt);
 
                             // SecurityTrails (Activity Icon)
@@ -309,13 +353,26 @@ async function show_info(result_data, filter = "") {
                             st.href = `https://securitytrails.com/domain/${rawValue}`;
                             st.target = '_blank';
                             st.title = 'Lookup on SecurityTrails';
-                            st.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>`;
+                            
+                            const stSvg = document.createElementNS(svgNS, "svg");
+                            stSvg.setAttribute("viewBox", "0 0 24 24");
+                            stSvg.setAttribute("fill", "none");
+                            stSvg.setAttribute("stroke", "currentColor");
+                            stSvg.setAttribute("stroke-width", "2");
+                            stSvg.setAttribute("stroke-linecap", "round");
+                            stSvg.setAttribute("stroke-linejoin", "round");
+                            
+                            const stPolyline = document.createElementNS(svgNS, "polyline");
+                            stPolyline.setAttribute("points", "22 12 18 12 15 21 9 3 6 12 2 12");
+                            stSvg.appendChild(stPolyline);
+                            st.appendChild(stSvg);
                             lookupWrapper.appendChild(st);
                         }
                         itemDiv.appendChild(lookupWrapper);
                     }
 
                     itemDiv.appendChild(a);
+                    itemDiv.appendChild(copyBtn);
 
                     fragment.appendChild(itemDiv);
                 }
@@ -880,7 +937,7 @@ function start_monitoring() {
                     return;
                 }
                 const result_data = result["findsomething_result_" + tab.url];
-                show_info(result_data);
+                show_info(result_data, "", tab);
                 if (result_data.donetasklist) {
                     const done = String(result_data.donetasklist.length);
                     const total = String(result_data.tasklist.length);
@@ -904,7 +961,7 @@ function start_monitoring() {
             for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
                 if (key == "findsomething_result_" + tab.url) {
                     const result_data = newValue;
-                    show_info(result_data);
+                    show_info(result_data, "", tab);
                     if (result_data.donetasklist) {
                         const done = String(result_data.donetasklist.length);
                         const total = String(result_data.tasklist.length);
