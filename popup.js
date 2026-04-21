@@ -275,13 +275,30 @@ async function show_info(result_data, filter = "", tab = null) {
                     itemDiv.appendChild(a);
 
                     // 2. Lookup Icons (Only for specific categories, after link)
-                    if (currentKey === 'ip' || currentKey === 'ip_port' || currentKey === 'domain') {
+                    if (currentKey === 'ip' || currentKey === 'ip_port' || currentKey === 'domain' || currentKey === 'url') {
                         const lookupWrapper = document.createElement('div');
                         lookupWrapper.className = 'lookup-wrapper';
 
-                        const rawValue = itemText.split(':')[0].replace(/^https?:\/\//, '').replace(/\/+$/, '');
+                        let rawValue = itemText.trim();
+                        try {
+                            // If it's a full URL, extract just the hostname
+                            if (rawValue.includes('://') || rawValue.startsWith('//')) {
+                                const urlObj = new URL(rawValue.startsWith('//') ? 'https:' + rawValue : rawValue);
+                                rawValue = urlObj.hostname;
+                            } else {
+                                // For domain/path or ip/path without protocol, take first part
+                                rawValue = rawValue.split('/')[0].split(':')[0];
+                            }
+                        } catch (e) {
+                            // Fallback to simple split
+                            rawValue = rawValue.split('/')[0].split(':')[0];
+                        }
+                        // Remove potential trailing dots, slashes or unwanted characters
+                        rawValue = rawValue.replace(/^https?:\/\//, '').replace(/\/+$/, '').replace(/^\.+/, '');
 
-                        if (currentKey.startsWith('ip')) {
+                        const isIP = currentKey.startsWith('ip') || /^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/.test(rawValue);
+
+                        if (isIP) {
                             // Shodan (Radar Icon)
                             const shodan = document.createElement('a');
                             shodan.className = 'lookup-btn';
