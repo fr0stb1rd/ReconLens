@@ -382,6 +382,10 @@ function init_search_logic() {
 }
 
 reconI18n.init().then(() => {
+    // Set language for proper text-transform (e.g., Turkish 'i' -> 'İ')
+    const uiLang = chrome.i18n.getUILanguage().split('-')[0];
+    document.documentElement.lang = uiLang;
+
     init_locales();
     init_category_navigation();
     init_search_logic(); // Initialize Search
