@@ -26,7 +26,7 @@
     function init_source(source) {
         var hostPath;
         var urlPath;
-        var urlWhiteList = ['.google.com', '.amazon.com', 'portswigger.net', 'sekademi.github.io'];
+        var urlWhiteList = ['.google.com', '.amazon.com', 'portswigger.net'];
         var target_list = [];
         // console.log(source)
         var source_href = source.match(/href=['"].*?['"]/g);

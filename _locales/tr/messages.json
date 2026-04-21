@@ -185,7 +185,7 @@
         "message": "Alan Adı İzin Listesi"
     },
     "setting_tip_allowlist": {
-        "message": "Her satıra bir alan adı uzantısı girin. Varsayılan: .google.com, .amazon.com, portswigger.net, sekademi.github.io"
+        "message": "Her satıra bir alan adı uzantısı girin. Varsayılan: .google.com, .amazon.com, portswigger.net"
     },
     "setting_btn_reset_save": {
         "message": "Sıfırla ve Kaydet"

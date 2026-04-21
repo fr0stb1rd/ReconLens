@@ -185,7 +185,7 @@
         "message": "域名白名单"
     },
     "setting_tip_allowlist": {
-        "message": "每行输入一个域名后缀，默认：.google.com、.amazon.com、portswigger.net、sekademi.github.io"
+        "message": "每行输入一个域名后缀，默认：.google.com、.amazon.com、portswigger.net"
     },
     "setting_btn_reset_save": {
         "message": "重置并保存"
