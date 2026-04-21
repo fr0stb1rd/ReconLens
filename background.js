@@ -951,8 +951,8 @@ function refresh_count() {
   if (selected_id === -1) return;
   const tid = selected_id;
 
-  chrome.storage.local.get(['master_switch'], (settings) => {
-    const isEnabled = settings.master_switch !== false;
+  chrome.storage.local.get(['extension_enabled'], (settings) => {
+    const isEnabled = settings.extension_enabled !== false;
     
     if (!isEnabled) {
       chrome.action.setBadgeText({ text: "OFF", tabId: tid });
@@ -970,38 +970,39 @@ function refresh_count() {
     }
 
     const process_data = (data) => {
-    let cnt = 0;
-    if (data) {
-      for (const k in data) {
-        if (k == "done" || k == "tasklist" || k == "donetasklist" || k == "current" || k == "pretasknum")
-          continue;
-        const v = data[k];
-        if (!v || v === "" || (Array.isArray(v) && v.length === 0)) continue;
-        cnt++;
+      let cnt = 0;
+      if (data) {
+        for (const k in data) {
+          if (k == "done" || k == "tasklist" || k == "donetasklist" || k == "current" || k == "pretasknum")
+            continue;
+          const v = data[k];
+          if (!v || v === "" || (Array.isArray(v) && v.length === 0)) continue;
+          cnt++;
+        }
       }
-    }
-    const badgeText = cnt > 0 ? "" + cnt : "";
-    chrome.action.setBadgeText({ text: badgeText, tabId: tid });
-    if (data && data['donetasklist'] && data['pretasknum'] && data['donetasklist'].length == data['pretasknum']) {
-      data['done'] = 'done'
-      chrome.storage.local.set({ ["findsomething_result_" + cur]: data }, function () { });
-      refresh_storage_expire_index(cur)
-      webhook(cur);
-    }
-  };
+      const badgeText = cnt > 0 ? "" + cnt : "";
+      chrome.action.setBadgeText({ text: badgeText, tabId: tid });
+      if (data && data['donetasklist'] && data['pretasknum'] && data['donetasklist'].length == data['pretasknum']) {
+        data['done'] = 'done'
+        chrome.storage.local.set({ ["findsomething_result_" + cur]: data }, function () { });
+        refresh_storage_expire_index(cur)
+        webhook(cur);
+      }
+    };
 
-  if (!search_data[cur]) {
-    chrome.storage.local.get(["findsomething_result_" + cur], function (result) {
-      if (result["findsomething_result_" + cur]) {
-        search_data[cur] = result["findsomething_result_" + cur];
-        process_data(search_data[cur]);
-      } else {
-        process_data(null);
-      }
-    });
-  } else {
-    process_data(search_data[cur]);
-  }
+    if (!search_data[cur]) {
+      chrome.storage.local.get(["findsomething_result_" + cur], function (result) {
+        if (result["findsomething_result_" + cur]) {
+          search_data[cur] = result["findsomething_result_" + cur];
+          process_data(search_data[cur]);
+        } else {
+          process_data(null);
+        }
+      });
+    } else {
+      process_data(search_data[cur]);
+    }
+  }); // End of extension_enabled callback
 }
 
 function refresh_storage_expire_index(cur) {
@@ -1206,7 +1207,7 @@ chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
 
 // ── Master Switch Persistence & UI Sync ──────────────────────────────────────
 chrome.storage.onChanged.addListener((changes, area) => {
-  if (area === 'local' && changes.master_switch) {
+  if (area === 'local' && (changes.master_switch || changes.extension_enabled)) {
     refresh_count();
   }
 });

@@ -407,12 +407,28 @@ reconI18n.init().then(() => {
 // ── Merged Settings Logic ───────────────────────────────────────────────────
 
 function init_settings_logic() {
+    init_master_switch();
     init_language_selector();
     init_theme_selector(); // Theme selector handler
     loadToggleStates();
     init_toggle_handlers();
     init_webhook_logic();
     init_allowlist_logic();
+}
+
+function init_master_switch() {
+    const ms = document.getElementById('master_switch');
+    if (!ms) return;
+
+    // Load initial state from storage
+    chrome.storage.local.get(['extension_enabled'], (result) => {
+        ms.checked = result.extension_enabled !== false; // Default to true if not set
+    });
+
+    // Handle toggle
+    ms.onchange = () => {
+        chrome.storage.local.set({ extension_enabled: ms.checked });
+    };
 }
 
 function init_ai_copy_logic() {
