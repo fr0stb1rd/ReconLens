@@ -482,6 +482,11 @@ function init_search_logic() {
     }
 }
 
+// Set version dynamically from manifest for all version labels (immediate)
+document.querySelectorAll('.ext-version-display').forEach(el => {
+    el.textContent = chrome.runtime.getManifest().version;
+});
+
 reconI18n.init().then(() => {
     // Set language for proper text-transform (e.g., Turkish 'i' -> 'İ')
     const uiLang = chrome.i18n.getUILanguage().split('-')[0];
@@ -493,11 +498,6 @@ reconI18n.init().then(() => {
     init_ai_copy_logic(); // Initialize AI Copy
     init_settings_logic(); // Initialize merged settings logic
     init_theme_engine();    // Initialize Theme Engine
-
-    // Set version dynamically from manifest for all version labels
-    document.querySelectorAll('.ext-version-display').forEach(el => {
-        el.textContent = chrome.runtime.getManifest().version;
-    });
 
     start_monitoring();
 });
