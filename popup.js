@@ -644,7 +644,8 @@ function init_ai_copy_logic() {
 
     // Copy handlers
     const copyAll = (format, btn, menu) => {
-        const val = formatResults(lastResultData, key, format);
+        const targetUrl = lastResultData?.current || "";
+        const val = formatResults(lastResultData, key, format, targetUrl);
         if (val) {
             navigator.clipboard.writeText(val);
             provideFeedback(btn || document.getElementById('btn_copy_ai'), "popup_tip_copied");
@@ -656,7 +657,8 @@ function init_ai_copy_logic() {
         const activeLink = document.querySelector('.category-item a.active');
         if (!activeLink || !lastResultData) return;
         const cat = activeLink.dataset.category;
-        const val = formatResults(lastResultData, [cat], format);
+        const targetUrl = lastResultData?.current || "";
+        const val = formatResults(lastResultData, [cat], format, targetUrl);
         if (val) {
             navigator.clipboard.writeText(val);
             provideFeedback(btn, "popup_tip_copied");
@@ -682,7 +684,8 @@ function init_ai_copy_logic() {
         });
 
         const resolvedData = { [cat]: resolvedItems };
-        const val = formatResults(resolvedData, [cat], format);
+        const targetUrl = tab.url || "";
+        const val = formatResults(resolvedData, [cat], format, targetUrl);
         if (val) {
             navigator.clipboard.writeText(val);
             provideFeedback(btn, "popup_tip_copied");
