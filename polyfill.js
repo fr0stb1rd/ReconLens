@@ -15,7 +15,7 @@ if (typeof browser === "undefined") {
  * ReconLens — Global i18n Engine
  * Handles multi-language loading and fallback mechanisms.
  */
-window.reconI18n = {
+globalThis.reconI18n = {
     locales: {},
     currentLang: 'en',
     async init() {

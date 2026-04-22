@@ -4,13 +4,7 @@
 // @source : https://github.com/fr0stb1rd/ReconLens
 
 // ── Cross-browser Polyfill ───────────────────────────────────────────────────
-try {
-  if (typeof importScripts === 'function') {
-    importScripts('polyfill.js');
-  }
-} catch (e) {
-  console.warn("importScripts failed, assuming polyfill loaded via manifest", e);
-}
+import './polyfill.js';
 
 if (typeof browser === "undefined") {
   globalThis.browser = chrome;
